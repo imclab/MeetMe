@@ -1,7 +1,9 @@
 package com.meetme.activity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,11 +20,13 @@ import android.widget.ListView;
 
 import com.meetme.R;
 import com.meetme.core.HttpUtils;
+import com.meetme.model.entity.Meeting;
 import com.meetme.protocol.HttpParameters;
 import com.meetme.protocol.ServerUrlStore;
 
 public class MainActivity extends Activity {
 
+	private Set<Meeting> meetingSet;
 	private List<String> meetingAdapterList;
 	private ListView meetingListView;
 	private Button newMeetingButton;
@@ -36,6 +40,7 @@ public class MainActivity extends Activity {
 		newMeetingButton = (Button)findViewById(R.id.newMeetingButton);
 		newMeetingButton.setOnClickListener(newMeetingListener);
 		
+		meetingSet = new HashSet<Meeting>();
 		meetingAdapterList = new ArrayList<String>();
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -43,13 +48,18 @@ public class MainActivity extends Activity {
 		
 		meetingListView.setAdapter(adapter);		
 		
-		getMeetingsList(meetingAdapterList);
+		getMeetingSet();
+		updateMeetingList();
 	}
 	
 	/*
 	 * Private methods
 	 */
-	private void getMeetingsList(List<String> adapterList) {
+	
+	/***
+	 * Retrieve meeting list from server and fill the Set
+	 */
+	private void getMeetingSet() {
 		JSONObject responseJSON = null;
 		String url = ServerUrlStore.MEETING_URL;
 		HttpParameters parameters = new HttpParameters();
@@ -67,14 +77,25 @@ public class MainActivity extends Activity {
 			int meetingsSize = meetingsJSON.length();
 			
 			for (int i = 0; i < meetingsSize; i++) {
-				JSONObject meeting = meetingsJSON.getJSONObject(i);
-				meetingAdapterList.add(meeting.get("title").toString() + meeting.get("datetime").toString());
+				JSONObject meetingJSON = meetingsJSON.getJSONObject(i);
+				meetingSet.add(Meeting.getFromJSON(meetingJSON));
 			}
 			
 		} catch (JSONException e) {
 			Log.e(MainActivity.class.getName(), e.getMessage());
 		} catch (Exception e) {
 			Log.e(MainActivity.class.getName(), e.getMessage());
+		}
+	}
+	
+	/*
+	 * Update the meeting list adapter data
+	 */
+	private void updateMeetingList() {
+		meetingAdapterList.clear();
+		
+		for (Meeting meeting : meetingSet) {
+			meetingAdapterList.add(meeting.getTitle() + "\n" + meeting.getDatetime());
 		}
 	}
 	
