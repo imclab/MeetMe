@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    
+	<LinearLayout android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+	
+		<TextView 
+		    android:id="@+id/emailText"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		  	android:text="@string/emailLabel"
+		    />
+		<EditText 
+	        android:id="@+id/emailEdit"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:hint="@string/emailHint"
+	        android:inputType="textEmailAddress"
+	        />
+		
+		<TextView 
+		    android:id="@+id/firstnameText"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		  	android:text="@string/firstnameLabel"
+		    />
+		<EditText 
+	        android:id="@+id/firstnameEdit"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:hint="@string/firstnameHint"
+	        android:inputType="textPersonName"
+	        />
+		
+		<TextView 
+		    android:id="@+id/lastnameText"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		  	android:text="@string/lastnameLabel"
+		    />
+		<EditText 
+	        android:id="@+id/lastnameEdit"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:hint="@string/lastnameHint"
+	        android:inputType="textPersonName"
+	        />
+		
+		<TextView 
+		    android:id="@+id/passwordText"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		  	android:text="@string/passwordLabel"
+		    />
+		<EditText 
+	        android:id="@+id/passwordEdit"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:hint="@string/passwordHint"
+	        android:inputType="textPassword"
+	        />
+		
+		<TextView 
+		    android:id="@+id/repeatPasswordText"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		  	android:text="@string/repeatPasswordLabel"
+		    />
+		<EditText 
+	        android:id="@+id/repeatPasswordEdit"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:hint="@string/repeatPasswordHint"
+	        android:inputType="textPassword"
+	        />
+		 <Button 
+	        android:id="@+id/registrationButton"
+	        android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	    	android:text="@string/registrationButton"
+	        />	    
+	</LinearLayout>
+	
+</ScrollView>

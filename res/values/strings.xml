@@ -3,6 +3,26 @@
 
     <string name="app_name">MeetMe</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+	
+    <!-- Registration activity -->
+    <string name="emailLabel">Email : </string>
+    <string name="firstnameLabel">Firstname : </string>
+    <string name="lastnameLabel">Lastname : </string>
+    <string name="repeatPasswordLabel">Repeat password</string>
+    <string name="emailHint">Email</string>
+    <string name="firstnameHint">Firstname</string>
+    <string name="lastnameHint">Lastname</string>
+    <string name="repeatPasswordHint">Password</string>
+    <string name="registrationButton">Register</string>
+    
+    <!-- Login activity -->
+    <string name="loginLabel">Login :</string>
+    <string name="passwordLabel">Password :</string>
+    <string name="loginHint">Login</string>
+    <string name="passwordHint">Password</string>
+    <string name="loginButton">Log In</string>
 
+   	<!-- Main activity -->
+   	
+   	
 </resources>
