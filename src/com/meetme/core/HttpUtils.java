@@ -17,6 +17,8 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.meetme.protocol.HttpParameters;
+
 import android.util.Log;
 
 public abstract class HttpUtils {
@@ -31,7 +33,7 @@ public abstract class HttpUtils {
 	/*
 	 * Methods
 	 */
-	public static JSONObject post(String url, Map<String, String> parameters) {
+	public static JSONObject post(String url, HttpParameters parameters) {
 		String responseString;
 		JSONObject responseJSON = null;
 		

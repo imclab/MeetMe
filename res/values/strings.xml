@@ -5,10 +5,10 @@
     <string name="action_settings">Settings</string>
 	
     <!-- Registration activity -->
-    <string name="emailLabel">Email : </string>
-    <string name="firstnameLabel">Firstname : </string>
-    <string name="lastnameLabel">Lastname : </string>
-    <string name="repeatPasswordLabel">Repeat password</string>
+    <string name="emailLabel">Email :</string>
+    <string name="firstnameLabel">Firstname :</string>
+    <string name="lastnameLabel">Lastname :</string>
+    <string name="repeatPasswordLabel">Repeat password :</string>
     <string name="emailHint">Email</string>
     <string name="firstnameHint">Firstname</string>
     <string name="lastnameHint">Lastname</string>
@@ -23,6 +23,7 @@
     <string name="loginButton">Log In</string>
 
    	<!-- Main activity -->
-   	
+   	<string name="meetingListLabel">My meetings :</string>
+   	<string name="newMeetingButton">New Meeting</string>
    	
 </resources>
