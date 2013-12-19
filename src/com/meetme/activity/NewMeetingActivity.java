@@ -47,9 +47,11 @@ public class NewMeetingActivity extends Activity {
 	private OnClickListener inviteFriendsListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			// Start registration activity
-			Intent intent = new Intent(NewMeetingActivity.this, InviteFriendsActivity.class);
-			startActivity(intent);
+			if (newMeetingValidator.validate()) {
+				// Start registration activity
+				Intent intent = new Intent(NewMeetingActivity.this, InviteFriendsActivity.class);
+				startActivity(intent);
+			}
 	    }
 	};
 }

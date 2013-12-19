@@ -26,14 +26,13 @@ public abstract class ServerParameterStore {
 	public static final String MEETING_VIEW_MEETING_ID = "meeting_id";
 	
 	public static final String FRIEND_TOKEN = "token";
-	
-	public static final String ADD_FRIEND_TOKEN = "token";
-	public static final String ADD_FRIEND_OPERATION = "operation";
-	public static final String ADD_FRIEND_OPERATION_ID = "id";
-	public static final String ADD_FRIEND_OPERATION_ACCEPT = "accept";
-	public static final String ADD_FRIEND_OPERATION_EMAIL = "email";
-	public static final String ADD_FRIEND_ID = "friend_id";
-	public static final String ADD_FRIEND_ACCEPT = "friend_id";
-	public static final String ADD_FRIEND_EMAIL = "email";
+	public static final String FRIEND_OPERATION = "operation";
+	public static final String FRIEND_OPERATION_LIST = "list";
+	public static final String FRIEND_OPERATION_ADD = "add";
+	public static final String FRIEND_OPERATION_ACCEPT = "accept";
+	public static final String FRIEND_OPERATION_FIND_BY_EMAIL = "findByEmail";
+	public static final String FRIEND_ADD_ID = "friend_id";
+	public static final String FRIEND_ACCEPT_ID = "friend_id";
+	public static final String FRIEND_FIND_BY_EMAIL_EMAIL = "email";
 	
 }

@@ -25,8 +25,8 @@ public class NewMeetingValidator {
 		boolean isTitleValid = false;
 		String title = titleEdit.getText().toString();
 		
-		// Title must not be longer than 255 characters
-		isTitleValid = (title.length() <= TITLE_MAX_LENGTH);
+		// Title must not be empty and not longer than 255 characters
+		isTitleValid = (!title.isEmpty() && title.length() <= TITLE_MAX_LENGTH);
 		
 		if (!isTitleValid) {
 			titleEdit.setError(TITLE_TOO_LONG);

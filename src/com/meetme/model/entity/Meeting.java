@@ -44,6 +44,9 @@ public class Meeting {
 		this.hostUserId = hostUserId;
 	}
 	
+	/*
+	 * Methods 
+	 */
 	public static Meeting getFromJSON(JSONObject meetingJSON) {
 		Meeting meeting = null;
 		Map<String, String> fieldMap = new HashMap<String, String>();
@@ -78,9 +81,6 @@ public class Meeting {
 		return meeting;
 	}
 	
-	/*
-	 * Methods 
-	 */
 	@Override
 	public boolean equals(Object o) {
 		if (!(o instanceof Meeting) ) {
@@ -102,6 +102,10 @@ public class Meeting {
 	 */
 	public int getId() {
 		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTitle() {

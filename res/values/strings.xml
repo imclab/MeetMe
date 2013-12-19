@@ -40,6 +40,6 @@
    	<string name="inviteFriendsButton">Invite your friends</string>
    	
    	<!-- Invite Friends activity -->
-   	
+   	<string name="inviteButton">Invite</string>
    	
 </resources>
