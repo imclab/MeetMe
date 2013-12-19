@@ -7,8 +7,6 @@ public class LoginValidator {
 	
 	private EditText loginEdit;
 	private EditText passwordEdit;
-	private String login;
-	private String password;
 	
 	/*
 	 * Constructors
@@ -23,7 +21,7 @@ public class LoginValidator {
 	 */
 	private boolean validateLogin() {
 		boolean isLoginValid = false;
-		login = loginEdit.getText().toString();
+		String login = loginEdit.getText().toString();
 		
 		// Login must be an email
 		isLoginValid = android.util.Patterns.EMAIL_ADDRESS.matcher(login).matches();
@@ -37,7 +35,7 @@ public class LoginValidator {
 	
 	private boolean validatePassword() {
 		boolean isPasswordValid = false;
-		password = passwordEdit.getText().toString();
+		String password = passwordEdit.getText().toString();
 		int passwordLength = password.length();
 		
 		// Password must be at least 8 characters

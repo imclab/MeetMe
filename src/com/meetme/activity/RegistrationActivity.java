@@ -12,6 +12,8 @@ import android.widget.EditText;
 import com.meetme.R;
 import com.meetme.core.HttpUtils;
 import com.meetme.protocol.HttpParameters;
+import com.meetme.validator.RegistrationValidator;
+
 import static com.meetme.protocol.store.ServerParameterStore.*;
 import static com.meetme.protocol.store.ServerUrlStore.*;
 
@@ -23,6 +25,7 @@ public class RegistrationActivity extends Activity {
 	private EditText passwordEdit;
 	private EditText repeatPasswordEdit;
 	private Button registrationButton;
+	private RegistrationValidator registrationValidator;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,13 @@ public class RegistrationActivity extends Activity {
 		repeatPasswordEdit = (EditText)findViewById(R.id.repeatPasswordEdit);
 		registrationButton = (Button)findViewById(R.id.registrationButton);
 		registrationButton.setOnClickListener(registerListener);
+		
+		registrationValidator = new RegistrationValidator(
+				emailEdit, 
+				firstnameEdit, 
+				lastnameEdit, 
+				passwordEdit, 
+				repeatPasswordEdit);
 	}
 	
 	/*
@@ -59,7 +69,9 @@ public class RegistrationActivity extends Activity {
 	private OnClickListener registerListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			register();
+			if (registrationValidator.validate()) {
+				register();
+			}
 	    }
 	};
 }
