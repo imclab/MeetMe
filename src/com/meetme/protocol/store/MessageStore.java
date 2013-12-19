@@ -8,4 +8,5 @@ public abstract class MessageStore {
 	public static final String INVALID_PASSWORD = "Password must contain at least 8 characters";
 	public static final String EMPTY_PASSWORD = "Enter your password";
 	public static final String PASSWORDS_DO_NOT_MATCH = "Passwords do not match";
+	public static final String TITLE_TOO_LONG = "Title must not exceed 255 characters";
 }

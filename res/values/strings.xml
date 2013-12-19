@@ -28,4 +28,18 @@
    	<string name="meetingListLabel">My meetings :</string>
    	<string name="newMeetingButton">New Meeting</string>
    	
+   	<!-- New meeting activity -->
+   	<string name="titleLabel">Title :</string>
+   	<string name="descriptionLabel">Description :</string>
+   	<string name="dateTimeLabel">Date and time :</string>
+   	<string name="locationLabel">Location :</string>
+   	<string name="titleHint">Title</string>
+   	<string name="descriptionHint">Description</string>
+   	<string name="dateTimeHint">Date and time</string>
+   	<string name="locationHint">Location</string>
+   	<string name="inviteFriendsButton">Invite your friends</string>
+   	
+   	<!-- Invite Friends activity -->
+   	
+   	
 </resources>

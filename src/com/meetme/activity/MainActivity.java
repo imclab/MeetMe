@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -101,7 +102,9 @@ public class MainActivity extends Activity {
 	}
 	
 	private void newMeeting() {
-		
+		// Start registration activity
+		Intent intent = new Intent(MainActivity.this, NewMeetingActivity.class);
+		startActivity(intent);
 	}
 	
 	private OnClickListener newMeetingListener = new OnClickListener() {
