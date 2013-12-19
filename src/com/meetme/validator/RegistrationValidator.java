@@ -49,6 +49,7 @@ public class RegistrationValidator {
 		String firstname = firstnameEdit.getText().toString();
 		int firstnameLength = firstname.length();
 		
+		// Firstname must contain at least 1 character
 		isFirstnameValid = (firstnameLength >= 1 && firstnameLength <=90);
 		
 		if (!isFirstnameValid) {
@@ -64,6 +65,7 @@ public class RegistrationValidator {
 		String lastname = lastnameEdit.getText().toString();
 		int lastnameLength = lastname.length();
 		
+		// Lastname must contain at least 1 character
 		isLastnameValid = (lastnameLength >= 1 && lastnameLength <=90);
 		
 		if (!isLastnameValid) {
@@ -93,7 +95,7 @@ public class RegistrationValidator {
 		String repeatPassword = repeatPasswordEdit.getText().toString();
 		String password = passwordEdit.getText().toString();
 		
-		// Password must be at least 8 characters
+		// Passwords must be equal
 		isRepeatPasswordValid = repeatPassword.equals(password);
 		
 		if (!isRepeatPasswordValid) {
