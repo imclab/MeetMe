@@ -1,7 +1,7 @@
 package com.meetme.validator;
 
 import android.widget.EditText;
-import static com.meetme.protocol.store.ValidatorStore.*;
+import static com.meetme.protocol.store.MessageStore.*;
 
 
 public class RegistrationValidator {

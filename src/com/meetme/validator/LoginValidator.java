@@ -1,7 +1,7 @@
 package com.meetme.validator;
 
 import android.widget.EditText;
-import static com.meetme.protocol.store.ValidatorStore.*;
+import static com.meetme.protocol.store.MessageStore.*;
 
 public class LoginValidator {
 	
@@ -36,18 +36,16 @@ public class LoginValidator {
 	private boolean validatePassword() {
 		boolean isPasswordValid = false;
 		String password = passwordEdit.getText().toString();
-		int passwordLength = password.length();
 		
-		// Password must be at least 8 characters
-		isPasswordValid = (passwordLength >= 8 && passwordLength <= 80);
+		// Password must not be empty
+		isPasswordValid = !password.isEmpty();
 		
 		if (!isPasswordValid) {
-			passwordEdit.setError(INVALID_PASSWORD);
+			passwordEdit.setError(EMPTY_PASSWORD);
 		}
 		
 		return isPasswordValid;
 	}
-	
 	/*
 	 * Methods
 	 */
