@@ -12,7 +12,8 @@ import android.widget.EditText;
 import com.meetme.R;
 import com.meetme.core.HttpUtils;
 import com.meetme.protocol.HttpParameters;
-import com.meetme.protocol.ServerUrlStore;
+import static com.meetme.protocol.store.ServerParameterStore.*;
+import static com.meetme.protocol.store.ServerUrlStore.*;
 
 public class RegistrationActivity extends Activity {
 
@@ -42,14 +43,14 @@ public class RegistrationActivity extends Activity {
 	 */
 	private void register() {
 		JSONObject responseJSON = null;
-		String url = ServerUrlStore.REGISTRATION_URL;
+		String url = REGISTRATION_URL;
 		HttpParameters parameters = new HttpParameters();
 		
 		// Add parameters
-		parameters.put("email", emailEdit.getText().toString());
-		parameters.put("firstname", firstnameEdit.getText().toString());
-		parameters.put("lastname", lastnameEdit.getText().toString());
-		parameters.put("password", passwordEdit.getText().toString());
+		parameters.put(REGISTRATION_EMAIL, emailEdit.getText().toString());
+		parameters.put(REGISTRATION_FIRSTNAME, firstnameEdit.getText().toString());
+		parameters.put(REGISTRATION_LASTNAME, lastnameEdit.getText().toString());
+		parameters.put(REGISTRATION_PASSWORD, passwordEdit.getText().toString());
 		
 		// Send request
 		responseJSON = HttpUtils.post(url, parameters);

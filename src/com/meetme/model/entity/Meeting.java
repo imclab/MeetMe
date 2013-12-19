@@ -83,7 +83,6 @@ public class Meeting {
 	 */
 	@Override
 	public boolean equals(Object o) {
-		
 		if (!(o instanceof Meeting) ) {
 			return false;
 		} else {

@@ -1,4 +1,4 @@
-package com.meetme.protocol;
+package com.meetme.protocol.store;
 
 public abstract class ServerUrlStore {
 	

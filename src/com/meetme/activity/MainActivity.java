@@ -22,7 +22,8 @@ import com.meetme.R;
 import com.meetme.core.HttpUtils;
 import com.meetme.model.entity.Meeting;
 import com.meetme.protocol.HttpParameters;
-import com.meetme.protocol.ServerUrlStore;
+import static com.meetme.protocol.store.ServerParameterStore.*;
+import static com.meetme.protocol.store.ServerUrlStore.*;
 
 public class MainActivity extends Activity {
 
@@ -61,12 +62,12 @@ public class MainActivity extends Activity {
 	 */
 	private void getMeetingSet() {
 		JSONObject responseJSON = null;
-		String url = ServerUrlStore.MEETING_URL;
+		String url = MEETING_URL;
 		HttpParameters parameters = new HttpParameters();
 		
 		// Add parameters
-		parameters.put("operation", "list");
-		parameters.put("token", "usr52ac94a27877f4.60168588");
+		parameters.put(MEETING_OPERATION, MEETING_OPERATION_LIST);
+		parameters.put(MEETING_TOKEN, "usr52ac94a27877f4.60168588");
 		
 		// Send request
 		responseJSON = HttpUtils.post(url, parameters);
