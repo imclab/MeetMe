@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-public class Friend {
+public class Friend implements Comparable<Friend> {
 	
 	private int id;
 	private String firstname;
@@ -80,6 +80,11 @@ public class Friend {
 	public int hashCode() {
 		int hashCode = 4 * id + 3;
 		return hashCode;
+	}
+	
+	@Override
+	public int compareTo(Friend another) {
+		return this.lastname.compareTo(another.lastname);
 	}
 
 	/*

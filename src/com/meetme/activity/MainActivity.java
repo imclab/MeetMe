@@ -1,9 +1,12 @@
 package com.meetme.activity;
 
+import static com.meetme.protocol.store.ServerParameterStore.*;
+import static com.meetme.protocol.store.ServerUrlStore.*;
+
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,8 +26,6 @@ import com.meetme.R;
 import com.meetme.core.HttpUtils;
 import com.meetme.model.entity.Meeting;
 import com.meetme.protocol.HttpParameters;
-import static com.meetme.protocol.store.ServerParameterStore.*;
-import static com.meetme.protocol.store.ServerUrlStore.*;
 
 public class MainActivity extends Activity {
 
@@ -42,7 +43,7 @@ public class MainActivity extends Activity {
 		newMeetingButton = (Button)findViewById(R.id.newMeetingButton);
 		newMeetingButton.setOnClickListener(newMeetingListener);
 		
-		meetingSet = new HashSet<Meeting>();
+		meetingSet = new TreeSet<Meeting>();
 		meetingAdapterList = new ArrayList<String>();
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,

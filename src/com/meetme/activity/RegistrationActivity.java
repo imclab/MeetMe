@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.meetme.R;
 import com.meetme.core.HttpUtils;
+import com.meetme.core.SessionManager;
 import com.meetme.protocol.HttpParameters;
 import com.meetme.validator.RegistrationValidator;
 

@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-public class Meeting {
+public class Meeting implements Comparable<Meeting> {
 	
 	private int id;
 	private String title;
@@ -95,6 +95,11 @@ public class Meeting {
 	public int hashCode() {
 		int hashCode = 2 * id + 5;
 		return hashCode;
+	}
+
+	@Override
+	public int compareTo(Meeting another) {
+		return this.datetime.compareTo(another.datetime);
 	}
 
 	/*

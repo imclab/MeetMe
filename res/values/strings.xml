@@ -3,6 +3,7 @@
 
     <string name="app_name">MeetMe</string>
     <string name="action_settings">Settings</string>
+    <string name="meetmeUrl">www.meetme.com</string>
 	<string name="meetmeLogoDescription">MeetMe Logo</string>
     
     <!-- Registration activity -->
