@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import com.meetme.protocol.HttpParameters;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 public abstract class HttpUtils {

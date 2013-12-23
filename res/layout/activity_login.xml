@@ -37,6 +37,14 @@
 		    android:paddingTop="15dip"
 		    android:layout_below="@id/header" >
 		
+		    <TextView
+		        android:id="@+id/errorText"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content" 
+			    android:textColor="#ff0000"
+			    android:gravity="center"
+		        />
+		    
 			<TextView 
 			    android:id="@+id/loginText"
 			    android:layout_width="fill_parent"

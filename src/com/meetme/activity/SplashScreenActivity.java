@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.service.textservice.SpellCheckerService.Session;
 
 import com.meetme.R;
 import com.meetme.core.SessionManager;
@@ -27,7 +28,6 @@ public class SplashScreenActivity extends Activity {
          */
 		
 		if (isRemembered) {
-			// Download friend & meeting lists
 			new fetchData().execute(userToken);
     	} else {
     		// Wait for 3 seconds
@@ -61,6 +61,8 @@ public class SplashScreenActivity extends Activity {
     		/*
     		 * Download friend & meeting list of the user
     		 */
+    		session.updateFriendSet();
+    		session.updateMeetingSet();
         	
             return null;
         }
