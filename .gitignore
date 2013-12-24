@@ -45,3 +45,5 @@ local.properties
 # PDT-specific
 .buildpath
 
+# Sonar files
+.sonar/
