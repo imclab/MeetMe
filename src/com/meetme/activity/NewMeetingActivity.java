@@ -32,7 +32,10 @@ public class NewMeetingActivity extends Activity {
 		inviteFriendsButton = (Button)findViewById(R.id.inviteFriendsButton);
 		inviteFriendsButton.setOnClickListener(inviteFriendsListener);
 		
-		newMeetingValidator = new NewMeetingValidator(titleEdit); 
+		newMeetingValidator = new NewMeetingValidator(
+				getApplicationContext(), 
+				titleEdit
+			); 
 	}
 	
 	/*

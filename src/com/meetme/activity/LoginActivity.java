@@ -1,8 +1,11 @@
 package com.meetme.activity;
 
+import static com.meetme.protocol.store.DialogBoxesStore.LOGGING_IN;
+import static com.meetme.protocol.store.DialogBoxesStore.PLEASE_WAIT;
 import static com.meetme.protocol.store.ErrorCodeStore.LOGIN_WRONG_EMAIL;
 import static com.meetme.protocol.store.ErrorCodeStore.LOGIN_WRONG_PASSWORD;
 import static com.meetme.protocol.store.ErrorCodeStore.SUCCESS;
+import static com.meetme.protocol.store.MessageStore.GENERAL_ERROR;
 import static com.meetme.protocol.store.MessageStore.WRONG_EMAIL;
 import static com.meetme.protocol.store.MessageStore.WRONG_EMAIL_FULL;
 import static com.meetme.protocol.store.MessageStore.WRONG_PASSWORD;
@@ -48,7 +51,7 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
-		scrollView = (ScrollView)findViewById(R.id.scrollView);
+		scrollView = (ScrollView)findViewById(R.id.loginScrollView);
 		errorTextView = (TextView)findViewById(R.id.errorText);
 		loginEdit = (EditText)findViewById(R.id.loginEdit);
 		passwordEdit = (EditText)findViewById(R.id.passwordEdit);
@@ -56,7 +59,7 @@ public class LoginActivity extends Activity {
 		loginButton.setOnClickListener(loginListener);
 		newToMeetMeTextView = (TextView)findViewById(R.id.newToMeetMeLink);
 		newToMeetMeTextView.setOnClickListener(newToMeetMeListener);
-		loginValidator = new LoginValidator(loginEdit, passwordEdit);
+		loginValidator = new LoginValidator(getApplicationContext(), loginEdit, passwordEdit);
 		
 		session = SessionManager.getInstance();
 	}
@@ -66,13 +69,14 @@ public class LoginActivity extends Activity {
 	 */
 	private void handleLoginError(int errorCode) {
 		if (errorCode == LOGIN_WRONG_EMAIL) {
-			this.loginEdit.setError(WRONG_EMAIL);
+			this.loginEdit.setError(getString(WRONG_EMAIL));
 			this.errorTextView.setText(WRONG_EMAIL_FULL);
 		} else if (errorCode == LOGIN_WRONG_PASSWORD) {
-			this.passwordEdit.setError(WRONG_PASSWORD);
+			this.passwordEdit.setError(getString(WRONG_PASSWORD));
 			this.errorTextView.setText(WRONG_PASSWORD_FULL);
 		} else {
 			// Other errors
+			this.errorTextView.setText(GENERAL_ERROR);
 		}
 		
 		scrollView.pageScroll(ScrollView.FOCUS_UP);
@@ -110,12 +114,11 @@ public class LoginActivity extends Activity {
 	
 	private void login() {
 		final ProgressDialog progressDialog = 
-				ProgressDialog.show(LoginActivity.this, "Please wait...", "Logging in...", true);
+				ProgressDialog.show(LoginActivity.this, getString(PLEASE_WAIT), getString(LOGGING_IN), true);
 		progressDialog.setCancelable(true);
 		
 		new Thread(new Runnable() {
 			JSONObject responseJSON = null;
-			String url = LOGIN_URL;
 			HttpParameters parameters = new HttpParameters();
 			
 			@Override
@@ -125,7 +128,7 @@ public class LoginActivity extends Activity {
 				parameters.put(LOGIN_PASSWORD, passwordEdit.getText().toString());
 				
 				// Send request
-				responseJSON = HttpUtils.post(url, parameters);
+				responseJSON = HttpUtils.post(LOGIN_URL, parameters);
 			
 				// Handle response
 				handleLoginResponse(responseJSON);

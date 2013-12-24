@@ -1,10 +1,11 @@
 package com.meetme.validator;
 
+import static com.meetme.protocol.store.MessageStore.TITLE_TOO_LONG;
+import android.content.Context;
 import android.widget.EditText;
-import static com.meetme.protocol.store.MessageStore.*;
 
 
-public class NewMeetingValidator {
+public class NewMeetingValidator extends Validator {
 	
 	private static final int TITLE_MAX_LENGTH = 255;
 	
@@ -13,8 +14,8 @@ public class NewMeetingValidator {
 	/*
 	 * Constructors
 	 */
-	public NewMeetingValidator(EditText titleEdit) {
-		super();
+	public NewMeetingValidator(Context context, EditText titleEdit) {
+		super(context);
 		this.titleEdit = titleEdit;
 	}
 	
@@ -29,7 +30,7 @@ public class NewMeetingValidator {
 		isTitleValid = (!title.isEmpty() && title.length() <= TITLE_MAX_LENGTH);
 		
 		if (!isTitleValid) {
-			titleEdit.setError(TITLE_TOO_LONG);
+			titleEdit.setError(getString(TITLE_TOO_LONG));
 		}
 		
 		return isTitleValid;

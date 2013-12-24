@@ -1,18 +1,21 @@
 package com.meetme.protocol.store;
 
+import com.meetme.R;
+
 public abstract class MessageStore {
+	public static final int GENERAL_ERROR = R.string.generalError;
+	public static final int INVALID_EMAIL = R.string.invalidEmail;
+	public static final int INVALID_FIRSTNAME = R.string.invalidFirstname;
+	public static final int INVALID_LASTNAME = R.string.invalidLastname;
+	public static final int INVALID_PASSWORD = R.string.invalidPassword;
 	
-	public static final String INVALID_EMAIL = "Email is not valid";
-	public static final String INVALID_FIRSTNAME = "Firstname must contain at least 1 character";
-	public static final String INVALID_LASTNAME = "Lastname must contain at least 1 character";
-	public static final String INVALID_PASSWORD = "Password must contain at least 8 characters";
+	public static final int EMAIL_ALREADY_EXISTS = R.string.emailAlreadyExists;
+	public static final int EMPTY_PASSWORD = R.string.emptyPassword;
+	public static final int PASSWORDS_DO_NOT_MATCH = R.string.passwordDoNotMatch;
+	public static final int TITLE_TOO_LONG = R.string.titleTooLong;
 	
-	public static final String EMPTY_PASSWORD = "Enter your password";
-	public static final String PASSWORDS_DO_NOT_MATCH = "Passwords do not match";
-	public static final String TITLE_TOO_LONG = "Title must not exceed 255 characters";
-	
-	public static final String WRONG_EMAIL_FULL = "The email you entered does not exist";
-	public static final String WRONG_EMAIL = "Email does not exist";
-	public static final String WRONG_PASSWORD_FULL = "The password you entered is wrong";
-	public static final String WRONG_PASSWORD = "Wrong password";
+	public static final int WRONG_EMAIL_FULL = R.string.wrongEmailFull;
+	public static final int WRONG_EMAIL = R.string.wrongEmail;
+	public static final int WRONG_PASSWORD_FULL = R.string.wrongPasswordFull;
+	public static final int WRONG_PASSWORD = R.string.wrongPassword;
 }

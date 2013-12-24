@@ -1,10 +1,15 @@
 package com.meetme.validator;
 
+import static com.meetme.protocol.store.MessageStore.INVALID_EMAIL;
+import static com.meetme.protocol.store.MessageStore.INVALID_FIRSTNAME;
+import static com.meetme.protocol.store.MessageStore.INVALID_LASTNAME;
+import static com.meetme.protocol.store.MessageStore.INVALID_PASSWORD;
+import static com.meetme.protocol.store.MessageStore.PASSWORDS_DO_NOT_MATCH;
+import android.content.Context;
 import android.widget.EditText;
-import static com.meetme.protocol.store.MessageStore.*;
 
 
-public class RegistrationValidator {
+public class RegistrationValidator extends Validator {
 	
 	private EditText emailEdit;
 	private EditText firstnameEdit;
@@ -16,11 +21,13 @@ public class RegistrationValidator {
 	 * Constructors
 	 */
 	public RegistrationValidator(
+			Context context,
 			EditText emailEdit, 
 			EditText firstnameEdit,
 			EditText lastnameEdit, 
 			EditText passwordEdit,
 			EditText repeatPasswordEdit) {
+		super(context);
 		this.emailEdit = emailEdit;
 		this.firstnameEdit = firstnameEdit;
 		this.lastnameEdit = lastnameEdit;
@@ -38,7 +45,7 @@ public class RegistrationValidator {
 		isEmailValid = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
 		
 		if (!isEmailValid) {
-			emailEdit.setError(INVALID_EMAIL);
+			emailEdit.setError(getString(INVALID_EMAIL));
 		}
 		
 		return isEmailValid;
@@ -53,7 +60,7 @@ public class RegistrationValidator {
 		isFirstnameValid = (firstnameLength >= 1 && firstnameLength <=90);
 		
 		if (!isFirstnameValid) {
-			firstnameEdit.setError(INVALID_FIRSTNAME);
+			firstnameEdit.setError(getString(INVALID_FIRSTNAME));
 		}
 		
 		return isFirstnameValid;
@@ -69,7 +76,7 @@ public class RegistrationValidator {
 		isLastnameValid = (lastnameLength >= 1 && lastnameLength <=90);
 		
 		if (!isLastnameValid) {
-			lastnameEdit.setError(INVALID_LASTNAME);
+			lastnameEdit.setError(getString(INVALID_LASTNAME));
 		}
 		
 		return isLastnameValid;
@@ -84,7 +91,7 @@ public class RegistrationValidator {
 		isPasswordValid = (passwordLength >= 8 && passwordLength <= 80);
 		
 		if (!isPasswordValid) {
-			passwordEdit.setError(INVALID_PASSWORD);
+			passwordEdit.setError(getString(INVALID_PASSWORD));
 		}
 		
 		return isPasswordValid;
@@ -99,7 +106,7 @@ public class RegistrationValidator {
 		isRepeatPasswordValid = repeatPassword.equals(password);
 		
 		if (!isRepeatPasswordValid) {
-			repeatPasswordEdit.setError(PASSWORDS_DO_NOT_MATCH);
+			repeatPasswordEdit.setError(getString(PASSWORDS_DO_NOT_MATCH));
 		}
 		
 		return isRepeatPasswordValid;
