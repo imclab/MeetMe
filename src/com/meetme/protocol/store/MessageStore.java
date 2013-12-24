@@ -3,6 +3,9 @@ package com.meetme.protocol.store;
 import com.meetme.R;
 
 public abstract class MessageStore {
+	private MessageStore() {
+	}
+	
 	public static final int GENERAL_ERROR = R.string.generalError;
 	public static final int INVALID_EMAIL = R.string.invalidEmail;
 	public static final int INVALID_FIRSTNAME = R.string.invalidFirstname;

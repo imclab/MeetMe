@@ -115,12 +115,12 @@ public class RegistrationValidator extends Validator {
 	/*
 	 * Methods
 	 */
+	@Override
 	public boolean validate() {
-		return (validateEmail()
+		return validateEmail()
 				&& validateFirstname()
 				&& validateLastname()
 				&& validatePassword()
-				&& validateRepeatPassword()
-			);
+				&& validateRepeatPassword();
 	}
 }

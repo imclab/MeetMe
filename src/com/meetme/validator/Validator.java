@@ -22,4 +22,6 @@ public abstract class Validator {
 	protected String getString(int resId) {
 		return context.getString(resId);
 	}
+	
+	public abstract boolean validate();
 }

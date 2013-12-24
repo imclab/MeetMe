@@ -1,6 +1,9 @@
 package com.meetme.protocol.store;
 
 public abstract class ErrorCodeStore {
+	private ErrorCodeStore() {
+	}
+	
 	public static final int SUCCESS = 0;
 	
 	// General

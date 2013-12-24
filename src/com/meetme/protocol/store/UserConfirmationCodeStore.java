@@ -1,6 +1,8 @@
 package com.meetme.protocol.store;
 
 public abstract class UserConfirmationCodeStore {
+	private UserConfirmationCodeStore() {
+	}
 	
 	public static final String USER_CONFIRMATION_INVITED = "0";
 	public static final String USER_CONFIRMATION_ACCEPTED = "1";

@@ -1,6 +1,8 @@
 package com.meetme.protocol.store;
 
 public abstract class ServerParameterStore {
+	private ServerParameterStore() {
+	}
 	
 	public static final String LOGIN_EMAIL = "email";
 	public static final String LOGIN_PASSWORD = "password";

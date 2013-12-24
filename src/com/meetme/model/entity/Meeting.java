@@ -18,8 +18,16 @@ public class Meeting implements Comparable<Meeting> {
 	private String locationText;
 	private int hostUserId;
 	
+	private static final String MEETING_ID = "meeting_id";
+	private static final String TITLE = "title";
+	private static final String DESCRIPTION = "description";
+	private static final String DATETIME = "datetime";
+	private static final String LOCATION_GEO = "location_geo";
+	private static final String LOCATION_TEXT = "location_text";
+	private static final String HOST_USER_ID = "host_user_id";
+	
 	private static String[] fieldNameArray = 
-		{"meeting_id", "title", "description", "datetime", "location_geo", "location_text", "host_user_id"};
+		{MEETING_ID, TITLE, DESCRIPTION, DATETIME, LOCATION_GEO, LOCATION_TEXT, HOST_USER_ID};
 
 	/*
 	 * Constructors
@@ -69,13 +77,13 @@ public class Meeting implements Comparable<Meeting> {
 		
 		// Build meeting object
 		meeting = new Meeting(
-				Integer.parseInt(fieldMap.get("meeting_id")),
-				fieldMap.get("title"),
-				fieldMap.get("description"),
-				fieldMap.get("datetime"),
-				fieldMap.get("location_geo"),
-				fieldMap.get("location_text"),
-				Integer.parseInt(fieldMap.get("host_user_id"))
+				Integer.parseInt(fieldMap.get(MEETING_ID)),
+				fieldMap.get(TITLE),
+				fieldMap.get(DESCRIPTION),
+				fieldMap.get(DATETIME),
+				fieldMap.get(LOCATION_GEO),
+				fieldMap.get(LOCATION_TEXT),
+				Integer.parseInt(fieldMap.get(HOST_USER_ID))
 			);
 		
 		return meeting;
@@ -87,14 +95,13 @@ public class Meeting implements Comparable<Meeting> {
 			return false;
 		} else {
 			Meeting other = (Meeting)o;
-			return (this.id == other.id);
+			return this.id == other.id;
 		}
 	}
 
 	@Override
 	public int hashCode() {
-		int hashCode = 2 * id + 5;
-		return hashCode;
+		return 2 * id + 5;
 	}
 
 	@Override

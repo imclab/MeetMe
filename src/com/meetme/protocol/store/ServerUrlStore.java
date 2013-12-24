@@ -1,6 +1,8 @@
 package com.meetme.protocol.store;
 
 public abstract class ServerUrlStore {
+	private ServerUrlStore() {
+	}
 	
 	private static final String HOST_URL = "http://meetme.whitefenix.co/api/";
 	

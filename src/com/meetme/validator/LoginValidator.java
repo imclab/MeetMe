@@ -52,7 +52,8 @@ public class LoginValidator extends Validator {
 	/*
 	 * Methods
 	 */
+	@Override
 	public boolean validate() {
-		return (validateLogin() && validatePassword());
+		return validateLogin() && validatePassword();
 	}
 }

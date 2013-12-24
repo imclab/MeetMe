@@ -39,7 +39,8 @@ public class NewMeetingValidator extends Validator {
 	/*
 	 * Methods
 	 */
+	@Override
 	public boolean validate() {
-		return (validateTitle());
+		return validateTitle();
 	}
 }

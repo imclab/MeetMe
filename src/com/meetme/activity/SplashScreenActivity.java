@@ -27,7 +27,7 @@ public class SplashScreenActivity extends Activity {
          */
 		
 		if (isRemembered) {
-			new fetchData().execute(userToken);
+			new FetchData().execute(userToken);
     	} else {
     		// Wait for 2 seconds
     		new Handler().postDelayed(new Runnable() {
@@ -44,7 +44,7 @@ public class SplashScreenActivity extends Activity {
 	/*
 	 * Load user data if logged
 	 */
-	private class fetchData extends AsyncTask<String, Void, Void> {
+	private class FetchData extends AsyncTask<String, Void, Void> {
 		
 		private SessionManager session = null;
 		

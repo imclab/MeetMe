@@ -14,8 +14,12 @@ public class Friend implements Comparable<Friend> {
 	private String firstname;
 	private String lastname;
 	
+	private static final String USER_ID = "user_id";
+	private static final String FIRSTNAME = "firstname";
+	private static final String LASTNAME = "lastname";
+	
 	private static String[] fieldNameArray = 
-		{"user_id", "firstname", "lastname"};
+		{USER_ID, FIRSTNAME, LASTNAME};
 	
 	/*
 	 * Constructors
@@ -58,9 +62,9 @@ public class Friend implements Comparable<Friend> {
 		
 		// Build friend object
 		friend = new Friend(
-				Integer.parseInt(fieldMap.get("user_id")),
-				fieldMap.get("firstname"),
-				fieldMap.get("lastname")
+				Integer.parseInt(fieldMap.get(USER_ID)),
+				fieldMap.get(FIRSTNAME),
+				fieldMap.get(LASTNAME)
 			);
 		
 		return friend;
@@ -72,14 +76,13 @@ public class Friend implements Comparable<Friend> {
 			return false;
 		} else {
 			Friend other = (Friend)o;
-			return (this.id == other.id);
+			return this.id == other.id;
 		}
 	}
 
 	@Override
 	public int hashCode() {
-		int hashCode = 4 * id + 3;
-		return hashCode;
+		return 4 * id + 3;
 	}
 	
 	@Override

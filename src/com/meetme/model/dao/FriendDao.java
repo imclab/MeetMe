@@ -18,8 +18,11 @@ import com.meetme.core.HttpUtils;
 import com.meetme.model.entity.Friend;
 import com.meetme.protocol.HttpParameters;
 
-public class FriendDao {
+public abstract class FriendDao {
 
+	private FriendDao(){
+	}
+	
 	public static Set<Friend> findFriendsOfUser(String userToken) {
 		Set<Friend> friendSet = new TreeSet<Friend>();
 		

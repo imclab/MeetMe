@@ -18,8 +18,11 @@ import com.meetme.core.HttpUtils;
 import com.meetme.model.entity.Meeting;
 import com.meetme.protocol.HttpParameters;
 
-public class MeetingDao {
+public abstract class MeetingDao {
 
+	private MeetingDao() {
+	}
+	
 	public static Set<Meeting> findMeetingsOfUser(String userToken) {
 		Set<Meeting> meetingSet = new TreeSet<Meeting>();
 		

@@ -3,6 +3,9 @@ package com.meetme.protocol.store;
 import com.meetme.R;
 
 public abstract class DialogBoxesStore {
+	private DialogBoxesStore () {
+	}
+	
 	public static final int VALIDATED_BUTTON = R.string.validatedDialogButton;
 	public static final int PLEASE_WAIT = R.string.pleaseWait;
 	
@@ -12,6 +15,6 @@ public abstract class DialogBoxesStore {
 	
 	public static final int REGISTRATION = R.string.registration;
 	public static final int REGISTRATION_SUCCESS_TITLE = R.string.registrationSuccessDialogTitle;
-	public static final int REGISTRATION_SUCCESs_MESSAGE = R.string.registrationSuccessDialogMessage;
+	public static final int REGISTRATION_SUCCESS_MESSAGE = R.string.registrationSuccessDialogMessage;
 	
 }
