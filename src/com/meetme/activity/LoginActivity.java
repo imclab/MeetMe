@@ -51,7 +51,7 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
-		scrollView = (ScrollView)findViewById(R.id.loginScrollView);
+		scrollView = (ScrollView)findViewById(R.id.scrollView);
 		errorTextView = (TextView)findViewById(R.id.errorText);
 		loginEdit = (EditText)findViewById(R.id.loginEdit);
 		passwordEdit = (EditText)findViewById(R.id.passwordEdit);

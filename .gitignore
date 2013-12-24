@@ -1,3 +1,6 @@
+# Ant build files
+build.xml
+
 # built application files
 *.apk
 *.ap_

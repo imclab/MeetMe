@@ -59,7 +59,7 @@ public class RegistrationActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registration);
 		
-		scrollView = (ScrollView)findViewById(R.id.registrationScrollView);
+		scrollView = (ScrollView)findViewById(R.id.scrollView);
 		errorTextView = (TextView)findViewById(R.id.errorText);
 		emailEdit = (EditText)findViewById(R.id.emailEdit);
 		firstnameEdit = (EditText)findViewById(R.id.firstnameEdit);
@@ -70,12 +70,6 @@ public class RegistrationActivity extends Activity {
 		registrationButton.setOnClickListener(registerListener);
 		alreadyHaveAnAccountTextView = (TextView)findViewById(R.id.alreadyHaveAnAccountLink);
 		alreadyHaveAnAccountTextView.setOnClickListener(alreadyHaveAnAccountListener);
-		
-		emailEdit.setText("test@tet.com");
-		firstnameEdit.setText("ok");
-		lastnameEdit.setText("ok");
-		passwordEdit.setText("12345678");
-		repeatPasswordEdit.setText("12345678");
 		
 		registrationValidator = new RegistrationValidator(
 				getApplicationContext(),
@@ -108,7 +102,6 @@ public class RegistrationActivity extends Activity {
 			final int responseCode = responseJSON.getInt("error_code");
 			
 			if (responseCode == SUCCESS) {
-				//updateRegistrationState(SUCCESS);
 				registrationState = SUCCESS;
 			} else {
 				runOnUiThread(new Runnable() {
