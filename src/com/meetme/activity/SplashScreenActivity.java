@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.service.textservice.SpellCheckerService.Session;
 
 import com.meetme.R;
 import com.meetme.core.SessionManager;
@@ -14,7 +13,7 @@ public class SplashScreenActivity extends Activity {
 	
 	private boolean isRemembered = false;
 	private String userToken;
-	private static int SPLASH_TIME_OUT = 3000;
+	private static int SPLASH_TIME_OUT = 2000;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +29,7 @@ public class SplashScreenActivity extends Activity {
 		if (isRemembered) {
 			new fetchData().execute(userToken);
     	} else {
-    		// Wait for 3 seconds
+    		// Wait for 2 seconds
     		new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {

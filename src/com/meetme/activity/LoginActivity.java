@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.meetme.R;
@@ -34,6 +35,7 @@ import com.meetme.validator.LoginValidator;
 public class LoginActivity extends Activity {
 
 	private SessionManager session;
+	private ScrollView scrollView;
 	private TextView errorTextView;
 	private EditText loginEdit;
 	private EditText passwordEdit;
@@ -46,6 +48,7 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
+		scrollView = (ScrollView)findViewById(R.id.scrollView);
 		errorTextView = (TextView)findViewById(R.id.errorText);
 		loginEdit = (EditText)findViewById(R.id.loginEdit);
 		passwordEdit = (EditText)findViewById(R.id.passwordEdit);
@@ -71,6 +74,9 @@ public class LoginActivity extends Activity {
 		} else {
 			// Other errors
 		}
+		
+		scrollView.pageScroll(ScrollView.FOCUS_UP);
+		scrollView.scrollTo(0, 0);
 	}
 	
 	private void handleLoginResponse(JSONObject responseJSON) {
@@ -87,6 +93,7 @@ public class LoginActivity extends Activity {
 				// Start main activity
 				Intent i = new Intent(LoginActivity.this, MainActivity.class);
 				startActivity(i);
+				finish();
 			} else {
 				runOnUiThread(new Runnable() {
 					public void run() {

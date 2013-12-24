@@ -16,6 +16,7 @@
     <string name="lastnameHint">Lastname</string>
     <string name="repeatPasswordHint">Password</string>
     <string name="registrationButton">Register</string>
+    <string name="alreadyHaveAnAccountLink">Already have an account ? <u>Log In</u>!</string>
     
     <!-- Login activity -->
     <string name="loginLabel">Login :</string>
@@ -23,7 +24,7 @@
     <string name="loginHint">Login</string>
     <string name="passwordHint">Password</string>
     <string name="loginButton">Log In</string>
-    <string name="newToMeetMeLink">New to MeetMe ? <u>Sign Up !</u></string>
+    <string name="newToMeetMeLink">New to MeetMe ? <u>Sign Up</u>!</string>
 
    	<!-- Main activity -->
    	<string name="meetingListLabel">My meetings :</string>

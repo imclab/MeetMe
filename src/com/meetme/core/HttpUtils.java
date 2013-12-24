@@ -17,10 +17,9 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.meetme.protocol.HttpParameters;
-
-import android.os.AsyncTask;
 import android.util.Log;
+
+import com.meetme.protocol.HttpParameters;
 
 public abstract class HttpUtils {
 

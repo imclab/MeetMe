@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
 	}
 	
 	private void newMeeting() {
-		// Start registration activity
+		// Start new meeting activity
 		Intent intent = new Intent(MainActivity.this, NewMeetingActivity.class);
 		startActivity(intent);
 	}
