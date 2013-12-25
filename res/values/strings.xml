@@ -42,6 +42,8 @@
    	<string name="inviteFriendsButton">Invite your friends</string>
    	
    	<!-- Invite Friends activity -->
+   	<string name="searchFriend">Search friends&#8230;</string>
+   	<string name="noFriendText">No friends</string>
    	<string name="inviteButton">Invite</string>
    	
    	<!-- Dialog boxes -->
@@ -64,6 +66,7 @@
 	<string name="emailAlreadyExists">Email already exists</string>
 	<string name="emptyPassword">Enter your password</string>
 	<string name="passwordDoNotMatch">Passwords do not match</string>
+	<string name="emptyTitle">Enter a title</string>
 	<string name="titleTooLong">Title must not exceed 255 characters</string>
 	
 	<string name="wrongEmailFull">The email you entered does not exist</string>

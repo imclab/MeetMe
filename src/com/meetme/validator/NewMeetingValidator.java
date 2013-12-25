@@ -1,6 +1,7 @@
 package com.meetme.validator;
 
 import static com.meetme.protocol.store.MessageStore.TITLE_TOO_LONG;
+import static com.meetme.protocol.store.MessageStore.EMPTY_TITLE;
 import android.content.Context;
 import android.widget.EditText;
 
@@ -29,7 +30,11 @@ public class NewMeetingValidator extends Validator {
 		// Title must not be empty and not longer than 255 characters
 		isTitleValid = (!title.isEmpty() && title.length() <= TITLE_MAX_LENGTH);
 		
-		if (!isTitleValid) {
+		if (title.isEmpty()) {
+			titleEdit.setError(getString(EMPTY_TITLE));
+		}
+		
+		if (title.length() > TITLE_MAX_LENGTH) {
 			titleEdit.setError(getString(TITLE_TOO_LONG));
 		}
 		

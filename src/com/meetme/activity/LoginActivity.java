@@ -138,6 +138,9 @@ public class LoginActivity extends Activity {
 		}).start();
 	}
 	
+	/*
+	 * Listeners
+	 */
 	private OnClickListener loginListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {

@@ -5,20 +5,20 @@
     
     <TextView 
 	    android:id="@+id/meetingListText"
-	    android:layout_width="fill_parent"
+	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	  	android:text="@string/meetingListLabel"
 	    />
     
 	<ListView 
 	    android:id="@+id/meetingList"
-	    android:layout_width="fill_parent"
+	    android:layout_width="match_parent"
     	android:layout_height="wrap_content" >
 	</ListView>
 
     <Button 
         android:id="@+id/newMeetingButton"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
     	android:layout_height="wrap_content"
     	android:text="@string/newMeetingButton"
         />	 

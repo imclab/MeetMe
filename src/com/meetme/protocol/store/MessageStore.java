@@ -15,6 +15,7 @@ public abstract class MessageStore {
 	public static final int EMAIL_ALREADY_EXISTS = R.string.emailAlreadyExists;
 	public static final int EMPTY_PASSWORD = R.string.emptyPassword;
 	public static final int PASSWORDS_DO_NOT_MATCH = R.string.passwordDoNotMatch;
+	public static final int EMPTY_TITLE = R.string.emptyTitle;
 	public static final int TITLE_TOO_LONG = R.string.titleTooLong;
 	
 	public static final int WRONG_EMAIL_FULL = R.string.wrongEmailFull;

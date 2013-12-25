@@ -1,20 +1,61 @@
-<LinearLayout 
+<RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
+	android:orientation="vertical"
+	android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     >
- 
-    <ListView
-        android:id="@+id/friendList"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-      />
- 	
-    <Button 
-        android:id="@+id/inviteButton"
-        android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:text="@string/inviteButton"
-        />	
-</LinearLayout>
+    
+        <!-- Search bar starts -->
+        <RelativeLayout 
+            android:id="@+id/searchBar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
+            
+	        <EditText
+		        android:id="@+id/searchFriendEdit"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:hint="@string/searchFriend"
+		        android:inputType="text"
+		        android:drawableRight="@drawable/search_icon"
+		        />
+	    </RelativeLayout>
+	    <!-- Search bar ends -->
+	    <!-- Invite bar starts -->
+        <LinearLayout 
+	        android:id="@+id/inviteBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+	        >
+	        
+	        <Button 
+	            android:id="@+id/inviteButton"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:text="@string/inviteButton"
+	            />
+        </LinearLayout> 
+        <!-- Invite bar ends -->
+        <!-- Friend list starts -->
+        <ListView
+            android:id="@+id/friendList"
+            android:layout_width="match_parent"
+            android:layout_height="0dip" 
+            android:choiceMode="multipleChoice"
+            android:layout_below="@id/searchBar"
+            android:layout_above="@id/inviteBar"
+          />
+        <!-- Friend list ends -->
+        <!-- When friend list is empty -->
+        <TextView 
+            android:id="@+id/noFriendText" 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" 
+            android:visibility="invisible"
+	        android:text="@string/noFriendText"
+	        android:layout_below="@id/searchBar" 
+	        android:layout_above="@id/inviteBar" />
+</RelativeLayout>
