@@ -50,6 +50,10 @@ public class SessionManager {
 	/*
 	 * Update methods
 	 */
+	public void addMeeting(Meeting newMeeting) {
+		this.meetingSet.add(newMeeting);
+	}
+	
 	public void updateFriendSet() {
 		if (this.userToken != null && !this.userToken.isEmpty()) {
 			this.friendSet = FriendDao.findFriendsOfUser(this.userToken);

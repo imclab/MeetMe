@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.meetme.R;
+import com.meetme.model.entity.Meeting;
 import com.meetme.validator.NewMeetingValidator;
 
 public class NewMeetingActivity extends Activity {
@@ -41,12 +42,27 @@ public class NewMeetingActivity extends Activity {
 	/*
 	 * Private methods
 	 */
+	private Meeting createMeeting() {
+		Meeting meeting = new Meeting();
+		meeting.setTitle(titleEdit.getText().toString());
+		meeting.setDescription("Let's get fucking drunk");
+		meeting.setDatetime("2014-01-14 21:30:00");
+		meeting.setLocationGeo("75,45");
+		meeting.setLocationText("Le Corum");
+		
+		return meeting;
+	}
+	
+	/*
+	 * Listeners
+	 */
 	private OnClickListener inviteFriendsListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
 			if (newMeetingValidator.validate()) {
-				// Start registration activity
+				// Start invite friends activity
 				Intent intent = new Intent(NewMeetingActivity.this, InviteFriendsActivity.class);
+				intent.putExtra("newMeeting", createMeeting());
 				startActivity(intent);
 			}
 	    }

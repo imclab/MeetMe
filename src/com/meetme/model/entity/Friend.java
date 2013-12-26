@@ -1,5 +1,6 @@
 package com.meetme.model.entity;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +9,9 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-public class Friend implements Comparable<Friend> {
+public class Friend implements Comparable<Friend>, Serializable {
+	
+	static final long serialVersionUID = 200L;
 	
 	private int id;
 	private String firstname;

@@ -1,5 +1,6 @@
 package com.meetme.model.entity;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -10,7 +11,9 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-public class Meeting implements Comparable<Meeting> {
+public class Meeting implements Comparable<Meeting>, Serializable {
+	
+	static final long serialVersionUID = 100L;
 	
 	private int id;
 	private String title;

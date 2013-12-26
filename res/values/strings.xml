@@ -55,6 +55,7 @@
    	<string name="registration">Registration&#8230;</string>
    	<string name="registrationSuccessDialogTitle">Registration</string>
    	<string name="registrationSuccessDialogMessage">Your registration is complete !</string>
+   	<string name="creatingMeeting">Creating meeting</string>
    	
    	<!-- Error/Warning -->
    	<string name="generalError">An error occurred</string>
