@@ -62,6 +62,10 @@ public class LoginActivity extends Activity {
 		loginValidator = new LoginValidator(getApplicationContext(), loginEdit, passwordEdit);
 		
 		session = SessionManager.getInstance();
+		
+		// Test
+		loginEdit.setText("baptiste.lebail@gmail.com");
+		passwordEdit.setText("12345");
 	}
 	
 	/*
@@ -106,9 +110,9 @@ public class LoginActivity extends Activity {
 				});
 			}
 		} catch (JSONException e) {
-			Log.d(LoginActivity.class.getName(), e.getMessage());
+			Log.d(LoginActivity.class.getName(), e.getMessage(), e);
 		} catch (Exception e) {
-			Log.d(LoginActivity.class.getName(), e.getMessage());
+			Log.d(LoginActivity.class.getName(), e.getMessage(), e);
 		}
 	}
 	

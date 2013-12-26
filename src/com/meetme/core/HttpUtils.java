@@ -27,13 +27,6 @@ public abstract class HttpUtils {
 	}
 	
 	/*
-	 * Private methods
-	 */
-	private static void handleLogging(Exception e) {
-		Log.e(HttpUtils.class.getName(), e.getMessage());
-	}
-	
-	/*
 	 * Methods
 	 */
 	public static JSONObject post(String url, HttpParameters parameters) {
@@ -68,13 +61,13 @@ public abstract class HttpUtils {
 	        responseJSON = new JSONObject(responseString);
 	        
 	    } catch (JSONException e) {
-	    	handleLogging(e);
+	    	Log.e(HttpUtils.class.getName(), e.getMessage(), e);
 		} catch (ClientProtocolException e) {
-	    	handleLogging(e);
+			Log.e(HttpUtils.class.getName(), e.getMessage(), e);
 	    } catch (IOException e) {
-	    	handleLogging(e);
+	    	Log.e(HttpUtils.class.getName(), e.getMessage(), e);
 	    } catch (Exception e) {
-	    	handleLogging(e);
+	    	Log.e(HttpUtils.class.getName(), e.getMessage(), e);
 	    }
 	    
 	    return responseJSON;

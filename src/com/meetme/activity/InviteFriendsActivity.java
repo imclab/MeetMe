@@ -9,7 +9,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter.FilterListener;
@@ -20,13 +19,16 @@ import android.widget.Toast;
 import com.meetme.R;
 import com.meetme.core.SessionManager;
 import com.meetme.model.entity.Friend;
+import com.meetme.model.entity.Meeting;
+import com.meetme.presentation.FriendCheckable;
+import com.meetme.presentation.FriendListArrayAdapter;
 
 public class InviteFriendsActivity extends Activity {
 
 	private SessionManager session;
 	private EditText searchFriendEdit;
-	private List<String> friendList;
-	private ArrayAdapter<String> friendListAdapter;
+	private List<FriendCheckable> friendList;
+	private FriendListArrayAdapter friendListAdapter;
 	private ListView friendListView;
 	private Button inviteButton;
 	private TextView noFriendText;
@@ -38,18 +40,12 @@ public class InviteFriendsActivity extends Activity {
 		
 		searchFriendEdit = (EditText)findViewById(R.id.searchFriendEdit);
 		searchFriendEdit.addTextChangedListener(searchFriendTextWatcher);
-		
 		friendListView = (ListView)findViewById(R.id.friendList);
 		inviteButton = (Button)findViewById(R.id.inviteButton);
 		inviteButton.setOnClickListener(inviteListener);
 		noFriendText = (TextView)findViewById(R.id.noFriendText);
 		
-		friendList = new ArrayList<String>();
-		
-		friendListAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, android.R.id.text1, friendList);
-		
-		friendListView.setAdapter(friendListAdapter);		
+		friendList = new ArrayList<FriendCheckable>();
 		
 		session = SessionManager.getInstance();
 		updateFriendList();
@@ -57,6 +53,9 @@ public class InviteFriendsActivity extends Activity {
 		if (friendList.isEmpty()) {
 			noFriendText.setVisibility(View.VISIBLE);
 		}
+		
+		friendListAdapter = new FriendListArrayAdapter(this, friendList);
+		friendListView.setAdapter(friendListAdapter);
 	}
 	
 	/*
@@ -70,17 +69,28 @@ public class InviteFriendsActivity extends Activity {
 		friendList.clear();
 		
 		for (Friend friend : session.getFriendSet()) {
-			friendList.add(friend.getFirstname() + " " + friend.getLastname());
+			friendList.add(new FriendCheckable(friend));
 		}
 	}
-	
+	/*
+	 * Friend list adapter
+	 */
 	/*
 	 * Listeners
 	 */
 	private OnClickListener inviteListener = new OnClickListener() {
+		Meeting meeting = new Meeting();
+		
 		@Override
 		public void onClick(View v) {
-			Toast.makeText(getApplicationContext(), "create meeting", Toast.LENGTH_SHORT).show();
+			for (FriendCheckable friend : friendListAdapter.getFriendList()) {
+				if (friend.isSelected()) {
+					meeting.addFriend(friend);
+				}
+			}
+			
+		    Toast.makeText(getApplicationContext(),
+		    	"Create meeting", Toast.LENGTH_SHORT).show();
 	    }
 	};
 	
@@ -112,10 +122,12 @@ public class InviteFriendsActivity extends Activity {
 		@Override
 		public void beforeTextChanged(CharSequence s, int start, int count,
 				int after) {
+			//Do nothing before text changed
 		}
 		
 		@Override
 		public void afterTextChanged(Editable s) {
+			//Do nothing after text changed
 		}
 	};
 }

@@ -2,6 +2,8 @@ package com.meetme.model.entity;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +19,8 @@ public class Meeting implements Comparable<Meeting> {
 	private String locationGeo;
 	private String locationText;
 	private int hostUserId;
+
+	private Set<Friend> friendSet;
 	
 	private static final String MEETING_ID = "meeting_id";
 	private static final String TITLE = "title";
@@ -33,6 +37,7 @@ public class Meeting implements Comparable<Meeting> {
 	 * Constructors
 	 */
 	public Meeting() {	
+		this.friendSet = new TreeSet<Friend>();
 	}
 	
 	public Meeting(
@@ -50,6 +55,7 @@ public class Meeting implements Comparable<Meeting> {
 		this.locationGeo = locationGeo;
 		this.locationText = locationText;
 		this.hostUserId = hostUserId;
+		this.friendSet = new TreeSet<Friend>();
 	}
 	
 	/*
@@ -69,9 +75,9 @@ public class Meeting implements Comparable<Meeting> {
 				String fieldValue = meetingJSON.get(fieldName).toString();
 				fieldMap.put(fieldName, fieldValue);
 			} catch (JSONException e) {
-				Log.w(Meeting.class.getName(), "Could not parse entity field from JSON  : " + e.getMessage());
+				Log.w(Meeting.class.getName(), "Could not parse entity field from JSON  : " + e.getMessage(), e);
 			} catch (Exception e) {
-				Log.e(Meeting.class.getName(), e.getMessage());
+				Log.e(Meeting.class.getName(), e.getMessage(), e);
 			}
 		}
 		
@@ -87,6 +93,10 @@ public class Meeting implements Comparable<Meeting> {
 			);
 		
 		return meeting;
+	}
+	
+	public void addFriend(Friend friend) {
+		this.friendSet.add(friend);
 	}
 	
 	@Override
@@ -166,5 +176,13 @@ public class Meeting implements Comparable<Meeting> {
 	
 	public void setHostUserId(int hostUserId) {
 		this.hostUserId = hostUserId;
+	}
+
+	public Set<Friend> getFriendSet() {
+		return friendSet;
+	}
+
+	public void setFriendSet(Set<Friend> friendSet) {
+		this.friendSet = friendSet;
 	}
 }

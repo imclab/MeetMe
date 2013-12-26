@@ -48,9 +48,9 @@ public abstract class MeetingDao {
 			}
 			
 		} catch (JSONException e) {
-			Log.e(MeetingDao.class.getName(), e.getMessage());
+			Log.e(MeetingDao.class.getName(), e.getMessage(), e);
 		} catch (Exception e) {
-			Log.e(MeetingDao.class.getName(), e.getMessage());
+			Log.e(MeetingDao.class.getName(), e.getMessage(), e);
 		}
 		
 		return meetingSet;

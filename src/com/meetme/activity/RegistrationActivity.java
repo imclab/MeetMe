@@ -108,13 +108,13 @@ public class RegistrationActivity extends Activity {
 					@Override
 					public void run() {
 							handleRegistrationError(responseCode);
-						};
+						}
 					});
 			}
 		} catch (JSONException e) {
-			Log.d(LoginActivity.class.getName(), e.getMessage());
+			Log.d(LoginActivity.class.getName(), e.getMessage(), e);
 		} catch (Exception e) {
-			Log.d(LoginActivity.class.getName(), e.getMessage());
+			Log.d(LoginActivity.class.getName(), e.getMessage(), e);
 		}
 	}
 	

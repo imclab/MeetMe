@@ -15,7 +15,6 @@ import android.widget.ListView;
 import com.meetme.R;
 import com.meetme.core.SessionManager;
 import com.meetme.model.entity.Meeting;
-import com.meetme.protocol.store.DialogBoxesStore;
 
 public class MainActivity extends Activity {
 

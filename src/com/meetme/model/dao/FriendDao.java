@@ -48,9 +48,9 @@ public abstract class FriendDao {
 			}
 			
 		} catch (JSONException e) {
-			Log.e(FriendDao.class.getName(), e.getMessage());
+			Log.e(FriendDao.class.getName(), e.getMessage(), e);
 		} catch (Exception e) {
-			Log.e(FriendDao.class.getName(), e.getMessage());
+			Log.e(FriendDao.class.getName(), e.getMessage(), e);
 		}
 		
 		return friendSet;

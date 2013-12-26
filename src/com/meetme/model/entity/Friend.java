@@ -54,9 +54,9 @@ public class Friend implements Comparable<Friend> {
 				String fieldValue = friendJSON.get(fieldName).toString();
 				fieldMap.put(fieldName, fieldValue);
 			} catch (JSONException e) {
-				Log.w(Meeting.class.getName(), "Could not parse entity field from JSON  : " + e.getMessage());
+				Log.w(Meeting.class.getName(), "Could not parse entity field from JSON  : " + e.getMessage(), e);
 			} catch (Exception e) {
-				Log.e(Meeting.class.getName(), e.getMessage());
+				Log.e(Meeting.class.getName(), e.getMessage(), e);
 			}
 		}
 		
@@ -88,6 +88,11 @@ public class Friend implements Comparable<Friend> {
 	@Override
 	public int compareTo(Friend another) {
 		return this.lastname.compareTo(another.lastname);
+	}
+
+	@Override
+	public String toString() {
+		return this.firstname + " " + this.lastname;
 	}
 
 	/*
