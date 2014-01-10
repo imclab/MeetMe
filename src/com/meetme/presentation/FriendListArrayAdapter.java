@@ -2,6 +2,7 @@ package com.meetme.presentation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -114,13 +115,14 @@ public class FriendListArrayAdapter extends ArrayAdapter<FriendCheckable> implem
 				// Firstname or lastname must match the constraint
 				// (case insensitive)
 				List<FriendCheckable> resultList = new ArrayList<FriendCheckable>();
+				Locale locale = Locale.getDefault();
 				
 				for (FriendCheckable friend : originalList) {
-					String constraintString = constraint.toString().toLowerCase();
+					String constraintString = constraint.toString().toLowerCase(locale);
 					boolean firstnameMatches = 
-							friend.getFirstname().toLowerCase().startsWith(constraintString);
+							friend.getFirstname().toLowerCase(locale).startsWith(constraintString);
 					boolean lastnameMatches = 
-							friend.getLastname().toLowerCase().startsWith(constraintString);
+							friend.getLastname().toLowerCase(locale).startsWith(constraintString);
 					
 					if(firstnameMatches || lastnameMatches) {
 						resultList.add(friend);

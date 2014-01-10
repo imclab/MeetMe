@@ -3,19 +3,20 @@ package com.meetme.activity;
 import static com.meetme.protocol.store.DialogBoxesStore.CREATING_MEETING;
 import static com.meetme.protocol.store.DialogBoxesStore.PLEASE_WAIT;
 import static com.meetme.protocol.store.ErrorCodeStore.SUCCESS;
-import static com.meetme.protocol.store.ServerParameterStore.MEETING_TOKEN;
 import static com.meetme.protocol.store.ServerParameterStore.MEETING_CREATE_DATETIME;
 import static com.meetme.protocol.store.ServerParameterStore.MEETING_CREATE_DESCRIPTION;
-import static com.meetme.protocol.store.ServerParameterStore.MEETING_CREATE_LOCATION_GEO;
 import static com.meetme.protocol.store.ServerParameterStore.MEETING_CREATE_FRIENDS;
+import static com.meetme.protocol.store.ServerParameterStore.MEETING_CREATE_LOCATION_GEO;
 import static com.meetme.protocol.store.ServerParameterStore.MEETING_CREATE_LOCATION_TEXT;
 import static com.meetme.protocol.store.ServerParameterStore.MEETING_CREATE_TITLE;
 import static com.meetme.protocol.store.ServerParameterStore.MEETING_OPERATION;
 import static com.meetme.protocol.store.ServerParameterStore.MEETING_OPERATION_CREATE;
-import static com.meetme.protocol.store.ServerUrlStore.LOGIN_URL;
+import static com.meetme.protocol.store.ServerParameterStore.MEETING_TOKEN;
+import static com.meetme.protocol.store.ServerUrlStore.MEETING_URL;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -99,7 +100,8 @@ public class InviteFriendsActivity extends Activity {
 	}
 	
 	private void handleCreateMeetingError(int responseCode) {
-		Toast.makeText(getApplicationContext(), "meeting creation error", Toast.LENGTH_SHORT).show();
+		// TO DO
+		Toast.makeText(getApplicationContext(), "Meeting creation error", Toast.LENGTH_SHORT).show();
 	}
 	
 	private void handleCreateMeetingResponse(JSONObject responseJSON) {
@@ -147,10 +149,19 @@ public class InviteFriendsActivity extends Activity {
 				parameters.put(MEETING_CREATE_DATETIME, newMeeting.getDatetime());
 				parameters.put(MEETING_CREATE_LOCATION_GEO, newMeeting.getLocationGeo());
 				parameters.put(MEETING_CREATE_LOCATION_TEXT, newMeeting.getLocationText());
-				parameters.put(MEETING_CREATE_FRIENDS, "");
+				
+				Set<Friend> friendSet = newMeeting.getFriendSet();
+				
+				if (friendSet.size() == 0) {
+					parameters.put(MEETING_CREATE_FRIENDS, "");
+				} else {	
+					for (Friend friend : friendSet) {
+						parameters.put(MEETING_CREATE_FRIENDS, Integer.toString(friend.getId()));
+					}
+				}
 				
 				// Send request
-				responseJSON = HttpUtils.post(LOGIN_URL, parameters);
+				responseJSON = HttpUtils.post(MEETING_URL, parameters);
 			
 				// Handle response
 				handleCreateMeetingResponse(responseJSON);
@@ -170,9 +181,10 @@ public class InviteFriendsActivity extends Activity {
 			for (FriendCheckable friend : friendListAdapter.getFriendList()) {
 				if (friend.isSelected()) {
 					newMeeting.addFriend(friend);
-					createMeeting();
 				}
 			}
+			
+			createMeeting();
 	    }
 	};
 	

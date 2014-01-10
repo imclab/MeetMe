@@ -2,8 +2,8 @@ package com.meetme.activity;
 
 import static com.meetme.protocol.store.DialogBoxesStore.PLEASE_WAIT;
 import static com.meetme.protocol.store.DialogBoxesStore.REGISTRATION;
-import static com.meetme.protocol.store.DialogBoxesStore.REGISTRATION_SUCCESS_TITLE;
 import static com.meetme.protocol.store.DialogBoxesStore.REGISTRATION_SUCCESS_MESSAGE;
+import static com.meetme.protocol.store.DialogBoxesStore.REGISTRATION_SUCCESS_TITLE;
 import static com.meetme.protocol.store.DialogBoxesStore.VALIDATED_BUTTON;
 import static com.meetme.protocol.store.ErrorCodeStore.REGISTRATION_EMAIL_ALREADY_EXIST;
 import static com.meetme.protocol.store.ErrorCodeStore.SUCCESS;
@@ -13,7 +13,9 @@ import static com.meetme.protocol.store.ServerParameterStore.REGISTRATION_EMAIL;
 import static com.meetme.protocol.store.ServerParameterStore.REGISTRATION_FIRSTNAME;
 import static com.meetme.protocol.store.ServerParameterStore.REGISTRATION_LASTNAME;
 import static com.meetme.protocol.store.ServerParameterStore.REGISTRATION_PASSWORD;
-import static com.meetme.protocol.store.ServerUrlStore.REGISTRATION_URL;
+import static com.meetme.protocol.store.ServerParameterStore.USER_OPERATION;
+import static com.meetme.protocol.store.ServerParameterStore.USER_OPERATION_REGISTER;
+import static com.meetme.protocol.store.ServerUrlStore.USER_URL;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -141,13 +143,14 @@ public class RegistrationActivity extends Activity {
         @Override
         protected Void doInBackground(Void...voids) {
         	// Add parameters
+        	parameters.put(USER_OPERATION, USER_OPERATION_REGISTER);
 			parameters.put(REGISTRATION_EMAIL, emailEdit.getText().toString());
 			parameters.put(REGISTRATION_FIRSTNAME, firstnameEdit.getText().toString());
 			parameters.put(REGISTRATION_LASTNAME, lastnameEdit.getText().toString());
 			parameters.put(REGISTRATION_PASSWORD, passwordEdit.getText().toString());
 			
 			// Send request
-			responseJSON = HttpUtils.post(REGISTRATION_URL, parameters);
+			responseJSON = HttpUtils.post(USER_URL, parameters);
 			
 			// Handle response
 			handleRegistrationResponse(responseJSON);

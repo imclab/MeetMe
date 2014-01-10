@@ -12,7 +12,9 @@ import static com.meetme.protocol.store.MessageStore.WRONG_PASSWORD;
 import static com.meetme.protocol.store.MessageStore.WRONG_PASSWORD_FULL;
 import static com.meetme.protocol.store.ServerParameterStore.LOGIN_EMAIL;
 import static com.meetme.protocol.store.ServerParameterStore.LOGIN_PASSWORD;
-import static com.meetme.protocol.store.ServerUrlStore.LOGIN_URL;
+import static com.meetme.protocol.store.ServerParameterStore.USER_OPERATION;
+import static com.meetme.protocol.store.ServerParameterStore.USER_OPERATION_LOGIN;
+import static com.meetme.protocol.store.ServerUrlStore.USER_URL;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,7 +67,7 @@ public class LoginActivity extends Activity {
 		
 		// Test
 		loginEdit.setText("baptiste.lebail@gmail.com");
-		passwordEdit.setText("12345");
+		passwordEdit.setText("12345678");
 	}
 	
 	/*
@@ -128,11 +130,12 @@ public class LoginActivity extends Activity {
 			@Override
 			public void run() {
 				// Add parameters
+				parameters.put(USER_OPERATION, USER_OPERATION_LOGIN);
 				parameters.put(LOGIN_EMAIL, loginEdit.getText().toString());
 				parameters.put(LOGIN_PASSWORD, passwordEdit.getText().toString());
 				
 				// Send request
-				responseJSON = HttpUtils.post(LOGIN_URL, parameters);
+				responseJSON = HttpUtils.post(USER_URL, parameters);
 			
 				// Handle response
 				handleLoginResponse(responseJSON);

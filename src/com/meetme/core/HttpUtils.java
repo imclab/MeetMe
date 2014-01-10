@@ -1,18 +1,13 @@
 package com.meetme.core;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,13 +34,7 @@ public abstract class HttpUtils {
 	
 	    try {
 	        // Add parameters
-	    	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(parameters.size());
-	    	
-	    	for (Map.Entry<String, String> parameter : parameters.entrySet()) { 
-	    		nameValuePairs.add(new BasicNameValuePair(parameter.getKey(), parameter.getValue()));
-	    	}
-	        
-	        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+	        httppost.setEntity(new UrlEncodedFormEntity(parameters));
 	        
 	        // Log request
 	        Log.d(HttpUtils.class.getName(), EntityUtils.toString(httppost.getEntity()));

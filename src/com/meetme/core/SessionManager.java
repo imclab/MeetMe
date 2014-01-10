@@ -56,13 +56,15 @@ public class SessionManager {
 	
 	public void updateFriendSet() {
 		if (this.userToken != null && !this.userToken.isEmpty()) {
-			this.friendSet = FriendDao.findFriendsOfUser(this.userToken);
+			this.friendSet.clear();
+			this.friendSet.addAll(FriendDao.findFriendsOfUser(this.userToken));
 		}
 	}
 	
 	public void updateMeetingSet() {
 		if (this.userToken != null && !this.userToken.isEmpty()) {
-			this.meetingSet = MeetingDao.findMeetingsOfUser(this.userToken);
+			this.meetingSet.clear();
+			this.meetingSet.addAll(MeetingDao.findMeetingsOfUser(this.userToken));
 		}
 	}
 }

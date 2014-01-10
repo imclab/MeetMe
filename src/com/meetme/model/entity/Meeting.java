@@ -119,7 +119,17 @@ public class Meeting implements Comparable<Meeting>, Serializable {
 
 	@Override
 	public int compareTo(Meeting another) {
-		return this.datetime.compareTo(another.datetime);
+		if (this.datetime.equals(another.datetime)) {
+			return -1;
+		}
+		
+		// Newest to oldest
+		return -1 * this.datetime.compareTo(another.datetime);
+	}
+	
+	@Override
+	public String toString() {
+		return this.id + ":" + this.title;
 	}
 
 	/*

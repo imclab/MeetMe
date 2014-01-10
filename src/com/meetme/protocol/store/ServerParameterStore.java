@@ -4,6 +4,11 @@ public abstract class ServerParameterStore {
 	private ServerParameterStore() {
 	}
 	
+	public static final String USER_OPERATION = "operation";
+	public static final String USER_OPERATION_LOGIN = "login";
+	public static final String USER_OPERATION_REGISTER = "register";
+	public static final String USER_OPERATION_UPDATE = "update";
+	public static final String USER_OPERATION_DELETE = "delete";
 	public static final String LOGIN_EMAIL = "email";
 	public static final String LOGIN_PASSWORD = "password";
 	
@@ -24,7 +29,7 @@ public abstract class ServerParameterStore {
 	public static final String MEETING_CREATE_DATETIME = "datetime";
 	public static final String MEETING_CREATE_LOCATION_GEO = "location_geo";
 	public static final String MEETING_CREATE_LOCATION_TEXT = "location_text";
-	public static final String MEETING_CREATE_FRIENDS = "friends";
+	public static final String MEETING_CREATE_FRIENDS = "friends[]";
 	public static final String MEETING_VIEW_MEETING_ID = "meeting_id";
 	
 	public static final String FRIEND_TOKEN = "token";

@@ -7,6 +7,8 @@ import com.meetme.model.entity.Friend;
  */
 public class FriendCheckable extends Friend {
 	
+	static final long serialVersionUID = 225L;
+	
 	private boolean selected = false;
 
 	public FriendCheckable(Friend friend) {
