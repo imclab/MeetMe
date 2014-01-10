@@ -1,14 +1,21 @@
 package com.meetme.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
 import com.meetme.R;
+import com.meetme.core.DateUtils;
 import com.meetme.model.entity.Meeting;
 import com.meetme.validator.NewMeetingValidator;
 
@@ -19,6 +26,8 @@ public class NewMeetingActivity extends Activity {
 	private EditText dateTimeEdit;
 	private EditText locationEdit;
 	private Button inviteFriendsButton;
+	private Button dateTimeChooseButton;
+	AlertDialog dateTimeDialog;
 	private NewMeetingValidator newMeetingValidator;
 	
 	@Override
@@ -32,6 +41,10 @@ public class NewMeetingActivity extends Activity {
 		locationEdit = (EditText)findViewById(R.id.locationEdit);
 		inviteFriendsButton = (Button)findViewById(R.id.inviteFriendsButton);
 		inviteFriendsButton.setOnClickListener(inviteFriendsListener);
+		dateTimeChooseButton = (Button)findViewById(R.id.dateTimeChooseButton);
+		dateTimeChooseButton.setOnClickListener(dateTimeChooseListener);
+		
+		initDateTimeDialog();
 		
 		newMeetingValidator = new NewMeetingValidator(
 				getApplicationContext(), 
@@ -42,11 +55,35 @@ public class NewMeetingActivity extends Activity {
 	/*
 	 * Private methods
 	 */
+	private void initDateTimeDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setView(getLayoutInflater().inflate(R.layout.datetime_dialog, null));
+		builder.setTitle(R.string.dateTimeDialogTitle);
+		
+		builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+	           public void onClick(DialogInterface dialog, int id) {
+	               // User clicked OK button
+	        	   DatePicker datePicker = (DatePicker)dateTimeDialog.findViewById(R.id.datePicker);
+	        	   TimePicker timePicker = (TimePicker)dateTimeDialog.findViewById(R.id.timePicker);
+	        	   
+	        	   dateTimeEdit.setText(DateUtils.getDateTimeFromPickers(datePicker, timePicker));
+	           }
+	       });
+		
+		builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+	           public void onClick(DialogInterface dialog, int id) {
+	               // User cancelled the dialog
+	           }
+	       });
+		
+		dateTimeDialog = builder.create();
+	}
+	
 	private Meeting createMeeting() {
 		Meeting meeting = new Meeting();
 		meeting.setTitle(titleEdit.getText().toString());
 		meeting.setDescription("Let's get fucking drunk");
-		meeting.setDatetime("2014-01-14 21:30:00");
+		meeting.setDatetime(dateTimeEdit.getText().toString());
 		meeting.setLocationGeo("75,45");
 		meeting.setLocationText("Le Corum");
 		
@@ -65,6 +102,14 @@ public class NewMeetingActivity extends Activity {
 				intent.putExtra("newMeeting", createMeeting());
 				startActivity(intent);
 			}
+	    }
+	};
+	
+	private OnClickListener dateTimeChooseListener = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			// display dialog
+			dateTimeDialog.show();
 	    }
 	};
 }

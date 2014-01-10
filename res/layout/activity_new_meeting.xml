@@ -50,6 +50,12 @@
 	        android:hint="@string/dateTimeHint"
 	        android:inputType="datetime"
 	        />
+		<Button 
+		    android:id="@+id/dateTimeChooseButton"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/dateTimeChooseButton"
+		    />
 		<!-- Datetime field ends -->	
 		<!-- Location text field starts -->	
 		<TextView 

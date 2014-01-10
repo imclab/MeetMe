@@ -5,6 +5,10 @@
     <string name="action_settings">Settings</string>
     <string name="meetmeUrl">www.meetme.com</string>
 	<string name="meetmeLogoDescription">MeetMe Logo</string>
+	
+	<!-- Constants -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
     
     <!-- Registration activity -->
     <string name="emailLabel">Email :</string>
@@ -40,6 +44,7 @@
    	<string name="dateTimeHint">Date and time</string>
    	<string name="locationHint">Location</string>
    	<string name="inviteFriendsButton">Invite your friends</string>
+   	<string name="dateTimeChooseButton">Choose</string>
    	
    	<!-- Invite Friends activity -->
    	<string name="searchFriend">Search friends&#8230;</string>
@@ -56,6 +61,7 @@
    	<string name="registrationSuccessDialogTitle">Registration</string>
    	<string name="registrationSuccessDialogMessage">Your registration is complete !</string>
    	<string name="creatingMeeting">Creating meeting</string>
+   	<string name="dateTimeDialogTitle">Choose a date</string>
    	
    	<!-- Error/Warning -->
    	<string name="generalError">An error occurred</string>
