@@ -82,7 +82,7 @@ public class NewMeetingActivity extends Activity {
 	private Meeting createMeeting() {
 		Meeting meeting = new Meeting();
 		meeting.setTitle(titleEdit.getText().toString());
-		meeting.setDescription("Let's get fucking drunk");
+		meeting.setDescription(descriptionEdit.getText().toString());
 		meeting.setDatetime(dateTimeEdit.getText().toString());
 		meeting.setLocationGeo("75,45");
 		meeting.setLocationText("Le Corum");

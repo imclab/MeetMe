@@ -33,6 +33,7 @@
    	<!-- Main activity -->
    	<string name="meetingListLabel">My meetings :</string>
    	<string name="newMeetingButton">New Meeting</string>
+   	<string name="findFriendsButton">Find friends</string>
    	
    	<!-- New meeting activity -->
    	<string name="titleLabel">Title :</string>
@@ -46,10 +47,19 @@
    	<string name="inviteFriendsButton">Invite your friends</string>
    	<string name="dateTimeChooseButton">Choose</string>
    	
+   	<!-- Find friend activity -->
+   	<string name="findButton">Find</string>
+   	<string name="addFriendButton">Send an invitation</string>
+   	
    	<!-- Invite Friends activity -->
    	<string name="searchFriend">Search friends&#8230;</string>
    	<string name="noFriendText">No friends</string>
    	<string name="inviteButton">Invite</string>
+   	
+   	<!-- Meeting activity -->
+   	<string name="arrivedLabel"><u>Arrived</u></string>
+   	<string name="leftLabel"><u>Left</u></string>
+   	<string name="waitingLabel"><u>Waiting</u></string>
    	
    	<!-- Dialog boxes -->
    	<string name="validatedDialogButton">OK</string>
@@ -62,6 +72,8 @@
    	<string name="registrationSuccessDialogMessage">Your registration is complete !</string>
    	<string name="creatingMeeting">Creating meeting</string>
    	<string name="dateTimeDialogTitle">Choose a date</string>
+   	<string name="searchingUser">Searching user&#8230;</string>
+   	<string name="sendingInvitation">Sending invitation&#8230;</string>
    	
    	<!-- Error/Warning -->
    	<string name="generalError">An error occurred</string>
@@ -80,4 +92,9 @@
     <string name="wrongEmail">Email does not exist</string>
     <string name="wrongPasswordFull">The password you entered is wrong</string>
     <string name="wrongPassword">Wrong password</string>
+    
+    <string name="noFriendFoundForEmail">No user was found for this email</string>
+    <string name="friendAlreadyInList">This user is already in your friend list</string>
+    <string name="friendIsYourself">You can\'t add yourself as a friend</string>
+    <string name="friendInvitationAlreadySent">Invitation already sent</string>
 </resources>

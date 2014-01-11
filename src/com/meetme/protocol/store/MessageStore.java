@@ -22,4 +22,9 @@ public abstract class MessageStore {
 	public static final int WRONG_EMAIL = R.string.wrongEmail;
 	public static final int WRONG_PASSWORD_FULL = R.string.wrongPasswordFull;
 	public static final int WRONG_PASSWORD = R.string.wrongPassword;
+	
+	public static final int NO_FRIEND_FOUND_FOR_EMAIL = R.string.noFriendFoundForEmail;
+	public static final int FRIEND_ALREADY_IN_LIST = R.string.friendAlreadyInList;
+	public static final int FRIEND_IS_YOURSELF = R.string.friendIsYourself;
+	public static final int FRIEND_INVITATION_ALREADY_SENT = R.string.friendInvitationAlreadySent;
 }

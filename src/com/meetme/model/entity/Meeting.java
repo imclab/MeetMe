@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,6 +33,7 @@ public class Meeting implements Comparable<Meeting>, Serializable {
 	private static final String LOCATION_GEO = "location_geo";
 	private static final String LOCATION_TEXT = "location_text";
 	private static final String HOST_USER_ID = "host_user_id";
+	private static final String USERS = "users";
 	
 	private static String[] fieldNameArray = 
 		{MEETING_ID, TITLE, DESCRIPTION, DATETIME, LOCATION_GEO, LOCATION_TEXT, HOST_USER_ID};
@@ -73,6 +75,7 @@ public class Meeting implements Comparable<Meeting>, Serializable {
 				fieldMap.put(fieldName, "0");
 		}
 		
+		// Parse the meeting
 		for (String fieldName : fieldNameArray) {
 			try {
 				String fieldValue = meetingJSON.get(fieldName).toString();
@@ -94,6 +97,21 @@ public class Meeting implements Comparable<Meeting>, Serializable {
 				fieldMap.get(LOCATION_TEXT),
 				Integer.parseInt(fieldMap.get(HOST_USER_ID))
 			);
+		
+		// Parse users
+		try {
+			JSONArray userArray = (JSONArray)meetingJSON.get(USERS);
+			int userArrayLength = userArray.length();
+			
+			for (int i = 0; i < userArrayLength; i++) {
+				meeting.addFriend(Friend.getFromJSON(userArray.getJSONObject(i)));
+			}
+			
+		} catch (JSONException e) {
+			Log.w(Meeting.class.getName(), "Could not parse entity field from JSON  : " + e.getMessage(), e);
+		} catch (Exception e) {
+			Log.e(Meeting.class.getName(), e.getMessage(), e);
+		}
 		
 		return meeting;
 	}

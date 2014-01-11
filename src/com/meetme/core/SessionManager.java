@@ -11,6 +11,7 @@ import com.meetme.model.entity.Meeting;
 public class SessionManager {
 	
 	private static SessionManager instance = null;
+	private String email = null;
 	private String userToken = null;
 	private Set<Friend> friendSet = null;
 	private Set<Meeting> meetingSet = null;
@@ -29,6 +30,14 @@ public class SessionManager {
 		}
 		
 		return instance;
+	}
+	
+	public String getEmail() {
+		return this.email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	public String getUserToken() {

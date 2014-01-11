@@ -152,7 +152,7 @@ public class InviteFriendsActivity extends Activity {
 				
 				Set<Friend> friendSet = newMeeting.getFriendSet();
 				
-				if (friendSet.size() == 0) {
+				if (friendSet.isEmpty()) {
 					parameters.put(MEETING_CREATE_FRIENDS, "");
 				} else {	
 					for (Friend friend : friendSet) {

@@ -1,6 +1,5 @@
 package com.meetme.core;
 
-import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 

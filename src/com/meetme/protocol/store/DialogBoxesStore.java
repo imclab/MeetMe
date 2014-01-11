@@ -18,4 +18,7 @@ public abstract class DialogBoxesStore {
 	public static final int REGISTRATION_SUCCESS_MESSAGE = R.string.registrationSuccessDialogMessage;
 	
 	public static final int CREATING_MEETING = R.string.creatingMeeting;
+	
+	public static final int SEARCHING_USER = R.string.searchingUser;
+	public static final int SENDING_INVITATION = R.string.sendingInvitation;
 }

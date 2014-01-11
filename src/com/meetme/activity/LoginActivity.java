@@ -96,9 +96,10 @@ public class LoginActivity extends Activity {
 			if (responseCode == SUCCESS) {
 				final String userToken = responseJSON.getString("token");
 				
-						session.setUserToken(userToken);
-						session.updateFriendSet();
-						session.updateMeetingSet();
+				session.setEmail(loginEdit.getText().toString());
+				session.setUserToken(userToken);
+				session.updateFriendSet();
+				session.updateMeetingSet();
 			
 				// Start main activity
 				Intent i = new Intent(LoginActivity.this, MainActivity.class);
