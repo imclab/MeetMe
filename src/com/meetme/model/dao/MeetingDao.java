@@ -1,8 +1,6 @@
 package com.meetme.model.dao;
 
-import static com.meetme.protocol.store.ServerParameterStore.MEETING_OPERATION;
-import static com.meetme.protocol.store.ServerParameterStore.MEETING_OPERATION_LIST;
-import static com.meetme.protocol.store.ServerParameterStore.MEETING_TOKEN;
+import static com.meetme.protocol.store.ServerParameterStore.*;
 import static com.meetme.protocol.store.ServerUrlStore.MEETING_URL;
 
 import java.util.Set;
@@ -54,5 +52,32 @@ public abstract class MeetingDao {
 		}
 		
 		return meetingSet;
+	}
+	
+	public static Meeting findMeetingById(int meetingId, String userToken) {
+		Meeting meeting = new Meeting();
+		
+		JSONObject responseJSON = null;
+		String url = MEETING_URL;
+		HttpParameters parameters = new HttpParameters();
+		
+		// Add parameters
+		parameters.put(MEETING_OPERATION, MEETING_OPERATION_VIEW);
+		parameters.put(MEETING_TOKEN, userToken);
+		parameters.put(MEETING_VIEW_MEETING_ID, Integer.toString(meetingId));
+		
+		// Send request
+		responseJSON = HttpUtils.post(url, parameters);
+		
+		// Built meeting from JSON response
+		try {
+			meeting = Meeting.getFromJSON(responseJSON.getJSONObject("meeting"));
+		} catch (JSONException e) {
+			Log.e(MeetingDao.class.getName(), e.getMessage(), e);
+		} catch (Exception e) {
+			Log.e(MeetingDao.class.getName(), e.getMessage(), e);
+		}
+		
+		return meeting;
 	}
 }

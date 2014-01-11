@@ -42,4 +42,11 @@ public abstract class ServerParameterStore {
 	public static final String FRIEND_ACCEPT_ID = "friend_id";
 	public static final String FRIEND_FIND_BY_EMAIL_EMAIL = "email";
 	
+	public static final String MEET_TOKEN = "token";
+	public static final String MEET_OPERATION = "operation";
+	public static final String MEET_OPERATION_CONFIRMATION = "confirmation";
+	public static final String MEET_OPERATION_STATUS = "status";
+	public static final String MEET_OPERATION_REFRESH = "refresh";
+	public static final String MEET_OPERATION_REFRESH_OTHERS = "refresh_others";
+	public static final String MEET_REFRESH_OTHERS_MEETING_ID = "meeting_id";
 }
