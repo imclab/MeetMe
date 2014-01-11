@@ -1,12 +1,15 @@
 package com.meetme.presentation;
 
+import static com.meetme.protocol.store.UserStatusCodeStore.USER_STATUS_ARRIVED;
+import static com.meetme.protocol.store.UserStatusCodeStore.USER_STATUS_LEFT;
+import static com.meetme.protocol.store.UserStatusCodeStore.USER_STATUS_WAITING;
+
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 import com.meetme.model.entity.Meet;
-import static com.meetme.protocol.store.UserStatusCodeStore.*;
 
 public class MeetPresentation {
 	
@@ -51,9 +54,9 @@ public class MeetPresentation {
 	 * Methods 
 	 */
 	public void update(Set<Meet> meetSet) {
-		Set<Meet> arrivedSet = new TreeSet<Meet>();
-		Set<Meet> leftSet = new TreeSet<Meet>();
-		Set<Meet> waitingSet = new TreeSet<Meet>();
+		Set<Meet> arrivedSet = new HashSet<Meet>();
+		Set<Meet> leftSet = new HashSet<Meet>();
+		Set<Meet> waitingSet = new HashSet<Meet>();
 		
 		arrivedString = new StringBuilder();
 		leftString = new StringBuilder();

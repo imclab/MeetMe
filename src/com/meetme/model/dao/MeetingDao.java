@@ -56,6 +56,7 @@ public abstract class MeetingDao {
 	
 	public static Meeting findMeetingById(int meetingId, String userToken) {
 		Meeting meeting = new Meeting();
+		meeting.setId(meetingId);
 		
 		JSONObject responseJSON = null;
 		String url = MEETING_URL;
