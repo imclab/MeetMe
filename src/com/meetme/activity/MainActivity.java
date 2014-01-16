@@ -25,19 +25,19 @@ public class MainActivity extends TabActivity {
 		
         tabMeetings.setIndicator(
         		getString(R.string.tabMeetings), 
-        		getResources().getDrawable(R.drawable.ic_launcher)
+        		getResources().getDrawable(R.drawable.tab_meetings)
 			);
         tabMeetings.setContent(new Intent(this, MeetingsActivity.class));
         
         tabNewMeeting.setIndicator(
         		getString(R.string.tabNewMeeting), 
-        		getResources().getDrawable(R.drawable.ic_launcher)
+        		getResources().getDrawable(R.drawable.tab_new_meeting)
 			);
         tabNewMeeting.setContent(new Intent(this, NewMeetingActivity.class));
 
         tabFindFriends.setIndicator(
         		getString(R.string.tabFindFriends),
-        		getResources().getDrawable(R.drawable.search_icon)
+        		getResources().getDrawable(R.drawable.tab_find_friends)
 			);
         tabFindFriends.setContent(new Intent(this, FindFriendsActivity.class));
         
