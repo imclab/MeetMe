@@ -69,7 +69,7 @@ public class SplashScreenActivity extends Activity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            Intent i = new Intent(SplashScreenActivity.this, MainActivity.class);
+            Intent i = new Intent(SplashScreenActivity.this, MeetingsActivity.class);
             startActivity(i);
             finish();
         }

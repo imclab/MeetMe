@@ -25,8 +25,23 @@ public abstract class DateUtils {
 		
 		dateTime.append(month).append("/");
  	    dateTime.append(datePicker.getYear()).append(" ");
- 	    dateTime.append(timePicker.getCurrentHour()).append(":");
- 	    dateTime.append(timePicker.getCurrentMinute());
+ 	    
+ 	    
+ 	    int hour = timePicker.getCurrentHour();
+ 	    
+ 	    if (hour < 10) {
+			dateTime.append("0");
+		}
+ 	    
+ 	    dateTime.append(hour).append(":");
+ 	    
+ 	    int minute = timePicker.getCurrentMinute();
+ 	    
+ 	    if (minute < 10) {
+			dateTime.append("0");
+ 	    }
+ 	   
+ 	    dateTime.append(minute);
 		
 		return dateTime.toString();
 	}

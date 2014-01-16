@@ -4,6 +4,13 @@
 	android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+        <TextView 
+            android:id="@+id/foundFriendText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/emailLabel"
+            />
+        
         <EditText
 	        android:id="@+id/searchFriendEdit"
 	        android:layout_width="match_parent"

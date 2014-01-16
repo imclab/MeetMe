@@ -10,6 +10,11 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     
+    <!-- Main activity -->
+    <string name="tabMeetings">Meetings</string>
+    <string name="tabNewMeeting">New Meeting</string>
+    <string name="tabFindFriends">Find Friends</string>
+    
     <!-- Registration activity -->
     <string name="emailLabel">Email :</string>
     <string name="firstnameLabel">Firstname :</string>
@@ -30,8 +35,7 @@
     <string name="loginButton">Log In</string>
     <string name="newToMeetMeLink">New to MeetMe ? <u>Sign Up</u>!</string>
 
-   	<!-- Main activity -->
-   	<string name="meetingListLabel">My meetings :</string>
+   	<!-- Meetings activity -->
    	<string name="newMeetingButton">New Meeting</string>
    	<string name="findFriendsButton">Find friends</string>
    	

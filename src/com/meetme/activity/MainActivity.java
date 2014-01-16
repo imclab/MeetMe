@@ -1,97 +1,48 @@
 package com.meetme.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import android.app.Activity;
+import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 
 import com.meetme.R;
-import com.meetme.core.SessionManager;
-import com.meetme.model.entity.Meeting;
 
-public class MainActivity extends Activity {
+public class MainActivity extends TabActivity {
 
-	private SessionManager session;
-	private List<String> meetingAdapterList;
-	private ListView meetingListView;
-	private Button newMeetingButton;
-	private Button findFriendsButton;
+	private TabHost tabHost;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		meetingListView = (ListView)findViewById(R.id.meetingList);
-		newMeetingButton = (Button)findViewById(R.id.newMeetingButton);
-		newMeetingButton.setOnClickListener(newMeetingListener);
-		findFriendsButton = (Button)findViewById(R.id.findFriendsButton);
-		findFriendsButton.setOnClickListener(findFriendsListener);
+		tabHost = (TabHost)findViewById(android.R.id.tabhost);
 		
-		meetingAdapterList = new ArrayList<String>();
+		TabSpec tabMeetings = tabHost.newTabSpec("Meetings tab");
+		TabSpec tabNewMeeting = tabHost.newTabSpec("New meeting tab");
+        TabSpec tabFindFriends = tabHost.newTabSpec("Find friends tab");
 		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, android.R.id.text1, meetingAdapterList);
-		
-		meetingListView.setAdapter(adapter);		
-		
-		meetingListView.setOnItemClickListener(meetingListListener);
-		
-		session = SessionManager.getInstance();
-		updateMeetingList();
+        tabMeetings.setIndicator(
+        		getString(R.string.tabMeetings), 
+        		getResources().getDrawable(R.drawable.ic_launcher)
+			);
+        tabMeetings.setContent(new Intent(this, MeetingsActivity.class));
+        
+        tabNewMeeting.setIndicator(
+        		getString(R.string.tabNewMeeting), 
+        		getResources().getDrawable(R.drawable.ic_launcher)
+			);
+        tabNewMeeting.setContent(new Intent(this, NewMeetingActivity.class));
+
+        tabFindFriends.setIndicator(
+        		getString(R.string.tabFindFriends),
+        		getResources().getDrawable(R.drawable.search_icon)
+			);
+        tabFindFriends.setContent(new Intent(this, FindFriendsActivity.class));
+        
+        tabHost.addTab(tabMeetings);
+        tabHost.addTab(tabNewMeeting);
+        tabHost.addTab(tabFindFriends);
 	}
-	
-	/*
-	 * Private methods 
-	 */
-	
-	/*
-	 * Update the meeting list adapter data
-	 */
-	private void updateMeetingList() {
-		meetingAdapterList.clear();
-		
-		for (Meeting meeting : session.getMeetingSet()) {
-			meetingAdapterList.add(meeting.getTitle() + "\n" + meeting.getDatetime());
-		}
-	}
-	
-	/*
-	 * Listeners
-	 */
-	private OnClickListener newMeetingListener = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			Intent intent = new Intent(MainActivity.this, NewMeetingActivity.class);
-			startActivity(intent);
-	    }
-	};
-	
-	private OnClickListener findFriendsListener = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			Intent intent = new Intent(MainActivity.this, FindFriendsActivity.class);
-			startActivity(intent);
-	    }
-	};
-	
-	private OnItemClickListener meetingListListener = new OnItemClickListener() {
-		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-				long arg3) {
-			// MOCK UP LISTENER, TO REPLACE WITH CUSTOM ADAPTER
-			Intent intent = new Intent(MainActivity.this, MeetingActivity.class);
-			intent.putExtra("meeting", session.getMeetingById(33));
-			startActivity(intent);
-		}
-	};
 }
