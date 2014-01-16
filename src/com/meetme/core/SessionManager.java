@@ -57,6 +57,29 @@ public class SessionManager {
 	}
 	
 	/*
+	 * Find methods
+	 */
+	public Friend getFriendById(int friendId) {
+		for (Friend friend : this.friendSet) {
+			if (friend.getId() == friendId) {
+				return friend;
+			}
+		}
+		
+		return null;
+	}
+	
+	public Meeting getMeetingById(int meetingId) {
+		for (Meeting meeting : this.meetingSet) {
+			if (meeting.getId() == meetingId) {
+				return meeting;
+			}
+		}
+		
+		return null;
+	}
+	
+	/*
 	 * Update methods
 	 */
 	public void addMeeting(Meeting newMeeting) {
@@ -74,6 +97,18 @@ public class SessionManager {
 		if (this.userToken != null && !this.userToken.isEmpty()) {
 			this.meetingSet.clear();
 			this.meetingSet.addAll(MeetingDao.findMeetingsOfUser(this.userToken));
+		}
+	}
+	
+	public void updateMeeting(int meetingId) {
+		if (this.userToken != null && !this.userToken.isEmpty()) {
+			for (Meeting meeting : this.meetingSet) {
+				if (meeting.getId() == meetingId) {
+					Meeting updatedMeeting = MeetingDao.findMeetingById(meetingId, this.userToken);
+					this.meetingSet.remove(meeting);
+					this.meetingSet.add(updatedMeeting);
+				}
+			}
 		}
 	}
 }

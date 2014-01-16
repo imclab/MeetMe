@@ -9,17 +9,22 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.meetme.core.SessionManager;
+import com.meetme.model.entity.Friend;
 import com.meetme.model.entity.Meet;
+import com.meetme.model.entity.Meeting;
 
 public class MeetPresentation {
 	
+	private Meeting meeting;
 	private Map<Integer, Set<Meet>> meetMap;
 	StringBuilder arrivedString;
 	StringBuilder leftString;
 	StringBuilder waitingString;
 	
-	public MeetPresentation(Set<Meet> meetSet) {
-		meetMap = new HashMap<Integer, Set<Meet>>();
+	public MeetPresentation(Meeting meeting, Set<Meet> meetSet) {
+		this.meeting = meeting;
+		this.meetMap = new HashMap<Integer, Set<Meet>>();
 		update(meetSet);
 	}
 
@@ -63,22 +68,23 @@ public class MeetPresentation {
 		waitingString = new StringBuilder();
 		
 		// update map
-		
 		for (Meet meet : meetSet) {
+			Friend user = meeting.getFriendById(meet.getUserId());
+			
 			switch (meet.getUserStatus()) {
 				case USER_STATUS_ARRIVED : {
 					arrivedSet.add(meet);
-					arrivedString.append(meet.getUserId() + "\n");
+					arrivedString.append(user + "\n");
 				}
 				break;
 				case USER_STATUS_LEFT : {
 					leftSet.add(meet);
-					leftString.append(meet.getUserId() + "\n");
+					leftString.append(user + "\n");
 				}
 				break;
 				case USER_STATUS_WAITING : {
 					waitingSet.add(meet);
-					waitingString.append(meet.getUserId() + "\n");
+					waitingString.append(user + "\n");
 				}
 				break;
 				default : waitingSet.add(meet);

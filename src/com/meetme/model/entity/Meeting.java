@@ -216,4 +216,17 @@ public class Meeting implements Comparable<Meeting>, Serializable {
 	public void setFriendSet(Set<Friend> friendSet) {
 		this.friendSet = friendSet;
 	}
+	
+	/*
+	 * Find methods 
+	 */
+	public Friend getFriendById(int friendId) {
+		for (Friend friend : this.friendSet) {
+			if (friend.getId() == friendId) {
+				return friend;
+			}
+		}
+		
+		return null;
+	}
 }

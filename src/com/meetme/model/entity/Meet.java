@@ -73,7 +73,7 @@ public class Meet implements Serializable {
 	/*
 	 * Methods
 	 */
-	public static Meet getFromJSON(JSONObject friendJSON, int meetingId) {
+	public static Meet getFromJSON(JSONObject meetJSON, int meetingId) {
 		Meet meet = null;
 		Map<String, String> fieldMap = new HashMap<String, String>();
 		
@@ -84,7 +84,7 @@ public class Meet implements Serializable {
 		
 		for (String fieldName : fieldNameArray) {
 			try {
-				String fieldValue = friendJSON.get(fieldName).toString();
+				String fieldValue = meetJSON.get(fieldName).toString();
 				fieldMap.put(fieldName, fieldValue);
 			} catch (JSONException e) {
 				Log.w(Meeting.class.getName(), "Could not parse entity field from JSON  : " + e.getMessage(), e);

@@ -90,12 +90,7 @@ public class MainActivity extends Activity {
 				long arg3) {
 			// MOCK UP LISTENER, TO REPLACE WITH CUSTOM ADAPTER
 			Intent intent = new Intent(MainActivity.this, MeetingActivity.class);
-			for (Meeting meeting : session.getMeetingSet()) {
-				if (meeting.getId() == 33) {
-					intent.putExtra("meeting", meeting);
-					break;
-				}
-			}
+			intent.putExtra("meeting", session.getMeetingById(33));
 			startActivity(intent);
 		}
 	};

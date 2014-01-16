@@ -30,6 +30,7 @@ public class MeetingActivity extends Activity {
 	private MeetPresentation meetPresentation;
 	
 	private static final int REFRESH_RATE = 10000;
+	private static boolean REFRESHING = true;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +50,31 @@ public class MeetingActivity extends Activity {
 		leftList = (TextView)findViewById(R.id.leftList);
 		waitingList = (TextView)findViewById(R.id.waitingList);
 		
-		meetPresentation = new MeetPresentation(MeetDao.findMeetsOfMeeting(meeting, session.getUserToken()));
-		
 		refresh();
 	}
 	
+	
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		
+		// Stop refreshing
+		REFRESHING = false;
+	}
+
+
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+		// Resume refreshing
+		REFRESHING = true;
+	}
+
+
+
 	/*
 	 * Private methods 
 	 */
@@ -94,15 +115,25 @@ public class MeetingActivity extends Activity {
 	    	public void run() {
 	    		handler.post(new Runnable() {
 	                        public void run() {
-	                        	// Refresh meeting data
-	                        	meeting = MeetingDao.findMeetingById(meeting.getId(), session.getUserToken());
-	                        	
-	                        	// refresh meeting users data
-	                        	meetPresentation.update(MeetDao.findMeetsOfMeeting(meeting, session.getUserToken()));
-	                        	
-	                        	// Update UI
-	                        	updateUi();
 	                        	try {
+		                        	if (REFRESHING) {
+		                        		int meetingId = meeting.getId();
+			                        	
+			                        	// TO DO : Refresh meeting data in session
+			                        	//session.updateMeeting(meetingId);
+			                        	
+		                        		// Refresh meeting data
+			                        	meeting = MeetingDao.findMeetingById(meetingId, session.getUserToken());
+			                        	
+			                        	// Refresh friends data 
+			                    		meetPresentation = new MeetPresentation(
+			                    				meeting,
+			                    				MeetDao.findMeetsOfMeeting(meeting, session.getUserToken())
+		                    				);
+			                        	
+			                        	// Update UI
+			                        	updateUi();
+		                        	}
 	                            } catch (Exception e) {
 	                            	timer.cancel();
 	                            }
