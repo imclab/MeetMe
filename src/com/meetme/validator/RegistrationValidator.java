@@ -1,10 +1,10 @@
 package com.meetme.validator;
 
-import static com.meetme.protocol.store.MessageStore.INVALID_EMAIL;
-import static com.meetme.protocol.store.MessageStore.INVALID_FIRSTNAME;
-import static com.meetme.protocol.store.MessageStore.INVALID_LASTNAME;
-import static com.meetme.protocol.store.MessageStore.INVALID_PASSWORD;
-import static com.meetme.protocol.store.MessageStore.PASSWORDS_DO_NOT_MATCH;
+import static com.meetme.store.MessageStore.INVALID_EMAIL;
+import static com.meetme.store.MessageStore.INVALID_FIRSTNAME;
+import static com.meetme.store.MessageStore.INVALID_LASTNAME;
+import static com.meetme.store.MessageStore.INVALID_PASSWORD;
+import static com.meetme.store.MessageStore.PASSWORDS_DO_NOT_MATCH;
 import android.content.Context;
 import android.widget.EditText;
 

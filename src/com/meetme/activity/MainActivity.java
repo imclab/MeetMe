@@ -2,9 +2,13 @@ package com.meetme.activity;
 
 import android.app.TabActivity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+import android.widget.TabWidget;
 
 import com.meetme.R;
 
@@ -44,5 +48,13 @@ public class MainActivity extends TabActivity {
         tabHost.addTab(tabMeetings);
         tabHost.addTab(tabNewMeeting);
         tabHost.addTab(tabFindFriends);
+        
+        // Change tabs background color
+        /*TabWidget tw = getTabWidget();
+
+        for (int i = 0; i < tw.getChildCount(); i++) {
+                    View v = tw.getChildAt(i);
+                    v.setBackgroundResource(R.drawable.tab_background);
+        }*/
 	}
 }

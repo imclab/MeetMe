@@ -22,6 +22,7 @@ public class NewMeetingActivity extends Activity {
 	private EditText titleEdit;
 	private EditText descriptionEdit;
 	private EditText dateTimeEdit;
+	private long timestamp;
 	private Button pickLocationButton;
 	private Button dateTimeChooseButton;
 	AlertDialog dateTimeDialog;
@@ -63,6 +64,7 @@ public class NewMeetingActivity extends Activity {
 	        	   TimePicker timePicker = (TimePicker)dateTimeDialog.findViewById(R.id.timePicker);
 	        	   
 	        	   dateTimeEdit.setText(DateUtils.getDateTimeFromPickers(datePicker, timePicker));
+	        	   timestamp = DateUtils.getTimestampFromPickers(datePicker, timePicker);
 	           }
 	       });
 		
@@ -80,6 +82,7 @@ public class NewMeetingActivity extends Activity {
 		meeting.setTitle(titleEdit.getText().toString());
 		meeting.setDescription(descriptionEdit.getText().toString());
 		meeting.setDatetime(dateTimeEdit.getText().toString());
+		meeting.setTimestamp(timestamp);
 		
 		return meeting;
 	}

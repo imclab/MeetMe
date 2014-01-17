@@ -1,17 +1,25 @@
 package com.meetme.activity;
 
-import static com.meetme.protocol.store.DialogBoxesStore.PLEASE_WAIT;
-import static com.meetme.protocol.store.DialogBoxesStore.SEARCHING_USER;
-import static com.meetme.protocol.store.DialogBoxesStore.SENDING_INVITATION;
-import static com.meetme.protocol.store.ErrorCodeStore.*;
-import static com.meetme.protocol.store.MessageStore.*;
-import static com.meetme.protocol.store.ServerParameterStore.FRIEND_ADD_ID;
-import static com.meetme.protocol.store.ServerParameterStore.FRIEND_FIND_BY_EMAIL_EMAIL;
-import static com.meetme.protocol.store.ServerParameterStore.FRIEND_OPERATION;
-import static com.meetme.protocol.store.ServerParameterStore.FRIEND_OPERATION_ADD;
-import static com.meetme.protocol.store.ServerParameterStore.FRIEND_OPERATION_FIND_BY_EMAIL;
-import static com.meetme.protocol.store.ServerParameterStore.FRIEND_TOKEN;
-import static com.meetme.protocol.store.ServerUrlStore.FRIEND_URL;
+import static com.meetme.store.DialogBoxesStore.PLEASE_WAIT;
+import static com.meetme.store.DialogBoxesStore.SEARCHING_USER;
+import static com.meetme.store.DialogBoxesStore.SENDING_INVITATION;
+import static com.meetme.store.ErrorCodeStore.FIND_FRIEND_ALREADY_FRIEND;
+import static com.meetme.store.ErrorCodeStore.FIND_FRIEND_INVITATION_ALREADY_SENT;
+import static com.meetme.store.ErrorCodeStore.FIND_FRIEND_USER_IS_YOURSELF;
+import static com.meetme.store.ErrorCodeStore.FIND_FRIEND_USER_NOT_FOUND;
+import static com.meetme.store.ErrorCodeStore.SUCCESS;
+import static com.meetme.store.MessageStore.FRIEND_ALREADY_IN_LIST;
+import static com.meetme.store.MessageStore.FRIEND_INVITATION_ALREADY_SENT;
+import static com.meetme.store.MessageStore.FRIEND_IS_YOURSELF;
+import static com.meetme.store.MessageStore.GENERAL_ERROR;
+import static com.meetme.store.MessageStore.NO_FRIEND_FOUND_FOR_EMAIL;
+import static com.meetme.store.ServerParameterStore.FRIEND_ADD_ID;
+import static com.meetme.store.ServerParameterStore.FRIEND_FIND_BY_EMAIL_EMAIL;
+import static com.meetme.store.ServerParameterStore.FRIEND_OPERATION;
+import static com.meetme.store.ServerParameterStore.FRIEND_OPERATION_ADD;
+import static com.meetme.store.ServerParameterStore.FRIEND_OPERATION_FIND_BY_EMAIL;
+import static com.meetme.store.ServerParameterStore.FRIEND_TOKEN;
+import static com.meetme.store.ServerUrlStore.FRIEND_URL;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,10 +35,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.meetme.R;
+import com.meetme.core.HttpParameters;
 import com.meetme.core.HttpUtils;
 import com.meetme.core.SessionManager;
 import com.meetme.model.entity.Friend;
-import com.meetme.protocol.HttpParameters;
 import com.meetme.validator.FindFriendsValidator;
 
 public class FindFriendsActivity extends Activity {

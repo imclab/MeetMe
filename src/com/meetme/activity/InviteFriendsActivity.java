@@ -1,18 +1,23 @@
 package com.meetme.activity;
 
-import static com.meetme.protocol.store.DialogBoxesStore.CREATING_MEETING;
-import static com.meetme.protocol.store.DialogBoxesStore.PLEASE_WAIT;
-import static com.meetme.protocol.store.ErrorCodeStore.SUCCESS;
-import static com.meetme.protocol.store.ServerParameterStore.MEETING_CREATE_DATETIME;
-import static com.meetme.protocol.store.ServerParameterStore.MEETING_CREATE_DESCRIPTION;
-import static com.meetme.protocol.store.ServerParameterStore.MEETING_CREATE_FRIENDS;
-import static com.meetme.protocol.store.ServerParameterStore.MEETING_CREATE_LOCATION_GEO;
-import static com.meetme.protocol.store.ServerParameterStore.MEETING_CREATE_LOCATION_TEXT;
-import static com.meetme.protocol.store.ServerParameterStore.MEETING_CREATE_TITLE;
-import static com.meetme.protocol.store.ServerParameterStore.MEETING_OPERATION;
-import static com.meetme.protocol.store.ServerParameterStore.MEETING_OPERATION_CREATE;
-import static com.meetme.protocol.store.ServerParameterStore.MEETING_TOKEN;
-import static com.meetme.protocol.store.ServerUrlStore.MEETING_URL;
+import static com.meetme.store.DialogBoxesStore.MEETING_CREATION;
+import static com.meetme.store.DialogBoxesStore.MEETING_CREATION_ERROR_MESSAGE;
+import static com.meetme.store.DialogBoxesStore.MEETING_CREATION_ERROR_TITLE;
+import static com.meetme.store.DialogBoxesStore.MEETING_CREATION_SUCCESS_MESSAGE;
+import static com.meetme.store.DialogBoxesStore.MEETING_CREATION_SUCCESS_TITLE;
+import static com.meetme.store.DialogBoxesStore.PLEASE_WAIT;
+import static com.meetme.store.DialogBoxesStore.VALIDATED_BUTTON;
+import static com.meetme.store.ErrorCodeStore.SUCCESS;
+import static com.meetme.store.ServerParameterStore.MEETING_CREATE_DATETIME;
+import static com.meetme.store.ServerParameterStore.MEETING_CREATE_DESCRIPTION;
+import static com.meetme.store.ServerParameterStore.MEETING_CREATE_FRIENDS;
+import static com.meetme.store.ServerParameterStore.MEETING_CREATE_LOCATION_GEO;
+import static com.meetme.store.ServerParameterStore.MEETING_CREATE_LOCATION_TEXT;
+import static com.meetme.store.ServerParameterStore.MEETING_CREATE_TITLE;
+import static com.meetme.store.ServerParameterStore.MEETING_OPERATION;
+import static com.meetme.store.ServerParameterStore.MEETING_OPERATION_CREATE;
+import static com.meetme.store.ServerParameterStore.MEETING_TOKEN;
+import static com.meetme.store.ServerUrlStore.MEETING_URL;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +27,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -35,16 +43,15 @@ import android.widget.EditText;
 import android.widget.Filter.FilterListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.meetme.R;
+import com.meetme.core.HttpParameters;
 import com.meetme.core.HttpUtils;
 import com.meetme.core.SessionManager;
 import com.meetme.model.entity.Friend;
 import com.meetme.model.entity.Meeting;
 import com.meetme.presentation.FriendCheckable;
 import com.meetme.presentation.FriendListArrayAdapter;
-import com.meetme.protocol.HttpParameters;
 
 public class InviteFriendsActivity extends Activity {
 
@@ -56,6 +63,9 @@ public class InviteFriendsActivity extends Activity {
 	private ListView friendListView;
 	private Button inviteButton;
 	private TextView noFriendText;
+	
+	// To keep track of the meeting creation process
+	private static int meetingCreationState = -1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -99,30 +109,11 @@ public class InviteFriendsActivity extends Activity {
 		}
 	}
 	
-	private void handleCreateMeetingError(int responseCode) {
-		// TO DO
-		Toast.makeText(getApplicationContext(), "Meeting creation error", Toast.LENGTH_SHORT).show();
-	}
-	
 	private void handleCreateMeetingResponse(JSONObject responseJSON) {
 		try {
 			final int responseCode = responseJSON.getInt("error_code");
 			
-			if (responseCode == SUCCESS) {
-				
-				session.addMeeting(newMeeting);
-			
-				// Start main activity
-				Intent i = new Intent(InviteFriendsActivity.this, MainActivity.class);
-				startActivity(i);
-				finish();
-			} else {
-				runOnUiThread(new Runnable() {
-					public void run() {
-						handleCreateMeetingError(responseCode);
-					}
-				});
-			}
+			meetingCreationState = responseCode;
 		} catch (JSONException e) {
 			Log.d(LoginActivity.class.getName(), e.getMessage(), e);
 		} catch (Exception e) {
@@ -131,45 +122,95 @@ public class InviteFriendsActivity extends Activity {
 	}
 	
 	private void createMeeting() {
-		final ProgressDialog progressDialog = 
-				ProgressDialog.show(InviteFriendsActivity.this, getString(PLEASE_WAIT), getString(CREATING_MEETING), true);
-		progressDialog.setCancelable(true);
-		
-		new Thread(new Runnable() {
-			JSONObject responseJSON = null;
-			HttpParameters parameters = new HttpParameters();
-			
-			@Override
-			public void run() {
-				// Add parameters
-				parameters.put(MEETING_TOKEN, session.getUserToken());
-				parameters.put(MEETING_OPERATION, MEETING_OPERATION_CREATE);
-				parameters.put(MEETING_CREATE_TITLE, newMeeting.getTitle());
-				parameters.put(MEETING_CREATE_DESCRIPTION, newMeeting.getDescription());
-				parameters.put(MEETING_CREATE_DATETIME, newMeeting.getDatetime());
-				parameters.put(MEETING_CREATE_LOCATION_GEO, newMeeting.getLocationGeo());
-				parameters.put(MEETING_CREATE_LOCATION_TEXT, newMeeting.getLocationText());
-				
-				Set<Friend> friendSet = newMeeting.getFriendSet();
-				
-				if (friendSet.isEmpty()) {
-					parameters.put(MEETING_CREATE_FRIENDS, "");
-				} else {	
-					for (Friend friend : friendSet) {
-						parameters.put(MEETING_CREATE_FRIENDS, Integer.toString(friend.getId()));
-					}
-				}
-				
-				// Send request
-				responseJSON = HttpUtils.post(MEETING_URL, parameters);
-			
-				// Handle response
-				handleCreateMeetingResponse(responseJSON);
-				
-				progressDialog.dismiss();
-			}
-		}).start();
+		new MeetingCreationProcess().execute();
 	}
+	
+	/*
+	 * Meeting creation task
+	 */
+	private class MeetingCreationProcess extends AsyncTask<Void, Void, Void> {
+		JSONObject responseJSON = null;
+		HttpParameters parameters = new HttpParameters();
+		ProgressDialog progressDialog;
+		
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            meetingCreationState = -1;
+            progressDialog = ProgressDialog.show(InviteFriendsActivity.this, getString(PLEASE_WAIT), getString(MEETING_CREATION), true);
+			progressDialog.setCancelable(true);
+        }
+ 
+        @Override
+        protected Void doInBackground(Void...voids) {
+        	// Add parameters
+			parameters.put(MEETING_TOKEN, session.getUserToken());
+			parameters.put(MEETING_OPERATION, MEETING_OPERATION_CREATE);
+			parameters.put(MEETING_CREATE_TITLE, newMeeting.getTitle());
+			parameters.put(MEETING_CREATE_DESCRIPTION, newMeeting.getDescription());
+			parameters.put(MEETING_CREATE_DATETIME, Long.toString(newMeeting.getTimestamp()));
+			parameters.put(MEETING_CREATE_LOCATION_GEO, newMeeting.getLocationGeo());
+			parameters.put(MEETING_CREATE_LOCATION_TEXT, newMeeting.getLocationText());
+			
+			Set<Friend> friendSet = newMeeting.getFriendSet();
+			
+			if (friendSet.isEmpty()) {
+				parameters.put(MEETING_CREATE_FRIENDS, "");
+			} else {	
+				for (Friend friend : friendSet) {
+					parameters.put(MEETING_CREATE_FRIENDS, Integer.toString(friend.getId()));
+				}
+			}
+			
+			// Send request
+			responseJSON = HttpUtils.post(MEETING_URL, parameters);
+		
+			// Handle response
+			handleCreateMeetingResponse(responseJSON);
+			
+			progressDialog.dismiss();
+			
+            return null;
+        }
+ 
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            
+    		if (meetingCreationState == SUCCESS) {
+    			// Add meeting in session
+    			session.addMeeting(newMeeting);
+    			
+				// Show success dialog
+				AlertDialog meetingCreationSuccessInfoDialog = 
+						new AlertDialog.Builder(InviteFriendsActivity.this).create();
+
+				meetingCreationSuccessInfoDialog.setTitle(getString(MEETING_CREATION_SUCCESS_TITLE));
+				meetingCreationSuccessInfoDialog.setMessage(getString(MEETING_CREATION_SUCCESS_MESSAGE));
+				meetingCreationSuccessInfoDialog.setIcon(R.drawable.validated_icon);
+				meetingCreationSuccessInfoDialog.setButton(
+						AlertDialog.BUTTON_POSITIVE, 
+						getString(VALIDATED_BUTTON),
+						meeetingCreationInfoDialogButtonListener
+					);
+				meetingCreationSuccessInfoDialog.show();
+    		} else {
+    			// Show error dialog
+    			AlertDialog meetingCreationErrorInfoDialog = 
+    					new AlertDialog.Builder(InviteFriendsActivity.this).create();
+
+    			meetingCreationErrorInfoDialog.setTitle(getString(MEETING_CREATION_ERROR_TITLE));
+    			meetingCreationErrorInfoDialog.setMessage(getString(MEETING_CREATION_ERROR_MESSAGE));
+    			meetingCreationErrorInfoDialog.setIcon(R.drawable.error_icon);
+    			meetingCreationErrorInfoDialog.setButton(
+    					AlertDialog.BUTTON_POSITIVE, 
+    					getString(VALIDATED_BUTTON),
+    					meeetingCreationInfoDialogButtonListener
+    				);
+    			meetingCreationErrorInfoDialog.show();
+    		}
+        }
+    }
 	
 	/*
 	 * Listeners
@@ -187,6 +228,15 @@ public class InviteFriendsActivity extends Activity {
 			createMeeting();
 	    }
 	};
+	
+	private DialogInterface.OnClickListener meeetingCreationInfoDialogButtonListener = 
+			new DialogInterface.OnClickListener() {
+	        	public void onClick(DialogInterface dialog, int which) {
+	        		Intent i = new Intent(InviteFriendsActivity.this, MainActivity.class);
+					startActivity(i);
+					finish();
+	        	}
+			};
 	
 	/*
 	 * Toggle the visibility of the textView in case of no result is found

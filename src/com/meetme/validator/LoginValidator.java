@@ -1,7 +1,7 @@
 package com.meetme.validator;
 
-import static com.meetme.protocol.store.MessageStore.EMPTY_PASSWORD;
-import static com.meetme.protocol.store.MessageStore.INVALID_EMAIL;
+import static com.meetme.store.MessageStore.EMPTY_PASSWORD;
+import static com.meetme.store.MessageStore.INVALID_EMAIL;
 import android.content.Context;
 import android.widget.EditText;
 

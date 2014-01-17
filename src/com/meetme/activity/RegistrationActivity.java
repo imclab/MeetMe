@@ -1,21 +1,21 @@
 package com.meetme.activity;
 
-import static com.meetme.protocol.store.DialogBoxesStore.PLEASE_WAIT;
-import static com.meetme.protocol.store.DialogBoxesStore.REGISTRATION;
-import static com.meetme.protocol.store.DialogBoxesStore.REGISTRATION_SUCCESS_MESSAGE;
-import static com.meetme.protocol.store.DialogBoxesStore.REGISTRATION_SUCCESS_TITLE;
-import static com.meetme.protocol.store.DialogBoxesStore.VALIDATED_BUTTON;
-import static com.meetme.protocol.store.ErrorCodeStore.REGISTRATION_EMAIL_ALREADY_EXIST;
-import static com.meetme.protocol.store.ErrorCodeStore.SUCCESS;
-import static com.meetme.protocol.store.MessageStore.EMAIL_ALREADY_EXISTS;
-import static com.meetme.protocol.store.MessageStore.GENERAL_ERROR;
-import static com.meetme.protocol.store.ServerParameterStore.REGISTRATION_EMAIL;
-import static com.meetme.protocol.store.ServerParameterStore.REGISTRATION_FIRSTNAME;
-import static com.meetme.protocol.store.ServerParameterStore.REGISTRATION_LASTNAME;
-import static com.meetme.protocol.store.ServerParameterStore.REGISTRATION_PASSWORD;
-import static com.meetme.protocol.store.ServerParameterStore.USER_OPERATION;
-import static com.meetme.protocol.store.ServerParameterStore.USER_OPERATION_REGISTER;
-import static com.meetme.protocol.store.ServerUrlStore.USER_URL;
+import static com.meetme.store.DialogBoxesStore.PLEASE_WAIT;
+import static com.meetme.store.DialogBoxesStore.REGISTRATION;
+import static com.meetme.store.DialogBoxesStore.REGISTRATION_SUCCESS_MESSAGE;
+import static com.meetme.store.DialogBoxesStore.REGISTRATION_SUCCESS_TITLE;
+import static com.meetme.store.DialogBoxesStore.VALIDATED_BUTTON;
+import static com.meetme.store.ErrorCodeStore.REGISTRATION_EMAIL_ALREADY_EXIST;
+import static com.meetme.store.ErrorCodeStore.SUCCESS;
+import static com.meetme.store.MessageStore.EMAIL_ALREADY_EXISTS;
+import static com.meetme.store.MessageStore.GENERAL_ERROR;
+import static com.meetme.store.ServerParameterStore.REGISTRATION_EMAIL;
+import static com.meetme.store.ServerParameterStore.REGISTRATION_FIRSTNAME;
+import static com.meetme.store.ServerParameterStore.REGISTRATION_LASTNAME;
+import static com.meetme.store.ServerParameterStore.REGISTRATION_PASSWORD;
+import static com.meetme.store.ServerParameterStore.USER_OPERATION;
+import static com.meetme.store.ServerParameterStore.USER_OPERATION_REGISTER;
+import static com.meetme.store.ServerUrlStore.USER_URL;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,8 +36,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.meetme.R;
+import com.meetme.core.HttpParameters;
 import com.meetme.core.HttpUtils;
-import com.meetme.protocol.HttpParameters;
 import com.meetme.validator.RegistrationValidator;
 
 public class RegistrationActivity extends Activity {

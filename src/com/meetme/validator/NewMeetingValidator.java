@@ -1,7 +1,7 @@
 package com.meetme.validator;
 
-import static com.meetme.protocol.store.MessageStore.TITLE_TOO_LONG;
-import static com.meetme.protocol.store.MessageStore.EMPTY_TITLE;
+import static com.meetme.store.MessageStore.EMPTY_TITLE;
+import static com.meetme.store.MessageStore.TITLE_TOO_LONG;
 import android.content.Context;
 import android.widget.EditText;
 

@@ -1,4 +1,4 @@
-package com.meetme.protocol.store;
+package com.meetme.store;
 
 import com.meetme.R;
 
@@ -17,7 +17,11 @@ public abstract class DialogBoxesStore {
 	public static final int REGISTRATION_SUCCESS_TITLE = R.string.registrationSuccessDialogTitle;
 	public static final int REGISTRATION_SUCCESS_MESSAGE = R.string.registrationSuccessDialogMessage;
 	
-	public static final int CREATING_MEETING = R.string.creatingMeeting;
+	public static final int MEETING_CREATION = R.string.meetingCreation;
+	public static final int MEETING_CREATION_SUCCESS_TITLE = R.string.meetingCreationSuccessDialogTitle;
+	public static final int MEETING_CREATION_SUCCESS_MESSAGE = R.string.meetingCreationSuccessDialogMessage;
+	public static final int MEETING_CREATION_ERROR_TITLE = R.string.meetingCreationErrorDialogTitle;
+	public static final int MEETING_CREATION_ERROR_MESSAGE = R.string.meetingCreationErrorDialogMessage;
 	
 	public static final int SEARCHING_USER = R.string.searchingUser;
 	public static final int SENDING_INVITATION = R.string.sendingInvitation;

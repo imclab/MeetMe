@@ -1,4 +1,4 @@
-package com.meetme.protocol;
+package com.meetme.core;
 
 import java.util.ArrayList;
 

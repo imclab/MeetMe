@@ -1,20 +1,20 @@
 package com.meetme.activity;
 
-import static com.meetme.protocol.store.DialogBoxesStore.LOGGING_IN;
-import static com.meetme.protocol.store.DialogBoxesStore.PLEASE_WAIT;
-import static com.meetme.protocol.store.ErrorCodeStore.LOGIN_WRONG_EMAIL;
-import static com.meetme.protocol.store.ErrorCodeStore.LOGIN_WRONG_PASSWORD;
-import static com.meetme.protocol.store.ErrorCodeStore.SUCCESS;
-import static com.meetme.protocol.store.MessageStore.GENERAL_ERROR;
-import static com.meetme.protocol.store.MessageStore.WRONG_EMAIL;
-import static com.meetme.protocol.store.MessageStore.WRONG_EMAIL_FULL;
-import static com.meetme.protocol.store.MessageStore.WRONG_PASSWORD;
-import static com.meetme.protocol.store.MessageStore.WRONG_PASSWORD_FULL;
-import static com.meetme.protocol.store.ServerParameterStore.LOGIN_EMAIL;
-import static com.meetme.protocol.store.ServerParameterStore.LOGIN_PASSWORD;
-import static com.meetme.protocol.store.ServerParameterStore.USER_OPERATION;
-import static com.meetme.protocol.store.ServerParameterStore.USER_OPERATION_LOGIN;
-import static com.meetme.protocol.store.ServerUrlStore.USER_URL;
+import static com.meetme.store.DialogBoxesStore.LOGGING_IN;
+import static com.meetme.store.DialogBoxesStore.PLEASE_WAIT;
+import static com.meetme.store.ErrorCodeStore.LOGIN_WRONG_EMAIL;
+import static com.meetme.store.ErrorCodeStore.LOGIN_WRONG_PASSWORD;
+import static com.meetme.store.ErrorCodeStore.SUCCESS;
+import static com.meetme.store.MessageStore.GENERAL_ERROR;
+import static com.meetme.store.MessageStore.WRONG_EMAIL;
+import static com.meetme.store.MessageStore.WRONG_EMAIL_FULL;
+import static com.meetme.store.MessageStore.WRONG_PASSWORD;
+import static com.meetme.store.MessageStore.WRONG_PASSWORD_FULL;
+import static com.meetme.store.ServerParameterStore.LOGIN_EMAIL;
+import static com.meetme.store.ServerParameterStore.LOGIN_PASSWORD;
+import static com.meetme.store.ServerParameterStore.USER_OPERATION;
+import static com.meetme.store.ServerParameterStore.USER_OPERATION_LOGIN;
+import static com.meetme.store.ServerUrlStore.USER_URL;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,9 +32,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.meetme.R;
+import com.meetme.core.HttpParameters;
 import com.meetme.core.HttpUtils;
 import com.meetme.core.SessionManager;
-import com.meetme.protocol.HttpParameters;
 import com.meetme.validator.LoginValidator;
 
 public class LoginActivity extends Activity {

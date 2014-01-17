@@ -15,7 +15,7 @@
 		<LinearLayout android:id="@+id/header"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-		    android:background="@layout/header_gradient"
+		    android:background="@drawable/header_gradient"
 		    android:paddingTop="5dip"
 		    android:paddingBottom="5dip">
 		        <!-- Logo Start-->
@@ -126,7 +126,7 @@
                 android:layout_marginBottom="40dip"
                 android:text="@string/alreadyHaveAnAccountLink"
                 android:gravity="center"
-                android:textSize="20dip"
+                android:textSize="20sp"
                 android:textColor="#FF9100"/>	    
         </LinearLayout>
         <!-- Registration Form ends -->
@@ -135,7 +135,7 @@
 			    android:id="@+id/footer"
 			    android:layout_width="match_parent"
 			    android:layout_height="match_parent"
-			    android:background="@layout/footer_gradient"
+			    android:background="@drawable/footer_gradient"
 			    android:paddingBottom="5dip"
 			    android:paddingTop="5dip" 
 			    android:layout_below="@id/registrationForm"

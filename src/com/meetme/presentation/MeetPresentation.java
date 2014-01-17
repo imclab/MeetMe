@@ -1,8 +1,8 @@
 package com.meetme.presentation;
 
-import static com.meetme.protocol.store.UserStatusCodeStore.USER_STATUS_ARRIVED;
-import static com.meetme.protocol.store.UserStatusCodeStore.USER_STATUS_LEFT;
-import static com.meetme.protocol.store.UserStatusCodeStore.USER_STATUS_WAITING;
+import static com.meetme.store.UserStatusCodeStore.USER_STATUS_ARRIVED;
+import static com.meetme.store.UserStatusCodeStore.USER_STATUS_LEFT;
+import static com.meetme.store.UserStatusCodeStore.USER_STATUS_WAITING;
 
 import java.util.HashMap;
 import java.util.HashSet;

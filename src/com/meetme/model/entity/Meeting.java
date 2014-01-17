@@ -20,6 +20,7 @@ public class Meeting implements Comparable<Meeting>, Serializable {
 	private String title;
 	private String description;
 	private String datetime;
+	private long timestamp;
 	private String locationGeo;
 	private String locationText;
 	private int hostUserId;
@@ -185,6 +186,14 @@ public class Meeting implements Comparable<Meeting>, Serializable {
 		this.datetime = datetime;
 	}
 	
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
+
 	public String getLocationGeo() {
 		return locationGeo;
 	}

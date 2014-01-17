@@ -65,9 +65,9 @@
     
     
     <!-- Meeting activity -->
-    <string name="arrivedLabel"><u>Arrived</u></string>
-    <string name="leftLabel"><u>Left</u></string>
-    <string name="waitingLabel"><u>Waiting</u></string>
+    <string name="arrivedLabel">Arrived</string>
+    <string name="leftLabel">Left</string>
+    <string name="waitingLabel">Waiting</string>
 
     <!-- Dialog boxes -->
     <string name="validatedDialogButton">OK</string>
@@ -78,7 +78,11 @@
     <string name="registration">Registration&#8230;</string>
     <string name="registrationSuccessDialogTitle">Registration</string>
     <string name="registrationSuccessDialogMessage">Your registration is complete !</string>
-    <string name="creatingMeeting">Creating meeting</string>
+    <string name="meetingCreation">Creating meeting</string>
+    <string name="meetingCreationSuccessDialogTitle">Meeting creation</string>
+    <string name="meetingCreationSuccessDialogMessage">Your meeting has been created !</string>
+    <string name="meetingCreationErrorDialogTitle">Error</string>
+    <string name="meetingCreationErrorDialogMessage">An error occurred while creating your meeting !</string>
     <string name="dateTimeDialogTitle">Choose a date</string>
     <string name="searchingUser">Searching user&#8230;</string>
     <string name="sendingInvitation">Sending invitation&#8230;</string>

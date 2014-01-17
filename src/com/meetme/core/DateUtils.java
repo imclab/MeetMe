@@ -1,5 +1,10 @@
 package com.meetme.core;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
@@ -9,40 +14,35 @@ public abstract class DateUtils {
 	}
 	
 	/*
+	 * Private methods
+	 */
+	private static Date getDateObject(DatePicker datePicker, TimePicker timePicker) {
+		Calendar calendar = new GregorianCalendar(
+				datePicker.getYear(), 
+				datePicker.getMonth(), 
+				datePicker.getDayOfMonth(), 
+				timePicker.getCurrentHour(), 
+				timePicker.getCurrentMinute()
+			);
+		
+		return calendar.getTime(); 
+	}
+	
+	/*
 	 * Methods
 	 */
 	public static String getDateTimeFromPickers(DatePicker datePicker, TimePicker timePicker) {
-		StringBuilder dateTime = new StringBuilder();
+		Date date = getDateObject(datePicker, timePicker);
 		
-		int month = datePicker.getMonth();
-		month++;
+		SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return sdf.format(date);
+	}
+	
+	public static long getTimestampFromPickers(DatePicker datePicker, TimePicker timePicker) {
+		Date date = getDateObject(datePicker, timePicker);
 		
-		dateTime.append(datePicker.getDayOfMonth()).append("/");
-		
-		if (month < 10) {
-			dateTime.append("0");
-		}
-		
-		dateTime.append(month).append("/");
- 	    dateTime.append(datePicker.getYear()).append(" ");
- 	    
- 	    
- 	    int hour = timePicker.getCurrentHour();
- 	    
- 	    if (hour < 10) {
-			dateTime.append("0");
-		}
- 	    
- 	    dateTime.append(hour).append(":");
- 	    
- 	    int minute = timePicker.getCurrentMinute();
- 	    
- 	    if (minute < 10) {
-			dateTime.append("0");
- 	    }
- 	   
- 	    dateTime.append(minute);
-		
-		return dateTime.toString();
+		// Date.getTime() returns milliseconds : unix timestamp * 1000
+		// Thus, we divide per 1000 to get a unix timestamp
+		return date.getTime() / 1000;
 	}
 }

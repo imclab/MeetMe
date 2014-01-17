@@ -13,7 +13,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:text="@string/arrivedLabel"
-	        android:textSize="20dip"
+	        android:textSize="20sp"
 	        />
 	    <TextView 
 	        android:id="@+id/arrivedList"
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/leftLabel"
-            android:textSize="20dip"
+            android:textSize="20sp"
             />
 	    <TextView 
             android:id="@+id/leftList"
@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/waitingLabel"
-            android:textSize="20dip"
+            android:textSize="20sp"
             />
 	    <TextView 
             android:id="@+id/waitingList"

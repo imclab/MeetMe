@@ -1,4 +1,4 @@
-package com.meetme.protocol.store;
+package com.meetme.store;
 
 public abstract class UserStatusCodeStore {
 	private UserStatusCodeStore() {
