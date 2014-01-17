@@ -6,7 +6,10 @@ public abstract class DialogBoxesStore {
 	private DialogBoxesStore () {
 	}
 	
-	public static final int VALIDATED_BUTTON = R.string.validatedDialogButton;
+	public static final int OK = R.string.ok;
+	public static final int CANCEL = R.string.cancel;
+	public static final int YES = R.string.yes;
+	public static final int NO = R.string.no;
 	public static final int PLEASE_WAIT = R.string.pleaseWait;
 	
 	public static final int LOGGING_IN = R.string.loggingIn;
@@ -25,4 +28,6 @@ public abstract class DialogBoxesStore {
 	
 	public static final int SEARCHING_USER = R.string.searchingUser;
 	public static final int SENDING_INVITATION = R.string.sendingInvitation;
+	
+	public static final int CONFIRM_LOCATION_TITLE = R.string.confirmLocationDialogTitle;
 }

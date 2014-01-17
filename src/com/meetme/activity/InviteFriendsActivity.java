@@ -5,8 +5,8 @@ import static com.meetme.store.DialogBoxesStore.MEETING_CREATION_ERROR_MESSAGE;
 import static com.meetme.store.DialogBoxesStore.MEETING_CREATION_ERROR_TITLE;
 import static com.meetme.store.DialogBoxesStore.MEETING_CREATION_SUCCESS_MESSAGE;
 import static com.meetme.store.DialogBoxesStore.MEETING_CREATION_SUCCESS_TITLE;
+import static com.meetme.store.DialogBoxesStore.OK;
 import static com.meetme.store.DialogBoxesStore.PLEASE_WAIT;
-import static com.meetme.store.DialogBoxesStore.VALIDATED_BUTTON;
 import static com.meetme.store.ErrorCodeStore.SUCCESS;
 import static com.meetme.store.ServerParameterStore.MEETING_CREATE_DATETIME;
 import static com.meetme.store.ServerParameterStore.MEETING_CREATE_DESCRIPTION;
@@ -154,9 +154,7 @@ public class InviteFriendsActivity extends Activity {
 			
 			Set<Friend> friendSet = newMeeting.getFriendSet();
 			
-			if (friendSet.isEmpty()) {
-				parameters.put(MEETING_CREATE_FRIENDS, "");
-			} else {	
+			if (!friendSet.isEmpty()) {
 				for (Friend friend : friendSet) {
 					parameters.put(MEETING_CREATE_FRIENDS, Integer.toString(friend.getId()));
 				}
@@ -190,7 +188,7 @@ public class InviteFriendsActivity extends Activity {
 				meetingCreationSuccessInfoDialog.setIcon(R.drawable.validated_icon);
 				meetingCreationSuccessInfoDialog.setButton(
 						AlertDialog.BUTTON_POSITIVE, 
-						getString(VALIDATED_BUTTON),
+						getString(OK),
 						meeetingCreationInfoDialogButtonListener
 					);
 				meetingCreationSuccessInfoDialog.show();
@@ -204,7 +202,7 @@ public class InviteFriendsActivity extends Activity {
     			meetingCreationErrorInfoDialog.setIcon(R.drawable.error_icon);
     			meetingCreationErrorInfoDialog.setButton(
     					AlertDialog.BUTTON_POSITIVE, 
-    					getString(VALIDATED_BUTTON),
+    					getString(OK),
     					meeetingCreationInfoDialogButtonListener
     				);
     			meetingCreationErrorInfoDialog.show();

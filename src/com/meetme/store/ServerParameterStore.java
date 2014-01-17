@@ -4,6 +4,9 @@ public abstract class ServerParameterStore {
 	private ServerParameterStore() {
 	}
 	
+	public static final String GOOGLE_MAP_ADDRESS = "address";
+	public static final String GOOGLE_MAP_SENSOR = "sensor";
+	
 	public static final String USER_OPERATION = "operation";
 	public static final String USER_OPERATION_LOGIN = "login";
 	public static final String USER_OPERATION_REGISTER = "register";

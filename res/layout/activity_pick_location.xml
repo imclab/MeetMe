@@ -1,9 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PickLocationActivity" >
+ 
+    <Button
+        android:id="@+id/findLocationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/findLocationButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" />
+ 
+    <EditText
+        android:id="@+id/findLocationEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/findLocationHint"
+        android:inputType="text"
+        android:layout_toLeftOf="@id/findLocationButton" />
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/findLocationEdit"
+        class="com.google.android.gms.maps.SupportMapFragment" />
+</RelativeLayout>
+
+<!-- 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <!-- Location text field starts --> 
         <TextView 
             android:id="@+id/locationText"
             android:layout_width="match_parent"
@@ -16,7 +48,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/locationHint"
             />
-        <!-- Location text field ends -->   
         <Button
             android:id="@+id/inviteFriendsButton" 
             android:layout_width="match_parent"
@@ -24,3 +55,4 @@
             android:text="@string/inviteFriendsButton"
             />
 </LinearLayout>
+-->

@@ -10,4 +10,6 @@ public abstract class ServerUrlStore {
 	public static final String MEETING_URL = HOST_URL + "meeting.php";
 	public static final String FRIEND_URL = HOST_URL + "friend.php";
 	public static final String MEET_URL = HOST_URL + "meet.php";
+	
+	public static final String GOOGLE_MAP_URL = "https://maps.googleapis.com/maps/api/geocode/json?";
 }

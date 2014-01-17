@@ -1,10 +1,10 @@
 package com.meetme.activity;
 
+import static com.meetme.store.DialogBoxesStore.OK;
 import static com.meetme.store.DialogBoxesStore.PLEASE_WAIT;
 import static com.meetme.store.DialogBoxesStore.REGISTRATION;
 import static com.meetme.store.DialogBoxesStore.REGISTRATION_SUCCESS_MESSAGE;
 import static com.meetme.store.DialogBoxesStore.REGISTRATION_SUCCESS_TITLE;
-import static com.meetme.store.DialogBoxesStore.VALIDATED_BUTTON;
 import static com.meetme.store.ErrorCodeStore.REGISTRATION_EMAIL_ALREADY_EXIST;
 import static com.meetme.store.ErrorCodeStore.SUCCESS;
 import static com.meetme.store.MessageStore.EMAIL_ALREADY_EXISTS;
@@ -173,7 +173,7 @@ public class RegistrationActivity extends Activity {
     			registrationSuccessInfoDialog.setIcon(R.drawable.validated_icon);
     			registrationSuccessInfoDialog.setButton(
     					AlertDialog.BUTTON_POSITIVE, 
-    					getString(VALIDATED_BUTTON),
+    					getString(OK),
     					registationSuccessInfoDialogButtonListener
     				);
     			registrationSuccessInfoDialog.show();
