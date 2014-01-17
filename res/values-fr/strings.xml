@@ -9,7 +9,7 @@
 
     <!-- Main activity -->
     <string name="tabMeetings">Meetings</string>
-    <string name="tabNewMeeting">Nouveau Meeting</string>
+    <string name="tabNotifications">Notifications</string>
     <string name="tabFindFriends">Trouver des amis</string>
 
     <!-- Registration activity -->

@@ -2,16 +2,13 @@ package com.meetme.activity;
 
 import android.app.TabActivity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
-import android.widget.TabWidget;
 
 import com.meetme.R;
 
+@SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity {
 
 	private TabHost tabHost;
@@ -24,7 +21,7 @@ public class MainActivity extends TabActivity {
 		tabHost = (TabHost)findViewById(android.R.id.tabhost);
 		
 		TabSpec tabMeetings = tabHost.newTabSpec("Meetings tab");
-		TabSpec tabNewMeeting = tabHost.newTabSpec("New meeting tab");
+		TabSpec tabNotifications = tabHost.newTabSpec("Notifications tab");
         TabSpec tabFindFriends = tabHost.newTabSpec("Find friends tab");
 		
         tabMeetings.setIndicator(
@@ -33,11 +30,11 @@ public class MainActivity extends TabActivity {
 			);
         tabMeetings.setContent(new Intent(this, MeetingsActivity.class));
         
-        tabNewMeeting.setIndicator(
-        		getString(R.string.tabNewMeeting), 
-        		getResources().getDrawable(R.drawable.tab_new_meeting)
+        tabNotifications.setIndicator(
+        		getString(R.string.tabNotifications), 
+        		getResources().getDrawable(R.drawable.tab_notifications)
 			);
-        tabNewMeeting.setContent(new Intent(this, NewMeetingActivity.class));
+        tabNotifications.setContent(new Intent(this, NotificationsActivity.class));
 
         tabFindFriends.setIndicator(
         		getString(R.string.tabFindFriends),
@@ -46,7 +43,7 @@ public class MainActivity extends TabActivity {
         tabFindFriends.setContent(new Intent(this, FindFriendsActivity.class));
         
         tabHost.addTab(tabMeetings);
-        tabHost.addTab(tabNewMeeting);
+        tabHost.addTab(tabNotifications);
         tabHost.addTab(tabFindFriends);
         
         // Change tabs background color

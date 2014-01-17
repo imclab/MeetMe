@@ -9,7 +9,7 @@
 
     <!-- Main activity -->
     <string name="tabMeetings">Meetings</string>
-    <string name="tabNewMeeting">New Meeting</string>
+    <string name="tabNotifications">Notifications</string>
     <string name="tabFindFriends">Find Friends</string>
 
     <!-- Registration activity -->
@@ -48,7 +48,7 @@
     <string name="locationHint">Location</string>
     <string name="pickLocationButton">Pick a location</string>
     <string name="dateTimeChooseButton">Pick a date</string>
-    
+
     <!-- Pick Location activity -->
     <string name="findLocationButton">Find</string>
     <string name="findLocationHint">Location</string>
@@ -61,7 +61,7 @@
     <!-- Find friend activity -->
     <string name="findButton">Find</string>
     <string name="addFriendButton">Send an invitation</string>
-    
+
     <!-- Meeting activity -->
     <string name="arrivedLabel">Arrived</string>
     <string name="leftLabel">Left</string>
@@ -109,4 +109,7 @@
     <string name="friendIsYourself">You can\'t add yourself as a friend</string>
     <string name="friendInvitationAlreadySent">Invitation already sent</string>
     <string name="emptyLocation">Enter a location</string>
+    <string name="title_activity_notifications">NotificationsActivity</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>
