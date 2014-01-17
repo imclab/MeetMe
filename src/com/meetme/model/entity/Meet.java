@@ -16,6 +16,7 @@ public class Meet implements Serializable {
 	private int meetingId;
 	private int userId;
 	private String userEstimatedTime;
+	private long userEstimatedTimeSeconds;
 	private String userEstimatedDistance;
 	private String userRefreshDateUpdated;
 	private int userStatus;
@@ -26,6 +27,7 @@ public class Meet implements Serializable {
 	
 	private static final String USER_ID = "user_id";
 	private static final String USER_ETA = "user_eta";
+	private static final String USER_ETA_SECONDS = "user_eta_seconds";
 	private static final String USER_EDA = "user_eda";
 	private static final String USER_REFRESH_DATE_UPDATED = "user_refresh_date_updated";
 	private static final String USER_STATUS = "user_status";
@@ -35,7 +37,7 @@ public class Meet implements Serializable {
 	private static final String USER_LAT_LONG = "user_lat_long";
 	
 	private static String[] fieldNameArray = 
-		{USER_ID, USER_ETA, USER_EDA, USER_REFRESH_DATE_UPDATED, USER_STATUS, USER_STATUS_DATE_UPDATED,
+		{USER_ID, USER_ETA, USER_ETA_SECONDS, USER_EDA, USER_REFRESH_DATE_UPDATED, USER_STATUS, USER_STATUS_DATE_UPDATED,
 		USER_CONFIRMATION, USER_CONFIRMATION_DATE_UPDATED, USER_LAT_LONG};
 	
 	/*
@@ -48,6 +50,7 @@ public class Meet implements Serializable {
 			int meetingId,
 			int userId, 
 			String userEstimatedTime,
+			long userEstimatedTimeSeconds,
 			String userEstimatedDistance, 
 			String userRefreshDateUpdated,
 			int userStatus, 
@@ -59,6 +62,7 @@ public class Meet implements Serializable {
 		this.meetingId = meetingId;
 		this.userId = userId;
 		this.userEstimatedTime = userEstimatedTime;
+		this.userEstimatedTimeSeconds = userEstimatedTimeSeconds;
 		this.userEstimatedDistance = userEstimatedDistance;
 		this.userRefreshDateUpdated = userRefreshDateUpdated;
 		this.userStatus = userStatus;
@@ -98,6 +102,7 @@ public class Meet implements Serializable {
 				meetingId,
 				Integer.parseInt(fieldMap.get(USER_ID)),
 				fieldMap.get(USER_ETA), 
+				Long.parseLong(fieldMap.get(USER_ETA_SECONDS)),
 				fieldMap.get(USER_EDA), 
 				fieldMap.get(USER_REFRESH_DATE_UPDATED), 
 				Integer.parseInt(fieldMap.get(USER_STATUS)), 
@@ -150,6 +155,14 @@ public class Meet implements Serializable {
 
 	public void setUserEstimatedTime(String userEstimatedTime) {
 		this.userEstimatedTime = userEstimatedTime;
+	}
+
+	public long getUserEstimatedTimeSeconds() {
+		return userEstimatedTimeSeconds;
+	}
+
+	public void setUserEstimatedTimeSeconds(long userEstimatedTimeSeconds) {
+		this.userEstimatedTimeSeconds = userEstimatedTimeSeconds;
 	}
 
 	public String getUserEstimatedDistance() {

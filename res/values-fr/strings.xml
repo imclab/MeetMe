@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Application -->
+    <string name="app_name">MeetMe</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="meetmeUrl">www.meetme.com</string>
+    <string name="meetmeLogoDescription">MeetMe Logo</string>
+
+    <!-- Main activity -->
+    <string name="tabMeetings">Meetings</string>
+    <string name="tabNewMeeting">Nouveau Meeting</string>
+    <string name="tabFindFriends">Trouver des amis</string>
+
+    <!-- Registration activity -->
+    <string name="emailLabel">Email :</string>
+    <string name="firstnameLabel">Prénom :</string>
+    <string name="lastnameLabel">Nom :</string>
+    <string name="repeatPasswordLabel">Répétez le mot de passe:</string>
+    <string name="emailHint">Email</string>
+    <string name="firstnameHint">Prénom</string>
+    <string name="lastnameHint">Nom</string>
+    <string name="repeatPasswordHint">Mot de passe</string>
+    <string name="registrationButton">Inscription</string>
+    <string name="alreadyHaveAnAccountLink">Déjà membre ? <u>Connectez-vous</u>!</string>
+
+    <!-- Login activity -->
+    <string name="loginLabel">Login :</string>
+    <string name="passwordLabel">Mot de passe :</string>
+    <string name="loginHint">Login</string>
+    <string name="passwordHint">Mot de passe</string>
+    <string name="loginButton">Connexion</string>
+    <string name="newToMeetMeLink">Pas encore inscrit ? <u>Inscrivez-vous</u>!</string>
+
+    <!-- Meetings activity -->
+    <string name="newMeetingButton">Nouveau Meeting</string>
+    <string name="findFriendsButton">Trouver des amis</string>
+
+    <!-- New meeting activity -->
+    <string name="titleLabel">Titre :</string>
+    <string name="descriptionLabel">Description :</string>
+    <string name="dateTimeLabel">Date et heure :</string>
+    <string name="locationLabel">Lieu :</string>
+    <string name="titleHint">Titre</string>
+    <string name="descriptionHint">Description</string>
+    <string name="dateTimeHint">Date et heure</string>
+    <string name="locationHint">Lieu</string>
+    <string name="pickLocationButton">Choisir un lieu</string>
+    <string name="dateTimeChooseButton">Choisir une date</string>
+    
+    <!-- Pick Location activity -->
+    <string name="findLocationButton">Chercher</string>
+    <string name="findLocationHint">Lieu</string>
+
+    <!-- Invite Friends activity -->
+    <string name="searchFriend">Rechercher des amis&#8230;</string>
+    <string name="noFriendText">Aucun ami</string>
+    <string name="inviteButton">Inviter</string>
+
+    <!-- Find friend activity -->
+    <string name="findButton">Chercher</string>
+    <string name="addFriendButton">Envoyer une invitation</string>
+    
+    <!-- Meeting activity -->
+    <string name="arrivedLabel">Arrivé</string>
+    <string name="leftLabel">Parti</string>
+    <string name="waitingLabel">En attente</string>
+
+    <!-- Dialog boxes -->
+    <string name="ok">OK</string>
+    <string name="cancel">Annuler</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="pleaseWait">Patientez&#8230;</string>
+    <string name="loggingIn">Connexion&#8230;</string>
+    <string name="loggingInSuccessDialogTitle">Connexion</string>
+    <string name="loggingInSuccessDialogMessage">Vous êtes connnecté !</string>
+    <string name="registration">Inscription&#8230;</string>
+    <string name="registrationSuccessDialogTitle">Inscription</string>
+    <string name="registrationSuccessDialogMessage">Votre inscription est terminée !</string>
+    <string name="meetingCreation">Création du meeting</string>
+    <string name="meetingCreationSuccessDialogTitle">Création du meeting</string>
+    <string name="meetingCreationSuccessDialogMessage">Votre meeting a été créé !</string>
+    <string name="meetingCreationErrorDialogTitle">Erreur</string>
+    <string name="meetingCreationErrorDialogMessage">Une erreur s\'est produite lors de la création de votre meeting !</string>
+    <string name="dateTimeDialogTitle">Choisissez une date</string>
+    <string name="searchingUser">Recherche d\'ami&#8230;</string>
+    <string name="sendingInvitation">Envoi de l\'invitation&#8230;</string>
+    <string name="confirmLocationDialogTitle">Vous confirmez ce lieu ?</string>
+
+    <!-- Error/Warning -->
+    <string name="generalError">Une erreur s\'est produite</string>
+    <string name="invalidEmail">Email invalide</string>
+    <string name="invalidFirstname">Le prénom doit contenir au moins 1 caractère</string>
+    <string name="invalidLastname">Le nom doit contenir au moins 1 caractère</string>
+    <string name="invalidPassword">Le mot de passe doit contenir au moins 8 caractères</string>
+    <string name="emailAlreadyExists">Cet email a déjà été enregistré</string>
+    <string name="emptyPassword">Entrez un mot de passe</string>
+    <string name="passwordDoNotMatch">Les mots de passe sont différents</string>
+    <string name="emptyTitle">Entrez un titre</string>
+    <string name="titleTooLong">Le titre ne doit pas dépasser 255 caractères</string>
+    <string name="wrongEmailFull">L\'email que vous avez saisi n\'existe pas</string>
+    <string name="wrongEmail">Cet email n\'existe pas</string>
+    <string name="wrongPasswordFull">Le mot de passe que vous avez entré n\'est pas bon</string>
+    <string name="wrongPassword">Mauvais mot de passe</string>
+    <string name="noFriendFoundForEmail">Aucun utilisateur correspondant à cet email</string>
+    <string name="friendAlreadyInList">Cet utilisateur est déjà dans votre liste d\'amis</string>
+    <string name="friendIsYourself">Vous ne pouvez pas vous ajoutez vous-même</string>
+    <string name="friendInvitationAlreadySent">Invitation déjà envoyée</string>
+    <string name="emptyLocation">Entrez un lieu</string>
+</resources>

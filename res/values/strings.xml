@@ -46,7 +46,7 @@
     <string name="dateTimeHint">Date and time</string>
     <string name="locationHint">Location</string>
     <string name="pickLocationButton">Pick a location</string>
-    <string name="dateTimeChooseButton">Choose</string>
+    <string name="dateTimeChooseButton">Pick a date</string>
     
     <!-- Pick Location activity -->
     <string name="findLocationButton">Find</string>
