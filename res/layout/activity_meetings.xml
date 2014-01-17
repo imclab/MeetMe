@@ -1,25 +1,43 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
-    
-	<ListView 
-	    android:id="@+id/meetingList"
-	    android:layout_width="match_parent"
-    	android:layout_height="wrap_content" >
-	</ListView>
+    >
 
-    <Button 
-        android:id="@+id/newMeetingButton"
-        android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:text="@string/newMeetingButton"
-        />	 
-        
-    <Button 
-        android:id="@+id/findFriendsButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/findFriendsButton"
-        />  
-</LinearLayout>
+        <!-- New meeting bar starts -->
+        <LinearLayout 
+            android:id="@+id/newMeetingBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            >
+            
+            <Button 
+                android:id="@+id/newMeetingButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/newMeetingButton"
+                />
+        </LinearLayout> 
+        <!-- New meeting bar ends -->
+        <!-- Meeting list starts -->
+        <ListView
+            android:id="@+id/meetingList"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:choiceMode="multipleChoice"
+            android:layout_alignParentTop="true"
+            android:layout_above="@id/newMeetingBar"
+          />
+        <!-- Meeting list ends -->
+        <!-- When Meeting list is empty -->
+        <TextView 
+            android:id="@+id/noMeetingText" 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" 
+            android:visibility="invisible"
+            android:text="@string/noMeetingText"
+            android:layout_above="@id/newMeetingBar" />
+</RelativeLayout>

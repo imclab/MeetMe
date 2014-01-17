@@ -132,8 +132,8 @@ public class FindFriendsActivity extends Activity {
 				runOnUiThread(new Runnable() {
 					public void run() {
 						foundFriendText.setText(
-								"Firstname : " + foundFriend.getFirstname() + "\n"
-								+ "Lastname : " + foundFriend.getLastname()
+								R.string.firstnameLabel + foundFriend.getFirstname() + "\n"
+								+ R.string.lastnameLabel  + foundFriend.getLastname()
 								);
 						foundFriendText.setVisibility(View.VISIBLE);
 						addFriendButton.setVisibility(View.VISIBLE);

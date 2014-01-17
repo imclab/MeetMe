@@ -10,21 +10,24 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.meetme.R;
 import com.meetme.core.SessionManager;
 import com.meetme.model.entity.Meeting;
+import com.meetme.presentation.MeetingListArrayAdapter;
 
 public class MeetingsActivity extends Activity {
 
 	private SessionManager session;
-	private List<String> meetingAdapterList;
+	private List<Meeting> meetingList;
+	private MeetingListArrayAdapter meetingListAdapter;
 	private ListView meetingListView;
 	private Button newMeetingButton;
-	private Button findFriendsButton;
+	private TextView noMeetingText;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,34 +37,31 @@ public class MeetingsActivity extends Activity {
 		meetingListView = (ListView)findViewById(R.id.meetingList);
 		newMeetingButton = (Button)findViewById(R.id.newMeetingButton);
 		newMeetingButton.setOnClickListener(newMeetingListener);
-		findFriendsButton = (Button)findViewById(R.id.findFriendsButton);
-		findFriendsButton.setOnClickListener(findFriendsListener);
+		noMeetingText = (TextView)findViewById(R.id.noMeetingText);
 		
-		meetingAdapterList = new ArrayList<String>();
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, android.R.id.text1, meetingAdapterList);
-		
-		meetingListView.setAdapter(adapter);		
+		meetingList = new ArrayList<Meeting>();
 		
 		meetingListView.setOnItemClickListener(meetingListListener);
 		
 		session = SessionManager.getInstance();
 		updateMeetingList();
+		
+		if (meetingList.isEmpty()) {
+			noMeetingText.setVisibility(View.VISIBLE);
+		}
+		
+		meetingListAdapter = new MeetingListArrayAdapter(this, meetingList);
+		meetingListView.setAdapter(meetingListAdapter);
 	}
-	
-	/*
-	 * Private methods 
-	 */
 	
 	/*
 	 * Update the meeting list adapter data
 	 */
 	private void updateMeetingList() {
-		meetingAdapterList.clear();
+		meetingList.clear();
 		
 		for (Meeting meeting : session.getMeetingSet()) {
-			meetingAdapterList.add(meeting.getTitle() + "\n" + meeting.getDatetime());
+			meetingList.add(meeting);
 		}
 	}
 	
@@ -76,21 +76,13 @@ public class MeetingsActivity extends Activity {
 	    }
 	};
 	
-	private OnClickListener findFriendsListener = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			Intent intent = new Intent(MeetingsActivity.this, FindFriendsActivity.class);
-			startActivity(intent);
-	    }
-	};
-	
 	private OnItemClickListener meetingListListener = new OnItemClickListener() {
+		
 		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-				long arg3) {
-			// MOCK UP LISTENER, TO REPLACE WITH CUSTOM ADAPTER
+		public void onItemClick(AdapterView<?> arent, View view, int position,
+				long id) {
 			Intent intent = new Intent(MeetingsActivity.this, MeetingActivity.class);
-			intent.putExtra("meeting", session.getMeetingById(33));
+			intent.putExtra("meeting", meetingList.get(position));
 			startActivity(intent);
 		}
 	};

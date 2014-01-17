@@ -33,6 +33,7 @@
     <string name="newToMeetMeLink">Pas encore inscrit ? <u>Inscrivez-vous</u>!</string>
 
     <!-- Meetings activity -->
+    <string name="noMeetingText">Aucun meetings</string>
     <string name="newMeetingButton">Nouveau Meeting</string>
     <string name="findFriendsButton">Trouver des amis</string>
 
