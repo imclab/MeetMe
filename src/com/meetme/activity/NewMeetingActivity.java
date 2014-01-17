@@ -2,11 +2,9 @@ package com.meetme.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -24,8 +22,7 @@ public class NewMeetingActivity extends Activity {
 	private EditText titleEdit;
 	private EditText descriptionEdit;
 	private EditText dateTimeEdit;
-	private EditText locationEdit;
-	private Button inviteFriendsButton;
+	private Button pickLocationButton;
 	private Button dateTimeChooseButton;
 	AlertDialog dateTimeDialog;
 	private NewMeetingValidator newMeetingValidator;
@@ -38,9 +35,8 @@ public class NewMeetingActivity extends Activity {
 		titleEdit = (EditText)findViewById(R.id.titleEdit);
 		descriptionEdit = (EditText)findViewById(R.id.descriptionEdit);
 		dateTimeEdit = (EditText)findViewById(R.id.dateTimeEdit);
-		locationEdit = (EditText)findViewById(R.id.locationEdit);
-		inviteFriendsButton = (Button)findViewById(R.id.inviteFriendsButton);
-		inviteFriendsButton.setOnClickListener(inviteFriendsListener);
+		pickLocationButton = (Button)findViewById(R.id.pickLocationButton);
+		pickLocationButton.setOnClickListener(pickLocationListener);
 		dateTimeChooseButton = (Button)findViewById(R.id.dateTimeChooseButton);
 		dateTimeChooseButton.setOnClickListener(dateTimeChooseListener);
 		
@@ -84,8 +80,6 @@ public class NewMeetingActivity extends Activity {
 		meeting.setTitle(titleEdit.getText().toString());
 		meeting.setDescription(descriptionEdit.getText().toString());
 		meeting.setDatetime(dateTimeEdit.getText().toString());
-		meeting.setLocationGeo("75,45");
-		meeting.setLocationText("Le Corum");
 		
 		return meeting;
 	}
@@ -93,12 +87,12 @@ public class NewMeetingActivity extends Activity {
 	/*
 	 * Listeners
 	 */
-	private OnClickListener inviteFriendsListener = new OnClickListener() {
+	private OnClickListener pickLocationListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
 			if (newMeetingValidator.validate()) {
-				// Start invite friends activity
-				Intent intent = new Intent(NewMeetingActivity.this, InviteFriendsActivity.class);
+				// Start pick location activity
+				Intent intent = new Intent(NewMeetingActivity.this, PickLocationActivity.class);
 				intent.putExtra("newMeeting", createMeeting());
 				startActivity(intent);
 			}

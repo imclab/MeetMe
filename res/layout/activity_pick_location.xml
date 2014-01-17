@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- Location text field starts --> 
+        <TextView 
+            android:id="@+id/locationText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/locationLabel"
+            />
+        <EditText 
+            android:id="@+id/locationEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/locationHint"
+            />
+        <!-- Location text field ends -->   
+        <Button
+            android:id="@+id/inviteFriendsButton" 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/inviteFriendsButton"
+            />
+</LinearLayout>
