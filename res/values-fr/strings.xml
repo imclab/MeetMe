@@ -70,6 +70,10 @@
     <string name="leftLabel">Parti</string>
     <string name="waitingLabel">En attente</string>
 
+    <!-- Notifications activity -->
+    <string name="friendNotificationLabel">Notifications d\'amis</string>
+    <string name="meetingNotificationLabel">Notifications de meetings</string>
+    
     <!-- Dialog boxes -->
     <string name="ok">OK</string>
     <string name="cancel">Annuler</string>

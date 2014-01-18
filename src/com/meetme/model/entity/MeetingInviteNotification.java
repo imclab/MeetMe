@@ -14,7 +14,6 @@ public class MeetingInviteNotification extends AbstractEntity
 	private String meetingDateTime;
 	private String meetingLocationText;
 	private int meetingHostUserId;
-	private int inviterId;
 	private String dateTime;
 	
 	/*
@@ -30,7 +29,6 @@ public class MeetingInviteNotification extends AbstractEntity
 			String meetingDateTime,
 			String meetingLocationText, 
 			int meetingHostUserId,
-			int inviterId,
 			String dateTime) {
 		super();
 		this.meetingId = meetingId;
@@ -39,7 +37,6 @@ public class MeetingInviteNotification extends AbstractEntity
 		this.meetingDateTime = meetingDateTime;
 		this.meetingLocationText = meetingLocationText;
 		this.meetingHostUserId = meetingHostUserId;
-		this.inviterId = inviterId;
 		this.dateTime = dateTime;
 	}
 
@@ -50,9 +47,6 @@ public class MeetingInviteNotification extends AbstractEntity
 	/*
 	 * Two meeting invite notifications are equal only if
 	 * - they concern the same meeting
-	 * and
-	 * - they are sent by the same friend
-	 * and
 	 * - they are sent at the same date and time
 	 */
 	@Override
@@ -62,7 +56,6 @@ public class MeetingInviteNotification extends AbstractEntity
 		} else {
 			MeetingInviteNotification other = (MeetingInviteNotification)o;
 			return (this.meetingId == other.meetingId) 
-					&& this.inviterId == other.inviterId
 					&& (this.dateTime.equals(other.dateTime));
 		}
 	}
@@ -74,6 +67,10 @@ public class MeetingInviteNotification extends AbstractEntity
 
 	@Override
 	public int compareTo(MeetingInviteNotification another) {
+		if (this.dateTime.equals(another.dateTime)) {
+			return -1;
+		}
+		
 		// Newest to oldest
 		return -1 * this.dateTime.compareTo(another.dateTime);
 	}
@@ -127,14 +124,6 @@ public class MeetingInviteNotification extends AbstractEntity
 
 	public void setMeetingHostUserId(int meetingHostUserId) {
 		this.meetingHostUserId = meetingHostUserId;
-	}
-
-	public int getInviterId() {
-		return inviterId;
-	}
-
-	public void setInviterId(int inviterId) {
-		this.inviterId = inviterId;
 	}
 
 	public String getDateTime() {

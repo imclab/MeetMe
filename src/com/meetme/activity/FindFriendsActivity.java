@@ -16,7 +16,7 @@ import static com.meetme.store.MessageStore.NO_FRIEND_FOUND_FOR_EMAIL;
 import static com.meetme.store.ServerParameterStore.FRIEND_ADD_ID;
 import static com.meetme.store.ServerParameterStore.FRIEND_FIND_BY_EMAIL_EMAIL;
 import static com.meetme.store.ServerParameterStore.FRIEND_OPERATION;
-import static com.meetme.store.ServerParameterStore.FRIEND_OPERATION_ADD;
+import static com.meetme.store.ServerParameterStore.FRIEND_OPERATION_REQUEST;
 import static com.meetme.store.ServerParameterStore.FRIEND_OPERATION_FIND_BY_EMAIL;
 import static com.meetme.store.ServerParameterStore.FRIEND_TOKEN;
 import static com.meetme.store.ServerUrlStore.FRIEND_URL;
@@ -88,7 +88,7 @@ public class FindFriendsActivity extends Activity {
 			@Override
 			public void run() {
 				// Add parameters
-				parameters.put(FRIEND_OPERATION, FRIEND_OPERATION_ADD);
+				parameters.put(FRIEND_OPERATION, FRIEND_OPERATION_REQUEST);
 				parameters.put(FRIEND_ADD_ID, Integer.toString(foundFriend.getId()));
 				parameters.put(FRIEND_TOKEN, session.getUserToken());
 				

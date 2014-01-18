@@ -1,13 +1,41 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".NotificationsActivity" >
-
-    <TextView
-        android:id="@+id/notificationsText"
-        android:layout_width="wrap_content"
+    android:layout_height="match_parent" >
+    
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
-
-</RelativeLayout>
+        android:orientation="vertical" >
+        
+        <!-- Friends notifications starts -->
+        <TextView
+            android:id="@+id/friendNotificationText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/friendNotificationLabel"
+            android:textSize="20sp"
+            />
+        <TextView 
+            android:id="@+id/friendNotificationList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
+        <!-- Friends notifications ends -->
+        <!-- Meeting notifications starts -->
+        <TextView
+            android:id="@+id/meetingNotificationText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50sp"
+            android:text="@string/meetingNotificationLabel"
+            android:textSize="20sp"
+            />
+        <TextView 
+            android:id="@+id/meetingNotificationList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
+        <!-- Meeting notifications ends -->
+    </LinearLayout>
+</ScrollView>

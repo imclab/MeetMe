@@ -70,6 +70,10 @@
     <string name="leftLabel">Left</string>
     <string name="waitingLabel">Waiting</string>
 
+    <!-- Notifications activity -->
+    <string name="friendNotificationLabel">Friends notifications</string>
+    <string name="meetingNotificationLabel">Meetings notification</string>
+    
     <!-- Dialog boxes -->
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>

@@ -43,7 +43,7 @@ public abstract class ServerParameterStore {
 	public static final String FRIEND_TOKEN = TOKEN;
 	public static final String FRIEND_OPERATION = OPERATION;
 	public static final String FRIEND_OPERATION_LIST = "list";
-	public static final String FRIEND_OPERATION_ADD = "add";
+	public static final String FRIEND_OPERATION_REQUEST = "request";
 	public static final String FRIEND_OPERATION_ACCEPT = "accept";
 	public static final String FRIEND_OPERATION_FIND_BY_EMAIL = "findByEmail";
 	public static final String FRIEND_OPERATION_NOTIFICATION = NOTIFICATION;

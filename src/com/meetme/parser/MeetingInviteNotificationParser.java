@@ -16,12 +16,11 @@ public class MeetingInviteNotificationParser
 	private static final String MEETING_DATETIME = "datetime";
 	private static final String MEETING_LOCATION_TEXT = "location_text";
 	private static final String MEETING_HOST_USER_ID = "host_user_id";
-	private static final String INVITER_ID = "user_id";
-	private static final String DATETIME = "date_created";
+	private static final String DATETIME = "notification_date_created";
 	
 	private static String[] fieldNameArray = 
 		{MEETING_ID, MEETING_TITLE, MEETING_DESCRIPTION, MEETING_DATETIME, 
-		MEETING_LOCATION_TEXT, MEETING_HOST_USER_ID, INVITER_ID, DATETIME};
+		MEETING_LOCATION_TEXT, MEETING_HOST_USER_ID, DATETIME};
 	
 	/*
 	 * Constructor
@@ -51,7 +50,6 @@ public class MeetingInviteNotificationParser
 				fieldMap.get(MEETING_DATETIME),
 				fieldMap.get(MEETING_LOCATION_TEXT),
 				Integer.parseInt(fieldMap.get(MEETING_HOST_USER_ID)),
-				Integer.parseInt(fieldMap.get(INVITER_ID)),
 				fieldMap.get(DATETIME)
 			);
 		

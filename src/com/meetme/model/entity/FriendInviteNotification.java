@@ -59,6 +59,10 @@ public class FriendInviteNotification extends AbstractEntity
 
 	@Override
 	public int compareTo(FriendInviteNotification another) {
+		if (this.dateTime.equals(another.dateTime)) {
+			return -1;
+		}
+		
 		// Newest to oldest
 		return -1 * this.dateTime.compareTo(another.dateTime);
 	}
