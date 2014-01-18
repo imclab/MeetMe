@@ -10,7 +10,8 @@ import android.util.Log;
 
 import com.meetme.model.entity.Meeting;
 
-public class MeetingEntityParser extends AbstractEntityParser<Meeting> {
+public class MeetingParser extends AbstractParser<Meeting> {
+	private static final String JSON_KEY_FOR_FIND_ALL_FROM_USER = "meetings";
 	
 	private static final String MEETING_ID = "meeting_id";
 	private static final String TITLE = "title";
@@ -24,12 +25,16 @@ public class MeetingEntityParser extends AbstractEntityParser<Meeting> {
 	private static String[] fieldNameArray = 
 		{MEETING_ID, TITLE, DESCRIPTION, DATETIME, LOCATION_GEO, LOCATION_TEXT, HOST_USER_ID};
 	
-	FriendEntityParser friendEntityParser = null;
+	FriendParser friendEntityParser = null;
 	
-	public MeetingEntityParser() {
-		this.friendEntityParser = new FriendEntityParser();
+	public MeetingParser() {
+		this.friendEntityParser = new FriendParser();
+		super.setJSONKeyForFindAllFromUser(JSON_KEY_FOR_FIND_ALL_FROM_USER);
 	}
 	
+	/*
+	 * Methods
+	 */
 	@Override
 	public Meeting getFromJSON(JSONObject meetingJSON) {
 		Meeting meeting = null;
@@ -61,9 +66,9 @@ public class MeetingEntityParser extends AbstractEntityParser<Meeting> {
 			}
 			
 		} catch (JSONException e) {
-			Log.w(MeetingEntityParser.class.getName(), COULD_NOT_PARSE_FIELD_FROM_JSON + e.getMessage(), e);
+			Log.w(MeetingParser.class.getName(), COULD_NOT_PARSE_FIELD_FROM_JSON + e.getMessage(), e);
 		} catch (Exception e) {
-			Log.e(MeetingEntityParser.class.getName(), e.getMessage(), e);
+			Log.e(MeetingParser.class.getName(), e.getMessage(), e);
 		}
 		
 		return meeting;

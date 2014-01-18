@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import com.meetme.model.entity.Meet;
 
-public class MeetEntityParser extends AbstractEntityParser<Meet> {
+public class MeetParser extends AbstractParser<Meet> {
 	
 	private static final String USER_ID = "user_id";
 	private static final String USER_ETA = "user_eta";
@@ -23,6 +23,9 @@ public class MeetEntityParser extends AbstractEntityParser<Meet> {
 		{USER_ID, USER_ETA, USER_ETA_SECONDS, USER_EDA, USER_REFRESH_DATE_UPDATED, USER_STATUS, USER_STATUS_DATE_UPDATED,
 		USER_CONFIRMATION, USER_CONFIRMATION_DATE_UPDATED, USER_LAT_LONG};
 	
+	/*
+	 * Methods
+	 */
 	@Override
 	public Meet getFromJSON(JSONObject meetJSON) {
 		return null;

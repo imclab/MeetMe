@@ -19,14 +19,14 @@ import com.meetme.core.HttpParameters;
 import com.meetme.core.HttpUtils;
 import com.meetme.model.entity.Meet;
 import com.meetme.model.entity.Meeting;
-import com.meetme.parser.MeetEntityParser;
+import com.meetme.parser.MeetParser;
 
 public class MeetDao {
 
-	private MeetEntityParser entityParser = null;
+	private MeetParser entityParser = null;
 	
 	public MeetDao(){
-		this.entityParser = new MeetEntityParser();
+		this.entityParser = new MeetParser();
 	}
 	
 	public Set<Meet> findMeetsOfMeeting(Meeting meeting, String userToken) {
@@ -43,7 +43,7 @@ public class MeetDao {
 		// Send request
 		responseJSON = HttpUtils.post(MEET_URL, parameters);
 		
-		// Built friend list from JSON response
+		// Built meet set from JSON response
 		try {
 			JSONArray meetsJSON = (JSONArray)responseJSON.get("users");
 			int meetsSize = meetsJSON.length();

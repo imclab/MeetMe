@@ -6,8 +6,10 @@ import org.json.JSONObject;
 
 import com.meetme.model.entity.FriendInviteNotification;
 
-public class FriendInviteNotificationEntityParser 
-	extends AbstractEntityParser<FriendInviteNotification> {
+public class FriendInviteNotificationParser 
+	extends AbstractParser<FriendInviteNotification> {
+	
+	private static final String JSON_KEY_FOR_FIND_ALL_FROM_USER = "friends";
 	
 	private static final String INVITER_ID = "friend_id";
 	private static final String INVITER_FIRSTNAME = "firstname";
@@ -17,6 +19,16 @@ public class FriendInviteNotificationEntityParser
 	private static String[] fieldNameArray = 
 		{INVITER_ID, INVITER_FIRSTNAME, INVITER_LASTNAME, DATETIME};
 	
+	/*
+	 * Constructor
+	 */
+	public FriendInviteNotificationParser() {
+		super.setJSONKeyForFindAllFromUser(JSON_KEY_FOR_FIND_ALL_FROM_USER);
+	}
+	
+	/*
+	 * Methods
+	 */
 	@Override
 	public FriendInviteNotification getFromJSON(JSONObject notificationJSON) {
 		FriendInviteNotification notification = null;

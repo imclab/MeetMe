@@ -8,9 +8,7 @@ import static com.meetme.store.ServerParameterStore.MEETING_VIEW_MEETING_ID;
 import static com.meetme.store.ServerUrlStore.MEETING_URL;
 
 import java.util.Set;
-import java.util.TreeSet;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,18 +17,15 @@ import android.util.Log;
 import com.meetme.core.HttpParameters;
 import com.meetme.core.HttpUtils;
 import com.meetme.model.entity.Meeting;
-import com.meetme.parser.MeetingEntityParser;
+import com.meetme.parser.MeetingParser;
 
 public class MeetingDao extends AbstractDao<Meeting> {
 
-	
 	public MeetingDao() {
-		super(new MeetingEntityParser());
+		super(new MeetingParser());
 	}
 	
 	public Set<Meeting> findMeetingsOfUser(String userToken) {
-		Set<Meeting> meetingSet = new TreeSet<Meeting>();
-		
 		JSONObject responseJSON = null;
 		HttpParameters parameters = new HttpParameters();
 		
@@ -42,22 +37,7 @@ public class MeetingDao extends AbstractDao<Meeting> {
 		responseJSON = HttpUtils.post(MEETING_URL, parameters);
 		
 		// Built meeting set from JSON response
-		try {
-			JSONArray meetingsJSON = (JSONArray)responseJSON.get("meetings");
-			int meetingsSize = meetingsJSON.length();
-			
-			for (int i = 0; i < meetingsSize; i++) {
-				JSONObject meetingJSON = meetingsJSON.getJSONObject(i);
-				meetingSet.add(this.entityParser.getFromJSON(meetingJSON));
-			}
-			
-		} catch (JSONException e) {
-			Log.e(MeetingDao.class.getName(), e.getMessage(), e);
-		} catch (Exception e) {
-			Log.e(MeetingDao.class.getName(), e.getMessage(), e);
-		}
-		
-		return meetingSet;
+		return super.findAllFromUser(responseJSON, userToken);
 	}
 	
 	public Meeting findMeetingById(int meetingId, String userToken) {

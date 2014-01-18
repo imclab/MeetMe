@@ -39,7 +39,7 @@ import com.meetme.core.HttpParameters;
 import com.meetme.core.HttpUtils;
 import com.meetme.core.SessionManager;
 import com.meetme.model.entity.Friend;
-import com.meetme.parser.FriendEntityParser;
+import com.meetme.parser.FriendParser;
 import com.meetme.validator.FindFriendsValidator;
 
 public class FindFriendsActivity extends Activity {
@@ -128,7 +128,7 @@ public class FindFriendsActivity extends Activity {
 			final int responseCode = responseJSON.getInt("error_code");
 			
 			if (responseCode == SUCCESS) {
-				FriendEntityParser friendEntityParser = new FriendEntityParser();
+				FriendParser friendEntityParser = new FriendParser();
 				foundFriend = friendEntityParser.getFromJSON(responseJSON.getJSONObject("user"));
 				
 				runOnUiThread(new Runnable() {
