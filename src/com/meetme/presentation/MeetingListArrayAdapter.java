@@ -50,7 +50,7 @@ public class MeetingListArrayAdapter extends ArrayAdapter<Meeting> implements Fi
 		ViewHolder holder = (ViewHolder) rowView.getTag();
 		holder.meetingTitle.setText(meeting.getTitle());
 		holder.meetingLocation.setText(meeting.getLocationText());
-	    holder.meetingDateTime.setText(meeting.getDatetime());
+	    holder.meetingDateTime.setText(meeting.getDateTime());
 	    
 	    return rowView;
 	}

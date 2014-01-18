@@ -9,7 +9,8 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-public class Friend implements Comparable<Friend>, Serializable {
+public class Friend extends AbstractEntity
+	implements Comparable<Friend>, Serializable {
 	
 	static final long serialVersionUID = 200L;
 	
@@ -57,7 +58,7 @@ public class Friend implements Comparable<Friend>, Serializable {
 				String fieldValue = friendJSON.get(fieldName).toString();
 				fieldMap.put(fieldName, fieldValue);
 			} catch (JSONException e) {
-				Log.w(Meeting.class.getName(), "Could not parse entity field from JSON  : " + e.getMessage(), e);
+				Log.w(Meeting.class.getName(), COULD_NOT_PARSE_FIELD_FROM_JSON + e.getMessage(), e);
 			} catch (Exception e) {
 				Log.e(Meeting.class.getName(), e.getMessage(), e);
 			}

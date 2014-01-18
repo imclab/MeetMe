@@ -83,7 +83,7 @@ public class NewMeetingActivity extends Activity {
 		Meeting meeting = new Meeting();
 		meeting.setTitle(titleEdit.getText().toString());
 		meeting.setDescription(descriptionEdit.getText().toString());
-		meeting.setDatetime(dateTimeEdit.getText().toString());
+		meeting.setDateTime(dateTimeEdit.getText().toString());
 		meeting.setTimestamp(timestamp);
 		
 		return meeting;

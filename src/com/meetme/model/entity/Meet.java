@@ -9,7 +9,8 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-public class Meet implements Serializable {
+public class Meet extends AbstractEntity
+	implements Serializable {
 	
 	static final long serialVersionUID = 500L;
 	
@@ -91,7 +92,7 @@ public class Meet implements Serializable {
 				String fieldValue = meetJSON.get(fieldName).toString();
 				fieldMap.put(fieldName, fieldValue);
 			} catch (JSONException e) {
-				Log.w(Meeting.class.getName(), "Could not parse entity field from JSON  : " + e.getMessage(), e);
+				Log.w(Meeting.class.getName(), COULD_NOT_PARSE_FIELD_FROM_JSON + e.getMessage(), e);
 			} catch (Exception e) {
 				Log.e(Meeting.class.getName(), e.getMessage(), e);
 			}

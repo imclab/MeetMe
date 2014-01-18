@@ -12,14 +12,15 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-public class Meeting implements Comparable<Meeting>, Serializable {
+public class Meeting extends AbstractEntity
+	implements Comparable<Meeting>, Serializable {
 	
 	static final long serialVersionUID = 100L;
 	
 	private int id;
 	private String title;
 	private String description;
-	private String datetime;
+	private String dateTime;
 	private long timestamp;
 	private String locationGeo;
 	private String locationText;
@@ -50,14 +51,14 @@ public class Meeting implements Comparable<Meeting>, Serializable {
 			int id, 
 			String title, 
 			String description, 
-			String datetime,
+			String dateTime,
 			String locationGeo, 
 			String locationText, 
 			int hostUserId) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
-		this.datetime = datetime;
+		this.dateTime = dateTime;
 		this.locationGeo = locationGeo;
 		this.locationText = locationText;
 		this.hostUserId = hostUserId;
@@ -82,7 +83,7 @@ public class Meeting implements Comparable<Meeting>, Serializable {
 				String fieldValue = meetingJSON.get(fieldName).toString();
 				fieldMap.put(fieldName, fieldValue);
 			} catch (JSONException e) {
-				Log.w(Meeting.class.getName(), "Could not parse entity field from JSON  : " + e.getMessage(), e);
+				Log.w(Meeting.class.getName(), COULD_NOT_PARSE_FIELD_FROM_JSON + e.getMessage(), e);
 			} catch (Exception e) {
 				Log.e(Meeting.class.getName(), e.getMessage(), e);
 			}
@@ -138,12 +139,12 @@ public class Meeting implements Comparable<Meeting>, Serializable {
 
 	@Override
 	public int compareTo(Meeting another) {
-		if (this.datetime.equals(another.datetime)) {
+		if (this.dateTime.equals(another.dateTime)) {
 			return -1;
 		}
 		
 		// Newest to oldest
-		return -1 * this.datetime.compareTo(another.datetime);
+		return -1 * this.dateTime.compareTo(another.dateTime);
 	}
 	
 	@Override
@@ -178,12 +179,12 @@ public class Meeting implements Comparable<Meeting>, Serializable {
 		this.description = description;
 	}
 	
-	public String getDatetime() {
-		return datetime;
+	public String getDateTime() {
+		return dateTime;
 	}
 	
-	public void setDatetime(String datetime) {
-		this.datetime = datetime;
+	public void setDateTime(String dateTime) {
+		this.dateTime = dateTime;
 	}
 	
 	public long getTimestamp() {
