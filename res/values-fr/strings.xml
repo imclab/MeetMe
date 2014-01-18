@@ -7,6 +7,9 @@
     <string name="meetmeUrl">www.meetme.com</string>
     <string name="meetmeLogoDescription">MeetMe Logo</string>
 
+    <!-- Options Menu -->
+    <string name="logOutMenuAction">Déconnexion</string>
+    
     <!-- Main activity -->
     <string name="tabMeetings">Meetings</string>
     <string name="tabNotifications">Notifications</string>

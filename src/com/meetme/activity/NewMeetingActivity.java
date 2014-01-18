@@ -28,6 +28,8 @@ public class NewMeetingActivity extends Activity {
 	AlertDialog dateTimeDialog;
 	private NewMeetingValidator newMeetingValidator;
 	
+	private static final String NEW_MEETING_INTENT_KEY = "newMeeting";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -96,7 +98,7 @@ public class NewMeetingActivity extends Activity {
 			if (newMeetingValidator.validate()) {
 				// Start pick location activity
 				Intent intent = new Intent(NewMeetingActivity.this, PickLocationActivity.class);
-				intent.putExtra("newMeeting", createMeeting());
+				intent.putExtra(NEW_MEETING_INTENT_KEY, createMeeting());
 				startActivity(intent);
 			}
 	    }
