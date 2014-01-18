@@ -1,7 +1,6 @@
 package com.meetme.model.entity;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -70,24 +69,13 @@ public class Meeting extends AbstractEntity
 	 */
 	public static Meeting getFromJSON(JSONObject meetingJSON) {
 		Meeting meeting = null;
-		Map<String, String> fieldMap = new HashMap<String, String>();
 		
-		// Init map with 0 values
-		for (String fieldName : fieldNameArray) {
-				fieldMap.put(fieldName, "0");
-		}
-		
-		// Parse the meeting
-		for (String fieldName : fieldNameArray) {
-			try {
-				String fieldValue = meetingJSON.get(fieldName).toString();
-				fieldMap.put(fieldName, fieldValue);
-			} catch (JSONException e) {
-				Log.w(Meeting.class.getName(), COULD_NOT_PARSE_FIELD_FROM_JSON + e.getMessage(), e);
-			} catch (Exception e) {
-				Log.e(Meeting.class.getName(), e.getMessage(), e);
-			}
-		}
+		Map<String, String> fieldMap = 
+				AbstractEntity.getFieldMap(
+						fieldNameArray, 
+						meetingJSON, 
+						Meeting.class.getName()
+					);
 		
 		// Build meeting object
 		meeting = new Meeting(

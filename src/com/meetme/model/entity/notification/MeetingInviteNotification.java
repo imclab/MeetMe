@@ -1,16 +1,11 @@
 package com.meetme.model.entity.notification;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.meetme.model.entity.AbstractEntity;
-import com.meetme.model.entity.Meeting;
-
-import android.util.Log;
 
 public class MeetingInviteNotification extends AbstractEntity
 	implements Comparable<MeetingInviteNotification>, Serializable {
@@ -70,23 +65,13 @@ public class MeetingInviteNotification extends AbstractEntity
 	 */
 	public static MeetingInviteNotification getFromJSON(JSONObject notificationJSON) {
 		MeetingInviteNotification notification = null;
-		Map<String, String> fieldMap = new HashMap<String, String>();
 		
-		// Init map with 0 values
-		for (String fieldName : fieldNameArray) {
-				fieldMap.put(fieldName, "0");
-		}
-		
-		for (String fieldName : fieldNameArray) {
-			try {
-				String fieldValue = notificationJSON.get(fieldName).toString();
-				fieldMap.put(fieldName, fieldValue);
-			} catch (JSONException e) {
-				Log.w(Meeting.class.getName(), COULD_NOT_PARSE_FIELD_FROM_JSON + e.getMessage(), e);
-			} catch (Exception e) {
-				Log.e(Meeting.class.getName(), e.getMessage(), e);
-			}
-		}
+		Map<String, String> fieldMap = 
+				AbstractEntity.getFieldMap(
+						fieldNameArray, 
+						notificationJSON, 
+						MeetingInviteNotification.class.getName()
+					);
 		
 		// Build friend invite notification object
 		notification = new MeetingInviteNotification(
@@ -183,6 +168,14 @@ public class MeetingInviteNotification extends AbstractEntity
 
 	public void setMeetingHostUserId(int meetingHostUserId) {
 		this.meetingHostUserId = meetingHostUserId;
+	}
+
+	public int getInviterId() {
+		return inviterId;
+	}
+
+	public void setInviterId(int inviterId) {
+		this.inviterId = inviterId;
 	}
 
 	public String getDateTime() {

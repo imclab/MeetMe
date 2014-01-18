@@ -1,16 +1,11 @@
 package com.meetme.model.entity.notification;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.meetme.model.entity.AbstractEntity;
-import com.meetme.model.entity.Meeting;
-
-import android.util.Log;
 
 public class FriendInviteNotification extends AbstractEntity
 	implements Comparable<FriendInviteNotification>, Serializable {
@@ -53,23 +48,13 @@ public class FriendInviteNotification extends AbstractEntity
 	 */
 	public static FriendInviteNotification getFromJSON(JSONObject notificationJSON) {
 		FriendInviteNotification notification = null;
-		Map<String, String> fieldMap = new HashMap<String, String>();
 		
-		// Init map with 0 values
-		for (String fieldName : fieldNameArray) {
-				fieldMap.put(fieldName, "0");
-		}
-		
-		for (String fieldName : fieldNameArray) {
-			try {
-				String fieldValue = notificationJSON.get(fieldName).toString();
-				fieldMap.put(fieldName, fieldValue);
-			} catch (JSONException e) {
-				Log.w(Meeting.class.getName(), COULD_NOT_PARSE_FIELD_FROM_JSON + e.getMessage(), e);
-			} catch (Exception e) {
-				Log.e(Meeting.class.getName(), e.getMessage(), e);
-			}
-		}
+		Map<String, String> fieldMap = 
+				AbstractEntity.getFieldMap(
+						fieldNameArray, 
+						notificationJSON, 
+						FriendInviteNotification.class.getName()
+					);
 		
 		// Build friend invite notification object
 		notification = new FriendInviteNotification(

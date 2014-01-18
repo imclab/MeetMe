@@ -1,13 +1,9 @@
 package com.meetme.model.entity;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.util.Log;
 
 public class Meet extends AbstractEntity
 	implements Serializable {
@@ -80,23 +76,13 @@ public class Meet extends AbstractEntity
 	 */
 	public static Meet getFromJSON(JSONObject meetJSON, int meetingId) {
 		Meet meet = null;
-		Map<String, String> fieldMap = new HashMap<String, String>();
-		
-		// Init map with 0 values
-		for (String fieldName : fieldNameArray) {
-				fieldMap.put(fieldName, "0");
-		}
-		
-		for (String fieldName : fieldNameArray) {
-			try {
-				String fieldValue = meetJSON.get(fieldName).toString();
-				fieldMap.put(fieldName, fieldValue);
-			} catch (JSONException e) {
-				Log.w(Meeting.class.getName(), COULD_NOT_PARSE_FIELD_FROM_JSON + e.getMessage(), e);
-			} catch (Exception e) {
-				Log.e(Meeting.class.getName(), e.getMessage(), e);
-			}
-		}
+
+		Map<String, String> fieldMap = 
+				AbstractEntity.getFieldMap(
+						fieldNameArray, 
+						meetJSON, 
+						Meet.class.getName()
+					);
 		
 		// Build meet object
 		meet = new Meet(
