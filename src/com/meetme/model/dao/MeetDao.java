@@ -19,17 +19,20 @@ import com.meetme.core.HttpParameters;
 import com.meetme.core.HttpUtils;
 import com.meetme.model.entity.Meet;
 import com.meetme.model.entity.Meeting;
+import com.meetme.parser.MeetEntityParser;
 
-public abstract class MeetDao {
+public class MeetDao {
 
-	private MeetDao(){
+	private MeetEntityParser entityParser = null;
+	
+	public MeetDao(){
+		this.entityParser = new MeetEntityParser();
 	}
 	
-	public static Set<Meet> findMeetsOfMeeting(Meeting meeting, String userToken) {
+	public Set<Meet> findMeetsOfMeeting(Meeting meeting, String userToken) {
 		Set<Meet> meetSet = new HashSet<Meet>();
 		
 		JSONObject responseJSON = null;
-		String url = MEET_URL;
 		HttpParameters parameters = new HttpParameters();
 		
 		// Add parameters
@@ -38,7 +41,7 @@ public abstract class MeetDao {
 		parameters.put(MEET_REFRESH_OTHERS_MEETING_ID, Integer.toString(meeting.getId()));
 		
 		// Send request
-		responseJSON = HttpUtils.post(url, parameters);
+		responseJSON = HttpUtils.post(MEET_URL, parameters);
 		
 		// Built friend list from JSON response
 		try {
@@ -47,7 +50,7 @@ public abstract class MeetDao {
 			
 			for (int i = 0; i < meetsSize; i++) {
 				JSONObject meetJSON = meetsJSON.getJSONObject(i);
-				meetSet.add(Meet.getFromJSON(meetJSON, meeting.getId()));
+				meetSet.add(this.entityParser.getFromJSON(meetJSON, meeting.getId()));
 			}
 			
 		} catch (JSONException e) {

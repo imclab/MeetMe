@@ -1,11 +1,7 @@
-package com.meetme.model.entity.notification;
+package com.meetme.model.entity;
 
 import java.io.Serializable;
-import java.util.Map;
 
-import org.json.JSONObject;
-
-import com.meetme.model.entity.AbstractEntity;
 
 public class MeetingInviteNotification extends AbstractEntity
 	implements Comparable<MeetingInviteNotification>, Serializable {
@@ -21,19 +17,6 @@ public class MeetingInviteNotification extends AbstractEntity
 	private int inviterId;
 	private String dateTime;
 	
-	private static final String MEETING_ID = "meeting_id";
-	private static final String MEETING_TITLE = "title";
-	private static final String MEETING_DESCRIPTION = "description";
-	private static final String MEETING_DATETIME = "datetime";
-	private static final String MEETING_LOCATION_TEXT = "location_text";
-	private static final String MEETING_HOST_USER_ID = "host_user_id";
-	private static final String INVITER_ID = "user_id";
-	private static final String DATETIME = "date_created";
-	
-	private static String[] fieldNameArray = 
-		{MEETING_ID, MEETING_TITLE, MEETING_DESCRIPTION, MEETING_DATETIME, 
-		MEETING_LOCATION_TEXT, MEETING_HOST_USER_ID, INVITER_ID, DATETIME};
-
 	/*
 	 * Constructors
 	 */
@@ -63,30 +46,6 @@ public class MeetingInviteNotification extends AbstractEntity
 	/*
 	 * Methods
 	 */
-	public static MeetingInviteNotification getFromJSON(JSONObject notificationJSON) {
-		MeetingInviteNotification notification = null;
-		
-		Map<String, String> fieldMap = 
-				AbstractEntity.getFieldMap(
-						fieldNameArray, 
-						notificationJSON, 
-						MeetingInviteNotification.class.getName()
-					);
-		
-		// Build friend invite notification object
-		notification = new MeetingInviteNotification(
-				Integer.parseInt(fieldMap.get(MEETING_ID)),
-				fieldMap.get(MEETING_TITLE),
-				fieldMap.get(MEETING_DESCRIPTION),
-				fieldMap.get(MEETING_DATETIME),
-				fieldMap.get(MEETING_LOCATION_TEXT),
-				Integer.parseInt(fieldMap.get(MEETING_HOST_USER_ID)),
-				Integer.parseInt(fieldMap.get(INVITER_ID)),
-				fieldMap.get(DATETIME)
-			);
-		
-		return notification;
-	}
 
 	/*
 	 * Two meeting invite notifications are equal only if

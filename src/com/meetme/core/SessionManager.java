@@ -15,10 +15,15 @@ public class SessionManager {
 	private String userToken = null;
 	private Set<Friend> friendSet = null;
 	private Set<Meeting> meetingSet = null;
+
+	private FriendDao friendDao;
+	private MeetingDao meetingDao;
 	
 	private SessionManager() {
 		this.friendSet = new TreeSet<Friend>();
 		this.meetingSet = new TreeSet<Meeting>();
+		this.friendDao = new FriendDao();
+		this.meetingDao = new MeetingDao();
 	}
 	
 	/*
@@ -89,14 +94,14 @@ public class SessionManager {
 	public void updateFriendSet() {
 		if (this.userToken != null && !this.userToken.isEmpty()) {
 			this.friendSet.clear();
-			this.friendSet.addAll(FriendDao.findFriendsOfUser(this.userToken));
+			this.friendSet.addAll(this.friendDao.findFriendsOfUser(this.userToken));
 		}
 	}
 	
 	public void updateMeetingSet() {
 		if (this.userToken != null && !this.userToken.isEmpty()) {
 			this.meetingSet.clear();
-			this.meetingSet.addAll(MeetingDao.findMeetingsOfUser(this.userToken));
+			this.meetingSet.addAll(this.meetingDao.findMeetingsOfUser(this.userToken));
 		}
 	}
 	
@@ -104,7 +109,7 @@ public class SessionManager {
 		if (this.userToken != null && !this.userToken.isEmpty()) {
 			for (Meeting meeting : this.meetingSet) {
 				if (meeting.getId() == meetingId) {
-					Meeting updatedMeeting = MeetingDao.findMeetingById(meetingId, this.userToken);
+					Meeting updatedMeeting = this.meetingDao.findMeetingById(meetingId, this.userToken);
 					this.meetingSet.remove(meeting);
 					this.meetingSet.add(updatedMeeting);
 				}

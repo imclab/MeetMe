@@ -17,17 +17,18 @@ import android.util.Log;
 import com.meetme.core.HttpParameters;
 import com.meetme.core.HttpUtils;
 import com.meetme.model.entity.Friend;
+import com.meetme.parser.FriendEntityParser;
 
-public abstract class FriendDao {
-
-	private FriendDao(){
+public class FriendDao extends AbstractDao<Friend> {
+	
+	public FriendDao() {
+		super(new FriendEntityParser());
 	}
 	
-	public static Set<Friend> findFriendsOfUser(String userToken) {
+	public Set<Friend> findFriendsOfUser(String userToken) {
 		Set<Friend> friendSet = new TreeSet<Friend>();
 		
 		JSONObject responseJSON = null;
-		String url = FRIEND_URL;
 		HttpParameters parameters = new HttpParameters();
 		
 		// Add parameters
@@ -35,16 +36,16 @@ public abstract class FriendDao {
 		parameters.put(FRIEND_TOKEN, userToken);
 		
 		// Send request
-		responseJSON = HttpUtils.post(url, parameters);
+		responseJSON = HttpUtils.post(FRIEND_URL, parameters);
 		
-		// Built friend list from JSON response
+		// Built friend set from JSON response
 		try {
 			JSONArray meetingsJSON = (JSONArray)responseJSON.get("friends");
 			int meetingsSize = meetingsJSON.length();
 			
 			for (int i = 0; i < meetingsSize; i++) {
 				JSONObject meetingJSON = meetingsJSON.getJSONObject(i);
-				friendSet.add(Friend.getFromJSON(meetingJSON));
+				friendSet.add(this.entityParser.getFromJSON(meetingJSON));
 			}
 			
 		} catch (JSONException e) {

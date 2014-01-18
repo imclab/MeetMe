@@ -19,17 +19,19 @@ import android.util.Log;
 import com.meetme.core.HttpParameters;
 import com.meetme.core.HttpUtils;
 import com.meetme.model.entity.Meeting;
+import com.meetme.parser.MeetingEntityParser;
 
-public abstract class MeetingDao {
+public class MeetingDao extends AbstractDao<Meeting> {
 
-	private MeetingDao() {
+	
+	public MeetingDao() {
+		super(new MeetingEntityParser());
 	}
 	
-	public static Set<Meeting> findMeetingsOfUser(String userToken) {
+	public Set<Meeting> findMeetingsOfUser(String userToken) {
 		Set<Meeting> meetingSet = new TreeSet<Meeting>();
 		
 		JSONObject responseJSON = null;
-		String url = MEETING_URL;
 		HttpParameters parameters = new HttpParameters();
 		
 		// Add parameters
@@ -37,16 +39,16 @@ public abstract class MeetingDao {
 		parameters.put(MEETING_TOKEN, userToken);
 		
 		// Send request
-		responseJSON = HttpUtils.post(url, parameters);
+		responseJSON = HttpUtils.post(MEETING_URL, parameters);
 		
-		// Built meeting list from JSON response
+		// Built meeting set from JSON response
 		try {
 			JSONArray meetingsJSON = (JSONArray)responseJSON.get("meetings");
 			int meetingsSize = meetingsJSON.length();
 			
 			for (int i = 0; i < meetingsSize; i++) {
 				JSONObject meetingJSON = meetingsJSON.getJSONObject(i);
-				meetingSet.add(Meeting.getFromJSON(meetingJSON));
+				meetingSet.add(this.entityParser.getFromJSON(meetingJSON));
 			}
 			
 		} catch (JSONException e) {
@@ -58,12 +60,11 @@ public abstract class MeetingDao {
 		return meetingSet;
 	}
 	
-	public static Meeting findMeetingById(int meetingId, String userToken) {
+	public Meeting findMeetingById(int meetingId, String userToken) {
 		Meeting meeting = new Meeting();
 		meeting.setId(meetingId);
 		
 		JSONObject responseJSON = null;
-		String url = MEETING_URL;
 		HttpParameters parameters = new HttpParameters();
 		
 		// Add parameters
@@ -72,11 +73,11 @@ public abstract class MeetingDao {
 		parameters.put(MEETING_VIEW_MEETING_ID, Integer.toString(meetingId));
 		
 		// Send request
-		responseJSON = HttpUtils.post(url, parameters);
+		responseJSON = HttpUtils.post(MEETING_URL, parameters);
 		
 		// Built meeting from JSON response
 		try {
-			meeting = Meeting.getFromJSON(responseJSON.getJSONObject("meeting"));
+			meeting = this.entityParser.getFromJSON(responseJSON.getJSONObject("meeting"));
 		} catch (JSONException e) {
 			Log.e(MeetingDao.class.getName(), e.getMessage(), e);
 		} catch (Exception e) {

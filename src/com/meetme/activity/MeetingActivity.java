@@ -29,6 +29,9 @@ public class MeetingActivity extends Activity {
 	private Meeting meeting;
 	private MeetPresentation meetPresentation;
 	
+	private MeetingDao meetingDao;
+	private MeetDao meetDao;
+	
 	private static final int REFRESH_RATE = 10000;
 	private static boolean REFRESHING = true;
 	
@@ -49,6 +52,9 @@ public class MeetingActivity extends Activity {
 		arrivedList = (TextView)findViewById(R.id.arrivedList);
 		leftList = (TextView)findViewById(R.id.leftList);
 		waitingList = (TextView)findViewById(R.id.waitingList);
+		
+		meetingDao = new MeetingDao();
+		meetDao = new MeetDao();
 		
 		refresh();
 	}
@@ -123,12 +129,12 @@ public class MeetingActivity extends Activity {
 			                        	//session.updateMeeting(meetingId);
 			                        	
 		                        		// Refresh meeting data
-			                        	meeting = MeetingDao.findMeetingById(meetingId, session.getUserToken());
+			                        	meeting = meetingDao.findMeetingById(meetingId, session.getUserToken());
 			                        	
 			                        	// Refresh friends data 
 			                    		meetPresentation = new MeetPresentation(
 			                    				meeting,
-			                    				MeetDao.findMeetsOfMeeting(meeting, session.getUserToken())
+			                    				meetDao.findMeetsOfMeeting(meeting, session.getUserToken())
 		                    				);
 			                        	
 			                        	// Update UI
