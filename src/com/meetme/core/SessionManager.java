@@ -4,9 +4,13 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import com.meetme.model.dao.FriendDao;
+import com.meetme.model.dao.FriendInviteNotificationDao;
 import com.meetme.model.dao.MeetingDao;
+import com.meetme.model.dao.MeetingInviteNotificationDao;
 import com.meetme.model.entity.Friend;
+import com.meetme.model.entity.FriendInviteNotification;
 import com.meetme.model.entity.Meeting;
+import com.meetme.model.entity.MeetingInviteNotification;
 
 public class SessionManager {
 	
@@ -15,15 +19,23 @@ public class SessionManager {
 	private String userToken = null;
 	private Set<Friend> friendSet = null;
 	private Set<Meeting> meetingSet = null;
+	private Set<FriendInviteNotification> friendNotificationSet = null;
+	private Set<MeetingInviteNotification> meetingNotificationSet = null;
 
 	private FriendDao friendDao;
 	private MeetingDao meetingDao;
+	private FriendInviteNotificationDao friendNotificationDao;
+	private MeetingInviteNotificationDao meetingNotificationDao;
 	
 	private SessionManager() {
 		this.friendSet = new TreeSet<Friend>();
 		this.meetingSet = new TreeSet<Meeting>();
+		this.friendNotificationSet = new TreeSet<FriendInviteNotification>();
+		this.meetingNotificationSet = new TreeSet<MeetingInviteNotification>();
 		this.friendDao = new FriendDao();
 		this.meetingDao = new MeetingDao();
+		this.friendNotificationDao = new FriendInviteNotificationDao();
+		this.meetingNotificationDao = new MeetingInviteNotificationDao();
 	}
 	
 	/*
@@ -61,6 +73,31 @@ public class SessionManager {
 		return this.meetingSet;
 	}
 	
+	public Set<FriendInviteNotification> getFriendNotificationSet() {
+		return this.friendNotificationSet;
+	}
+	
+	public Set<MeetingInviteNotification> getMeetingNotificationSet() {
+		return this.meetingNotificationSet;
+	}
+	
+	/**
+	 * Check if the session is valid by checking token validity
+	 */
+	private boolean isSessionValid() {
+		return this.userToken != null && !this.userToken.isEmpty();
+	}
+	
+	/**
+	 * Fully init the session with friends, meetings and notifications
+	 */
+	public void init() {
+		updateFriendSet();
+		updateMeetingSet();
+		updateFriendgNotificationSet();
+		updateMeetingNotificationSet();
+	}
+	
 	/*
 	 * Find methods
 	 */
@@ -92,21 +129,35 @@ public class SessionManager {
 	}
 	
 	public void updateFriendSet() {
-		if (this.userToken != null && !this.userToken.isEmpty()) {
+		if (isSessionValid()) {
 			this.friendSet.clear();
 			this.friendSet.addAll(this.friendDao.findFriendsOfUser(this.userToken));
 		}
 	}
 	
 	public void updateMeetingSet() {
-		if (this.userToken != null && !this.userToken.isEmpty()) {
+		if (isSessionValid()) {
 			this.meetingSet.clear();
 			this.meetingSet.addAll(this.meetingDao.findMeetingsOfUser(this.userToken));
 		}
 	}
 	
+	public void updateFriendgNotificationSet() {
+		if (isSessionValid()) {
+			this.friendNotificationSet.clear();
+			this.friendNotificationSet.addAll(this.friendNotificationDao.findFriendInviteNotifications(this.userToken));
+		}
+	}
+	
+	public void updateMeetingNotificationSet() {
+		if (isSessionValid()) {
+			this.meetingNotificationSet.clear();
+			this.meetingNotificationSet.addAll(this.meetingNotificationDao.findMeetingInviteNotifications(this.userToken));
+		}
+	}
+	
 	public void updateMeeting(int meetingId) {
-		if (this.userToken != null && !this.userToken.isEmpty()) {
+		if (isSessionValid()) {
 			for (Meeting meeting : this.meetingSet) {
 				if (meeting.getId() == meetingId) {
 					Meeting updatedMeeting = this.meetingDao.findMeetingById(meetingId, this.userToken);

@@ -98,8 +98,7 @@ public class LoginActivity extends Activity {
 				
 				session.setEmail(loginEdit.getText().toString());
 				session.setUserToken(userToken);
-				session.updateFriendSet();
-				session.updateMeetingSet();
+				session.init();
 			
 				// Start main activity
 				Intent i = new Intent(LoginActivity.this, MainActivity.class);

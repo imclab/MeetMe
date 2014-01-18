@@ -1,6 +1,7 @@
 package com.meetme.activity;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,18 +11,14 @@ import android.widget.TextView;
 
 import com.meetme.R;
 import com.meetme.core.SessionManager;
-import com.meetme.model.dao.FriendInviteNotificationDao;
-import com.meetme.model.dao.MeetingInviteNotificationDao;
 import com.meetme.model.entity.FriendInviteNotification;
 import com.meetme.model.entity.MeetingInviteNotification;
 
 public class NotificationsActivity extends Activity {
 	
 	private SessionManager session;
-	private Set<FriendInviteNotification> friendInviteNotificationSet;
-	private Set<MeetingInviteNotification> meetingInviteNotificationSet;
-	private FriendInviteNotificationDao friendInviteNotificationDao;
-	private MeetingInviteNotificationDao meetingInviteNotificationDao;
+	private List<FriendInviteNotification> friendInviteNotificationList;
+	private List<MeetingInviteNotification> meetingInviteNotificationList;
 	
 	private TextView friendNotificationText;
 	private TextView friendNotificationList;
@@ -41,15 +38,13 @@ public class NotificationsActivity extends Activity {
 		friendNotificationText.setOnClickListener(friendNotificationTextListener);
 		meetingNotificationText.setOnClickListener(meetingNotificationTextListener);
 		
-		session = SessionManager.getInstance();
-		friendInviteNotificationDao = new FriendInviteNotificationDao();
-		meetingInviteNotificationDao = new MeetingInviteNotificationDao();
+		meetingInviteNotificationList = new ArrayList<MeetingInviteNotification>();
+		friendInviteNotificationList = new ArrayList<FriendInviteNotification>();
 		
-		friendInviteNotificationSet = 
-				friendInviteNotificationDao.findFriendInviteNotifications(session.getUserToken());
-		meetingInviteNotificationSet = 
-				meetingInviteNotificationDao.findMeetingInviteNotifications(session.getUserToken());
-	
+		session = SessionManager.getInstance();
+		
+		updateNotificationsLists();
+		
 		refresh();
 	}
 	
@@ -62,25 +57,38 @@ public class NotificationsActivity extends Activity {
 		v.setVisibility(visibility == View.GONE ? View.VISIBLE : View.GONE);
 	}
 	
+	private void updateNotificationsLists() {
+		friendInviteNotificationList.clear();
+		meetingInviteNotificationList.clear();
+		
+		for (FriendInviteNotification friendNotification : session.getFriendNotificationSet()) {
+			friendInviteNotificationList.add(friendNotification);
+		}
+		
+		for (MeetingInviteNotification meetingNotification : session.getMeetingNotificationSet()) {
+			meetingInviteNotificationList.add(meetingNotification);
+		}
+	}
+	
 	private void updateUi() {
 		StringBuilder friendNotificationBuilder = new StringBuilder();
 		StringBuilder meetingNotificationBuilder = new StringBuilder();
 		
-		for (FriendInviteNotification friendNotification : friendInviteNotificationSet) {
+		for (FriendInviteNotification friendNotification : friendInviteNotificationList) {
 			friendNotificationBuilder.append(friendNotification.getInviterFirstname()).append("\n");
 			friendNotificationBuilder.append(friendNotification.getInviterLastname()).append("\n");
 			friendNotificationBuilder.append(friendNotification.getDateTime()).append("\n\n");
 		}
 		
-		for (MeetingInviteNotification meetingNotification : meetingInviteNotificationSet) {
+		for (MeetingInviteNotification meetingNotification : meetingInviteNotificationList) {
 			meetingNotificationBuilder.append(meetingNotification.getMeetingTitle()).append("\n");
 			meetingNotificationBuilder.append(meetingNotification.getMeetingDateTime()).append("\n");
 			meetingNotificationBuilder.append("from ").append(session.getFriendById(meetingNotification.getMeetingHostUserId())).append("\n");
 			meetingNotificationBuilder.append(meetingNotification.getDateTime()).append("\n\n");
 		}
 		
-		friendNotificationText.setText(getString(R.string.friendNotificationLabel) + "(" + friendInviteNotificationSet.size() + ")");
-		meetingNotificationText.setText(getString(R.string.meetingNotificationLabel) + "(" + meetingInviteNotificationSet.size() + ")");
+		friendNotificationText.setText(getString(R.string.friendNotificationLabel) + "(" + friendInviteNotificationList.size() + ")");
+		meetingNotificationText.setText(getString(R.string.meetingNotificationLabel) + "(" + meetingInviteNotificationList.size() + ")");
 		
 		friendNotificationList.setText(friendNotificationBuilder.toString());
 		meetingNotificationList.setText(meetingNotificationBuilder.toString());
