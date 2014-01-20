@@ -17,8 +17,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
@@ -36,7 +36,7 @@ public class PickLocationActivity extends FragmentActivity {
 	private String locationText;
 	private String locationGeo;
 	public GoogleMap map;
-    private Button findLocationButton;
+    private ImageButton findLocationButton;
     private SupportMapFragment mapFragment;
     private EditText findLocationEdit;
 	private PickLocationValidator pickLocationValidator;
@@ -52,7 +52,7 @@ public class PickLocationActivity extends FragmentActivity {
 		
         findLocationEdit = (EditText) findViewById(R.id.findLocationEdit);
         
-        findLocationButton = (Button) findViewById(R.id.findLocationButton);
+        findLocationButton = (ImageButton) findViewById(R.id.findLocationButton);
         findLocationButton.setOnClickListener(findLocationButtonListener);
         
         mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);

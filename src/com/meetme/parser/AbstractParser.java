@@ -16,7 +16,7 @@ public abstract class AbstractParser<E extends AbstractEntity> {
 	protected static final String COULD_NOT_PARSE_FIELD_FROM_JSON 
 		= "Could not parse entity field from JSON  : ";
 	
-	// Map<"Dao method name", "corresponding key in json">
+	// Map<"Daomethod name", "corresponding key in json">
 	protected Map<String, String> JSONKeyMap = new HashMap<String, String>();
 	
 	/**
@@ -51,7 +51,7 @@ public abstract class AbstractParser<E extends AbstractEntity> {
 	
 	
 	/**
-	 * Get a Map<"FieldName", "FieldValue"> for className 
+	 * Get a Map<"FieldName", "FieldValue">
 	 * built from JSON parsing
 	 * @param fieldNameArray The list of the class fields names
 	 * @param entityJSON the JSON corresponding to the entity

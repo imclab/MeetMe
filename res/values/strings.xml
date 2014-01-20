@@ -55,6 +55,7 @@
     <!-- Pick Location activity -->
     <string name="findLocationButton">Find</string>
     <string name="findLocationHint">Location</string>
+    <string name="findLocationButtonDescription">Search location button</string>
 
     <!-- Invite Friends activity -->
     <string name="searchFriend">Search friends&#8230;</string>
@@ -117,6 +118,7 @@
     <string name="friendInvitationAlreadySent">Invitation already sent</string>
     <string name="emptyLocation">Enter a location</string>
     <string name="title_activity_notifications">NotificationsActivity</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="invalidDateTime">Date and time are invalid</string>
+    <string name="emptyDateTime">Pick a date and time</string>
 
 </resources>

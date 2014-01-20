@@ -47,7 +47,8 @@ public class NewMeetingActivity extends Activity {
 		
 		newMeetingValidator = new NewMeetingValidator(
 				getApplicationContext(), 
-				titleEdit
+				titleEdit,
+				dateTimeEdit
 			); 
 	}
 	

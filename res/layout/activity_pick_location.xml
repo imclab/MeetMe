@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".PickLocationActivity" >
  
-    <Button
+    <ImageButton
         android:id="@+id/findLocationButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/findLocationButton"
+        android:src="@drawable/search_icon"
+        android:contentDescription="@string/findLocationButtonDescription"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" />
  
@@ -20,7 +21,9 @@
         android:layout_height="wrap_content"
         android:hint="@string/findLocationHint"
         android:inputType="text"
-        android:layout_toLeftOf="@id/findLocationButton" />
+        android:layout_toLeftOf="@id/findLocationButton"
+        android:layout_alignTop="@id/findLocationButton"
+        android:layout_alignBottom="@id/findLocationButton" />
 
     <fragment
         android:id="@+id/map"
@@ -29,30 +32,3 @@
         android:layout_below="@id/findLocationEdit"
         class="com.google.android.gms.maps.SupportMapFragment" />
 </RelativeLayout>
-
-<!-- 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-
-        <TextView 
-            android:id="@+id/locationText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/locationLabel"
-            />
-        <EditText 
-            android:id="@+id/locationEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/locationHint"
-            />
-        <Button
-            android:id="@+id/inviteFriendsButton" 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/inviteFriendsButton"
-            />
-</LinearLayout>
--->

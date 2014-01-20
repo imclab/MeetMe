@@ -55,6 +55,7 @@
     <!-- Pick Location activity -->
     <string name="findLocationButton">Chercher</string>
     <string name="findLocationHint">Lieu</string>
+    <string name="findLocationButtonDescription">Bouton de recherche de lieu</string>
 
     <!-- Invite Friends activity -->
     <string name="searchFriend">Rechercher des amis&#8230;</string>
@@ -116,4 +117,6 @@
     <string name="friendIsYourself">Vous ne pouvez pas vous ajoutez vous-même</string>
     <string name="friendInvitationAlreadySent">Invitation déjà envoyée</string>
     <string name="emptyLocation">Entrez un lieu</string>
+    <string name="invalidDateTime">La date et l\'heure sont invalides</string>
+    <string name="emptyDateTime">Choisissez une date et une heure</string>
 </resources>
