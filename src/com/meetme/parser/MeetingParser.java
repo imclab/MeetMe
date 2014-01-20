@@ -11,8 +11,7 @@ import android.util.Log;
 import com.meetme.model.entity.Meeting;
 
 public class MeetingParser extends AbstractParser<Meeting> {
-	private static final String JSON_KEY_FOR_FIND_ALL_FROM_USER = "meetings";
-	
+
 	private static final String MEETING_ID = "meeting_id";
 	private static final String TITLE = "title";
 	private static final String DESCRIPTION = "description";
@@ -29,7 +28,6 @@ public class MeetingParser extends AbstractParser<Meeting> {
 	
 	public MeetingParser() {
 		this.friendEntityParser = new FriendParser();
-		super.setJSONKeyForFindAllFromUser(JSON_KEY_FOR_FIND_ALL_FROM_USER);
 	}
 	
 	/*

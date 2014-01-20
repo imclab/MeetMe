@@ -35,6 +35,10 @@ import com.meetme.R;
 import com.meetme.core.HttpParameters;
 import com.meetme.core.HttpUtils;
 import com.meetme.core.SessionManager;
+import com.meetme.parser.FriendInviteNotificationParser;
+import com.meetme.parser.FriendParser;
+import com.meetme.parser.MeetingInviteNotificationParser;
+import com.meetme.parser.MeetingParser;
 import com.meetme.validator.LoginValidator;
 
 public class LoginActivity extends Activity {
@@ -96,9 +100,19 @@ public class LoginActivity extends Activity {
 			if (responseCode == SUCCESS) {
 				final String userToken = responseJSON.getString("token");
 				
+				// Instanciate parsers
+				FriendParser friendParser = new FriendParser();
+				MeetingParser meetingParser = new MeetingParser();
+				FriendInviteNotificationParser friendNotificationParser = new FriendInviteNotificationParser();
+				MeetingInviteNotificationParser meetingNotificationParser = new MeetingInviteNotificationParser();
+				
+				// Load data into session
 				session.setEmail(loginEdit.getText().toString());
 				session.setUserToken(userToken);
-				session.init();
+				session.setFriendSet(friendParser.getSetFromJSON(responseJSON, "friends"));
+				session.setMeetingSet(meetingParser.getSetFromJSON(responseJSON, "meetings"));
+				session.setFriendNotificationSet(friendNotificationParser.getSetFromJSON(responseJSON, "friendsNotifications"));
+				session.setMeetingNotificationSet(meetingNotificationParser.getSetFromJSON(responseJSON, "meetingsNotifications"));
 			
 				// Start main activity
 				Intent i = new Intent(LoginActivity.this, MainActivity.class);

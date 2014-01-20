@@ -58,10 +58,8 @@ public class SplashScreenActivity extends Activity {
         protected Void doInBackground(String... userToken) {
     		session.setUserToken(userToken[0]);
     		/*
-    		 * Download friend & meeting list of the user
+    		 * Init session
     		 */
-    		session.updateFriendSet();
-    		session.updateMeetingSet();
         	
             return null;
         }

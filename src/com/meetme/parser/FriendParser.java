@@ -7,21 +7,13 @@ import org.json.JSONObject;
 import com.meetme.model.entity.Friend;
 
 public class FriendParser extends AbstractParser<Friend> {
-	private static final String JSON_KEY_FOR_FIND_ALL_FROM_USER = "friends";
-	
+
 	private static final String USER_ID = "user_id";
 	private static final String FIRSTNAME = "firstname";
 	private static final String LASTNAME = "lastname";
 	
 	private static String[] fieldNameArray = 
 		{USER_ID, FIRSTNAME, LASTNAME};
-	
-	/*
-	 * Constructor
-	 */
-	public FriendParser() {
-		super.setJSONKeyForFindAllFromUser(JSON_KEY_FOR_FIND_ALL_FROM_USER);
-	}
 	
 	/*
 	 * Methods

@@ -81,21 +81,29 @@ public class SessionManager {
 		return this.meetingNotificationSet;
 	}
 	
+	public void setFriendSet(Set<Friend> friendSet) {
+		this.friendSet = friendSet;
+	}
+
+	public void setMeetingSet(Set<Meeting> meetingSet) {
+		this.meetingSet = meetingSet;
+	}
+
+	public void setFriendNotificationSet(
+			Set<FriendInviteNotification> friendNotificationSet) {
+		this.friendNotificationSet = friendNotificationSet;
+	}
+
+	public void setMeetingNotificationSet(
+			Set<MeetingInviteNotification> meetingNotificationSet) {
+		this.meetingNotificationSet = meetingNotificationSet;
+	}
+
 	/**
 	 * Check if the session is valid by checking token validity
 	 */
 	private boolean isSessionValid() {
 		return this.userToken != null && !this.userToken.isEmpty();
-	}
-	
-	/**
-	 * Fully init the session with friends, meetings and notifications
-	 */
-	public void init() {
-		updateFriendSet();
-		updateMeetingSet();
-		updateFriendgNotificationSet();
-		updateMeetingNotificationSet();
 	}
 	
 	/*
@@ -126,6 +134,13 @@ public class SessionManager {
 	 */
 	public void addMeeting(Meeting newMeeting) {
 		this.meetingSet.add(newMeeting);
+	}
+	
+	public void update() {
+		updateFriendSet();
+		updateMeetingSet();
+		updateFriendgNotificationSet();
+		updateMeetingNotificationSet();
 	}
 	
 	public void updateFriendSet() {

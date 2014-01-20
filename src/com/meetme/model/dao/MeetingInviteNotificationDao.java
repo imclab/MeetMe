@@ -7,31 +7,28 @@ import static com.meetme.store.ServerUrlStore.MEETING_URL;
 
 import java.util.Set;
 
-import org.json.JSONObject;
-
 import com.meetme.core.HttpParameters;
 import com.meetme.core.HttpUtils;
 import com.meetme.model.entity.MeetingInviteNotification;
 import com.meetme.parser.MeetingInviteNotificationParser;
 
 public class MeetingInviteNotificationDao extends AbstractDao<MeetingInviteNotification> {
+	private static final String JSON_KEY_FOR_FIND_MEETING_INVITE_NOTIFICATIONS = "meetings";
 	
 	public MeetingInviteNotificationDao() {
 		super(new MeetingInviteNotificationParser());
 	}
 	
 	public Set<MeetingInviteNotification> findMeetingInviteNotifications(String userToken) {
-		JSONObject responseJSON = null;
-		HttpParameters parameters = new HttpParameters();
-		
 		// Add parameters
+		HttpParameters parameters = new HttpParameters();
 		parameters.put(MEETING_OPERATION, MEETING_OPERATION_NOTIFICATION);
 		parameters.put(MEETING_TOKEN, userToken);
 		
-		// Send request
-		responseJSON = HttpUtils.post(MEETING_URL, parameters);
-		
 		// Built notification set from JSON response
-		return super.findAllFromUser(responseJSON, userToken);
+		return super.findAllFromUser(
+				HttpUtils.post(MEETING_URL, parameters), 
+				JSON_KEY_FOR_FIND_MEETING_INVITE_NOTIFICATIONS
+			);
 	}
 }

@@ -20,24 +20,25 @@ import com.meetme.model.entity.Meeting;
 import com.meetme.parser.MeetingParser;
 
 public class MeetingDao extends AbstractDao<Meeting> {
-
+	
+	private static final String JSON_KEY_FOR_FIND_MEETINGS_OF_USER = "meetings";
+	private static final String JSON_KEY_FOR_FIND_MEETINg_BY_ID = "meeting";
+	
 	public MeetingDao() {
 		super(new MeetingParser());
 	}
 	
 	public Set<Meeting> findMeetingsOfUser(String userToken) {
-		JSONObject responseJSON = null;
-		HttpParameters parameters = new HttpParameters();
-		
 		// Add parameters
+		HttpParameters parameters = new HttpParameters();
 		parameters.put(MEETING_OPERATION, MEETING_OPERATION_LIST);
 		parameters.put(MEETING_TOKEN, userToken);
 		
-		// Send request
-		responseJSON = HttpUtils.post(MEETING_URL, parameters);
-		
 		// Built meeting set from JSON response
-		return super.findAllFromUser(responseJSON, userToken);
+		return super.findAllFromUser(
+				HttpUtils.post(MEETING_URL, parameters), 
+				JSON_KEY_FOR_FIND_MEETINGS_OF_USER
+			);
 	}
 	
 	public Meeting findMeetingById(int meetingId, String userToken) {
@@ -57,7 +58,9 @@ public class MeetingDao extends AbstractDao<Meeting> {
 		
 		// Built meeting from JSON response
 		try {
-			meeting = this.entityParser.getFromJSON(responseJSON.getJSONObject("meeting"));
+			meeting = this.entityParser.getFromJSON(
+					responseJSON.getJSONObject(JSON_KEY_FOR_FIND_MEETINg_BY_ID)
+				);
 		} catch (JSONException e) {
 			Log.e(MeetingDao.class.getName(), e.getMessage(), e);
 		} catch (Exception e) {

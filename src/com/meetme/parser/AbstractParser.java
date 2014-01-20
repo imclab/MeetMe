@@ -2,53 +2,21 @@ package com.meetme.parser;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
 
-import com.meetme.model.dao.AbstractDao;
 import com.meetme.model.entity.AbstractEntity;
 
 public abstract class AbstractParser<E extends AbstractEntity> {
 
 	protected static final String COULD_NOT_PARSE_FIELD_FROM_JSON 
 		= "Could not parse entity field from JSON  : ";
-	
-	// Map<"Daomethod name", "corresponding key in json">
-	protected Map<String, String> JSONKeyMap = new HashMap<String, String>();
-	
-	/**
-	 * Set the JSON key corresponding to the DAO method name
-	 * so the DAO know what key to look for
-	 * @param JSONKey the key in the JSON
-	 */
-	protected void setJSONKeyForFindAllFromUser(String JSONKey) {
-		this.JSONKeyMap.put(AbstractDao.FIND_ALL_FROM_USER, JSONKey);
-	}
-	
-	/**
-	 * Fetch data from a JSON object
-	 * @return the entity
-	 */
-	public abstract E getFromJSON(JSONObject jsonObject);
-	
-	/**
-	 * 
-	 * @param daoMethodKey the DAO method name
-	 * @return the corresponding JSON key
-	 */
-	public String getJSONKey(String daoMethodKey) {
-		String JSONKey = null;
-		
-		if (this.JSONKeyMap != null) {
-			return this.JSONKeyMap.get(daoMethodKey);
-		} 
-		
-		return JSONKey;
-	}
-	
 	
 	/**
 	 * Get a Map<"FieldName", "FieldValue">
@@ -80,5 +48,32 @@ public abstract class AbstractParser<E extends AbstractEntity> {
 		}
 		
 		return fieldMap;
+	}
+	
+	/**
+	 * Fetch data from a JSON object
+	 * @return the entity
+	 */
+	public abstract E getFromJSON(JSONObject jsonObject);
+	
+	public Set<E> getSetFromJSON(JSONObject responseJSON, String JSONKey) {
+		Set<E> entitySet = new TreeSet<E>();
+		
+		try {
+			JSONArray entitiesJSON = (JSONArray)responseJSON.get(JSONKey);
+			int entitiesSize = entitiesJSON.length();
+			
+			for (int i = 0; i < entitiesSize; i++) {
+				JSONObject entityJSON = entitiesJSON.getJSONObject(i);
+				entitySet.add(getFromJSON(entityJSON));
+			}
+			
+		} catch (JSONException e) {
+			Log.e(AbstractParser.class.getName(), e.getMessage(), e);
+		} catch (Exception e) {
+			Log.e(AbstractParser.class.getName(), e.getMessage(), e);
+		}
+		
+		return entitySet;
 	}
 }
