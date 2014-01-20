@@ -1,40 +1,54 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
     
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-        
-        <!-- Friends notifications starts -->
-        <TextView
-            android:id="@+id/friendNotificationText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/friendNotificationLabel"
-            android:textSize="20sp"
-            />
-        <TextView 
-            android:id="@+id/friendNotificationList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            />
-        <!-- Friends notifications ends -->
-        <!-- Meeting notifications starts -->
-        <TextView
-            android:id="@+id/meetingNotificationText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/meetingNotificationLabel"
-            android:textSize="20sp"
-            />
-        <TextView 
-            android:id="@+id/meetingNotificationList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            />
-        <!-- Meeting notifications ends -->
-    </LinearLayout>
-</ScrollView>
+    <!-- Notification bar starts -->
+   <Spinner
+	   android:id="@+id/pickNotificationTypeSpinner"
+	   android:layout_width="match_parent"
+	   android:layout_height="wrap_content"
+	   android:entries="@array/pickNotificationTypeSpinnerArray"
+	   android:prompt="@string/pickNotificationTypeSpinnerPrompt" 
+    />
+   <!-- Notification bar ends -->
+   <!-- Friends notifications starts -->
+   <TextView
+       android:id="@+id/noFriendNotificationText"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center_vertical"
+       android:gravity="center"
+       android:text="@string/noFriendNotificationText"
+       android:textSize="20sp"
+       android:visibility="gone"
+       />
+   <ListView 
+       android:id="@+id/friendNotificationList"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:visibility="gone"
+       >
+       
+   </ListView>
+   <!-- Friends notifications ends -->
+   <!-- Meeting notifications starts -->
+   <TextView
+       android:id="@+id/noMeetingNotificationText"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center_vertical"
+       android:gravity="center"
+       android:text="@string/noMeetingNotificationText"
+       android:textSize="20sp"
+       />
+   <ListView 
+       android:id="@+id/meetingNotificationList"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       >
+   </ListView>
+   <!-- Meeting notifications ends -->
+</LinearLayout>

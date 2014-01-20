@@ -1,0 +1,46 @@
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/meetingInviteNotificationLayout"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:orientation="vertical" 
+    android:padding="4dip"
+    >
+    
+    <ImageView
+        android:id="@+id/meetingInviteNotificationImage"
+        android:src="@drawable/meeting_invite_notification_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/meetingInviteNotificationDescription"
+        android:layout_alignParentLeft="true"
+        />
+    <TextView
+        android:id="@+id/meetingTitle"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="6dip"
+        android:layout_toRightOf="@id/meetingInviteNotificationImage"
+        android:layout_alignTop="@id/meetingInviteNotificationImage">
+    </TextView>
+    <TextView
+        android:id="@+id/meetingLocation"
+        android:textSize="14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="6dip"
+        android:layout_below="@id/meetingTitle"
+        android:layout_alignLeft="@id/meetingTitle">
+    </TextView>
+    <TextView
+        android:id="@+id/meetingDateTime"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="6dip"
+        android:layout_below="@id/meetingLocation"
+        android:layout_alignLeft="@id/meetingLocation">
+    </TextView>
+</RelativeLayout>

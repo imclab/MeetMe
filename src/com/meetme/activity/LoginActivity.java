@@ -111,7 +111,7 @@ public class LoginActivity extends Activity {
 				session.setUserToken(userToken);
 				session.setFriendSet(friendParser.getSetFromJSON(responseJSON, "friends"));
 				session.setMeetingSet(meetingParser.getSetFromJSON(responseJSON, "meetings"));
-				session.setFriendNotificationSet(friendNotificationParser.getSetFromJSON(responseJSON, "friendsNotifications"));
+				session.setFriendNotificationSet(friendNotificationParser.getSetFromJSON(responseJSON, "friendNotifications"));
 				session.setMeetingNotificationSet(meetingNotificationParser.getSetFromJSON(responseJSON, "meetingsNotifications"));
 			
 				// Start main activity

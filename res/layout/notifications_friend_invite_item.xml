@@ -1,0 +1,38 @@
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/friendInviteNotificationLayout"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:orientation="vertical" 
+    android:padding="4dip"
+    >
+    
+    <ImageView
+        android:id="@+id/friendInviteNotificationImage"
+        android:src="@drawable/friend_invite_notification_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/friendInviteNotificationDescription"
+        android:layout_alignParentLeft="true"
+        />
+    <TextView
+        android:id="@+id/friendName"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="6dip"
+        android:layout_toRightOf="@id/friendInviteNotificationImage"
+        android:layout_alignTop="@id/friendInviteNotificationImage">
+    </TextView>
+    <TextView
+        android:id="@+id/friendLastname"
+        android:textSize="14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="6dip"
+        android:text="@string/friendInviteNoticationText"
+        android:layout_below="@id/friendName"
+        android:layout_alignLeft="@id/friendName">
+    </TextView>
+</RelativeLayout>

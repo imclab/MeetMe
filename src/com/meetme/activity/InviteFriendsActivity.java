@@ -51,7 +51,7 @@ import com.meetme.core.SessionManager;
 import com.meetme.model.entity.Friend;
 import com.meetme.model.entity.Meeting;
 import com.meetme.presentation.FriendCheckable;
-import com.meetme.presentation.FriendListArrayAdapter;
+import com.meetme.presentation.adapter.FriendListArrayAdapter;
 
 public class InviteFriendsActivity extends Activity {
 
@@ -84,7 +84,7 @@ public class InviteFriendsActivity extends Activity {
 		friendList = new ArrayList<FriendCheckable>();
 		
 		session = SessionManager.getInstance();
-		updateFriendList();
+		populateFriendList();
 		
 		if (friendList.isEmpty()) {
 			noFriendText.setVisibility(View.VISIBLE);
@@ -99,9 +99,9 @@ public class InviteFriendsActivity extends Activity {
 	 */
 	
 	/*
-	 * Update the friend list adapter data
+	 * Populate the friend list adapter data
 	 */
-	private void updateFriendList() {
+	private void populateFriendList() {
 		friendList.clear();
 		
 		for (Friend friend : session.getFriendSet()) {

@@ -132,6 +132,10 @@ public class SessionManager {
 	/*
 	 * Update methods
 	 */
+	public void addFriend(Friend newFriend) {
+		this.friendSet.add(newFriend);
+	}
+	
 	public void addMeeting(Meeting newMeeting) {
 		this.meetingSet.add(newMeeting);
 	}

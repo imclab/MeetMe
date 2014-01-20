@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.meetme.R;
 import com.meetme.core.SessionManager;
 import com.meetme.model.entity.Meeting;
-import com.meetme.presentation.MeetingListArrayAdapter;
+import com.meetme.presentation.adapter.MeetingListArrayAdapter;
 
 public class MeetingsActivity extends Activity {
 
@@ -43,7 +43,7 @@ public class MeetingsActivity extends Activity {
 		meetingListView.setOnItemClickListener(meetingListListener);
 		
 		session = SessionManager.getInstance();
-		updateMeetingList();
+		populateMeetingList();
 		
 		if (meetingList.isEmpty()) {
 			noMeetingText.setVisibility(View.VISIBLE);
@@ -56,7 +56,7 @@ public class MeetingsActivity extends Activity {
 	/*
 	 * Update the meeting list adapter data
 	 */
-	private void updateMeetingList() {
+	private void populateMeetingList() {
 		meetingList.clear();
 		
 		for (Meeting meeting : session.getMeetingSet()) {
@@ -78,7 +78,7 @@ public class MeetingsActivity extends Activity {
 	private OnItemClickListener meetingListListener = new OnItemClickListener() {
 		
 		@Override
-		public void onItemClick(AdapterView<?> arent, View view, int position,
+		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			Intent intent = new Intent(MeetingsActivity.this, MeetingActivity.class);
 			intent.putExtra("meeting", meetingList.get(position));

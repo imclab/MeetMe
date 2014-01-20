@@ -1,4 +1,4 @@
-package com.meetme.presentation;
+package com.meetme.presentation.adapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,7 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.meetme.R;
+import com.meetme.presentation.FriendCheckable;
 
 public class FriendListArrayAdapter extends ArrayAdapter<FriendCheckable> implements Filterable {
 	

@@ -72,8 +72,16 @@
     <string name="waitingLabel">En attente</string>
 
     <!-- Notifications activity -->
-    <string name="friendNotificationLabel">Notifications d\'amis</string>
-    <string name="meetingNotificationLabel">Notifications de meetings</string>
+    <string name="pickNotificationTypeSpinnerPrompt">Choisissez le type de notification</string>
+    <string-array name="pickNotificationTypeSpinnerArray">
+        <item>Demandes d\'amis</item>
+        <item>Invitations</item>
+    </string-array>
+    <string name="noFriendNotificationText">Aucune demande d\'ami</string>
+    <string name="noMeetingNotificationText">Aucune invitation</string>
+    <string name="meetingInviteNotificationDescription">Icône d\'invitation à un meeting</string>
+    <string name="friendInviteNotificationDescription">Icône de demande d\'ajout d\'ami</string>
+    <string name="friendInviteNoticationText">would like to be your friend.</string>
     
     <!-- Dialog boxes -->
     <string name="ok">OK</string>
