@@ -9,7 +9,7 @@
 
     <!-- Options Menu -->
     <string name="logOutMenuAction">Log out</string>
-    
+
     <!-- Main activity -->
     <string name="tabMeetings">Meetings</string>
     <string name="tabNotifications">Notifications</string>
@@ -66,6 +66,14 @@
     <string name="findButton">Find</string>
     <string name="addFriendButton">Send an invitation</string>
 
+    <!-- Meeting info activity -->
+    <string name="meetingHostLabel">Created by</string>
+    <string name="goingLabel">Going</string>
+    <string name="maybeLabel">Maybe</string>
+    <string name="invitedLabel">Invited</string>
+    <string name="declinedLabel">Declined</string>
+    <string name="seeLiveButton">See live</string>
+    
     <!-- Meeting activity -->
     <string name="arrivedLabel">Arrived</string>
     <string name="leftLabel">Left</string>
@@ -73,16 +81,18 @@
 
     <!-- Notifications activity -->
     <string name="pickNotificationTypeSpinnerPrompt">Choose notifications</string>
+
     <string-array name="pickNotificationTypeSpinnerArray">
         <item>Friend requests</item>
         <item>Invitations</item>
     </string-array>
+
     <string name="noFriendNotificationText">No friend request</string>
     <string name="noMeetingNotificationText">No invitation</string>
     <string name="meetingInviteNotificationDescription">Meeting invite notification icon</string>
     <string name="friendInviteNotificationDescription">Friend invite notification icon</string>
     <string name="friendInviteNoticationText">would like to be your friend.</string>
-    
+
     <!-- Dialog boxes -->
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -115,7 +125,7 @@
     <string name="friendAcceptSuccessDialogMessage">is now in your friend list.</string>
     <string name="meetingAcceptSuccessDialogTitle">Meeting invitation</string>
     <string name="meetingAcceptSuccessDialogMessage">You are now part of the meeting</string>
-    
+
     <!-- Error/Warning -->
     <string name="generalError">An error occurred</string>
     <string name="invalidEmail">Email is not valid</string>
@@ -136,8 +146,6 @@
     <string name="friendIsYourself">You can\'t add yourself as a friend</string>
     <string name="friendInvitationAlreadySent">Invitation already sent</string>
     <string name="emptyLocation">Enter a location</string>
-    <string name="title_activity_notifications">NotificationsActivity</string>
     <string name="invalidDateTime">Date and time are invalid</string>
     <string name="emptyDateTime">Pick a date and time</string>
-
 </resources>

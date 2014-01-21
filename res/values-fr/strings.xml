@@ -66,6 +66,14 @@
     <string name="findButton">Chercher</string>
     <string name="addFriendButton">Envoyer une invitation</string>
     
+    <!-- Meeting info activity -->
+    <string name="meetingHostLabel">Créé par</string>
+    <string name="goingLabel">Présent</string>
+    <string name="maybeLabel">Peut-être</string>
+    <string name="invitedLabel">Absent</string>
+    <string name="declinedLabel">Invités</string>
+    <string name="seeLiveButton">Voir le direct</string>
+    
     <!-- Meeting activity -->
     <string name="arrivedLabel">Arrivé</string>
     <string name="leftLabel">Parti</string>

@@ -15,22 +15,22 @@ import com.meetme.core.SessionManager;
 import com.meetme.model.dao.MeetDao;
 import com.meetme.model.dao.MeetingDao;
 import com.meetme.model.entity.Meeting;
-import com.meetme.presentation.MeetPresentation;
+import com.meetme.presentation.MeetingPresentation;
 
 public class MeetingActivity extends Activity {
 
 	private SessionManager session;
+	private Meeting meeting;
+	private MeetingPresentation meetPresentation;
+	private MeetingDao meetingDao;
+	private MeetDao meetDao;
+	
 	private TextView arrivedText;
 	private TextView arrivedList;
 	private TextView leftText;
 	private TextView leftList;
 	private TextView waitingText;
 	private TextView waitingList;
-	private Meeting meeting;
-	private MeetPresentation meetPresentation;
-	
-	private MeetingDao meetingDao;
-	private MeetDao meetDao;
 	
 	private static final int REFRESH_RATE = 10000;
 	private static boolean REFRESHING = true;
@@ -132,7 +132,7 @@ public class MeetingActivity extends Activity {
 			                        	meeting = meetingDao.findMeetingById(meetingId, session.getUserToken());
 			                        	
 			                        	// Refresh friends data 
-			                    		meetPresentation = new MeetPresentation(
+			                    		meetPresentation = new MeetingPresentation(
 			                    				meeting,
 			                    				meetDao.findMeetsOfMeeting(meeting, session.getUserToken())
 		                    				);

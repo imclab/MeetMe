@@ -80,7 +80,7 @@ public class MeetingsActivity extends Activity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			Intent intent = new Intent(MeetingsActivity.this, MeetingActivity.class);
+			Intent intent = new Intent(MeetingsActivity.this, MeetingInfoActivity.class);
 			intent.putExtra("meeting", meetingList.get(position));
 			startActivity(intent);
 		}

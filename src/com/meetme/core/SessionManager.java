@@ -110,6 +110,12 @@ public class SessionManager {
 	 * Find methods
 	 */
 	public Friend getFriendById(int friendId) {
+		// TO DO : check if is the user himself
+		if (friendId == 100) {
+			Friend userHimself = new Friend(100, "Baptiste", "Le Bail");
+			return userHimself;
+		}
+		
 		for (Friend friend : this.friendSet) {
 			if (friend.getId() == friendId) {
 				return friend;
