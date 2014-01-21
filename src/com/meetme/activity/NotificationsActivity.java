@@ -4,8 +4,12 @@ import static com.meetme.store.DialogBoxesStore.ACCEPT;
 import static com.meetme.store.DialogBoxesStore.DECLINE;
 import static com.meetme.store.DialogBoxesStore.FRIEND_REQUEST_CONFIRM_DIALOG_MESSAGE;
 import static com.meetme.store.DialogBoxesStore.FRIEND_REQUEST_CONFIRM_DIALOG_TITLE;
+import static com.meetme.store.DialogBoxesStore.MAYBE;
 import static com.meetme.store.DialogBoxesStore.MEETING_INVITATION_CONFIRM_DIALOG_MESSAGE;
 import static com.meetme.store.DialogBoxesStore.MEETING_INVITATION_CONFIRM_DIALOG_TITLE;
+import static com.meetme.store.UserConfirmationCodeStore.USER_CONFIRMATION_ACCEPTED;
+import static com.meetme.store.UserConfirmationCodeStore.USER_CONFIRMATION_DECLINED;
+import static com.meetme.store.UserConfirmationCodeStore.USER_CONFIRMATION_MAYBE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -173,7 +177,16 @@ public class NotificationsActivity extends Activity {
 	        	   new MeetingInviteConfirmTask(
 	        			   NotificationsActivity.this, 
 	        			   meetingNotification, 
-	        			   true).execute();
+	        			   USER_CONFIRMATION_ACCEPTED).execute();
+	           }
+	       });
+		
+		builder.setNeutralButton(MAYBE, new DialogInterface.OnClickListener() {
+	           public void onClick(DialogInterface dialog, int id) {
+	        	   new MeetingInviteConfirmTask(
+	        			   NotificationsActivity.this, 
+	        			   meetingNotification, 
+	        			   USER_CONFIRMATION_MAYBE).execute();
 	           }
 	       });
 		
@@ -182,7 +195,7 @@ public class NotificationsActivity extends Activity {
 	        	   new MeetingInviteConfirmTask(
 	        			   NotificationsActivity.this, 
 	        			   meetingNotification, 
-	        			   false).execute();
+	        			   USER_CONFIRMATION_DECLINED).execute();
 	           }
 	       });
 		

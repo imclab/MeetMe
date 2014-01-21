@@ -12,6 +12,7 @@ public abstract class DialogBoxesStore {
 	public static final int NO = R.string.no;
 	public static final int ACCEPT = R.string.accept;
 	public static final int DECLINE = R.string.decline;
+	public static final int MAYBE = R.string.maybe;
 	public static final int PLEASE_WAIT = R.string.pleaseWait;
 	
 	public static final int LOGGING_IN = R.string.loggingIn;

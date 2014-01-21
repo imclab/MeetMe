@@ -106,6 +106,7 @@
     <string name="no">No</string>
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
+    <string name="maybe">Maybe</string>
     <string name="pleaseWait">Please wait&#8230;</string>
     <string name="loggingIn">Logging in&#8230;</string>
     <string name="loggingInSuccessDialogTitle">Log In</string>

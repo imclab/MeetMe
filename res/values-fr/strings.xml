@@ -104,6 +104,7 @@
     <string name="no">Non</string>
     <string name="accept">Accepter</string>
     <string name="decline">Refuser</string>
+    <string name="maybe">Peut-être</string>
     <string name="pleaseWait">Patientez&#8230;</string>
     <string name="loggingIn">Connexion&#8230;</string>
     <string name="loggingInSuccessDialogTitle">Connexion</string>

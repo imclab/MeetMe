@@ -59,5 +59,7 @@ public abstract class ServerParameterStore {
 	public static final String MEET_OPERATION_STATUS = "status";
 	public static final String MEET_OPERATION_REFRESH = "refresh";
 	public static final String MEET_OPERATION_REFRESH_OTHERS = "refresh_others";
+	public static final String MEET_CONFIRMATION_CONFIRMATION_CODE = "confirmation_code";
+	public static final String MEET_CONFIRMATION_MEETING_ID = "meeting_id";
 	public static final String MEET_REFRESH_OTHERS_MEETING_ID = "meeting_id";
 }
