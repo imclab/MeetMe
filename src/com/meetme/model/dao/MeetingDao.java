@@ -22,7 +22,7 @@ import com.meetme.parser.MeetingParser;
 public class MeetingDao extends AbstractDao<Meeting> {
 	
 	private static final String JSON_KEY_FOR_FIND_MEETINGS_OF_USER = "meetings";
-	private static final String JSON_KEY_FOR_FIND_MEETINg_BY_ID = "meeting";
+	private static final String JSON_KEY_FOR_FIND_MEETING_BY_ID = "meeting";
 	
 	public MeetingDao() {
 		super(new MeetingParser());
@@ -59,7 +59,7 @@ public class MeetingDao extends AbstractDao<Meeting> {
 		// Built meeting from JSON response
 		try {
 			meeting = this.entityParser.getFromJSON(
-					responseJSON.getJSONObject(JSON_KEY_FOR_FIND_MEETINg_BY_ID)
+					responseJSON.getJSONObject(JSON_KEY_FOR_FIND_MEETING_BY_ID)
 				);
 		} catch (JSONException e) {
 			Log.e(MeetingDao.class.getName(), e.getMessage(), e);

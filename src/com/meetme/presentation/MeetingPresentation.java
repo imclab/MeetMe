@@ -147,48 +147,41 @@ public class MeetingPresentation {
 			Friend user = meeting.getFriendById(meet.getUserId());
 			
 			switch (meet.getUserConfirmation()) {
-				case USER_CONFIRMATION_ACCEPTED : {
+				case USER_CONFIRMATION_ACCEPTED :
 					goingSet.add(meet);
 					goingString.append(user).append("\n");
-				}
 				break;
-				case USER_CONFIRMATION_MAYBE : {
+				case USER_CONFIRMATION_MAYBE :
 					maybeSet.add(meet);
 					maybeString.append(user).append("\n");
-				}
 				break;
-				case USER_CONFIRMATION_INVITED : {
+				case USER_CONFIRMATION_INVITED :
 					invitedSet.add(meet);
 					invitedString.append(user).append("\n");
-				}
 				break;
-				case USER_CONFIRMATION_DECLINED : {
+				case USER_CONFIRMATION_DECLINED :
 					declinedSet.add(meet);
 					declinedString.append(user).append("\n");
-				}
 				break;
 				default : invitedSet.add(meet);
 				break;
 			}
 			
 			switch (meet.getUserStatus()) {
-				case USER_STATUS_ARRIVED : {
+				case USER_STATUS_ARRIVED :
 					arrivedSet.add(meet);
 					arrivedString.append(user).append("\n");
-				}
 				break;
-				case USER_STATUS_LEFT : {
+				case USER_STATUS_LEFT :
 					leftSet.add(meet);
 					leftString.append(user).append("\n");
 					leftString.append(meet.getUserEstimatedDistance()).append("\n");
 					leftString.append(meet.getUserEstimatedTime()).append("\n");
 					leftString.append(getTravelModeString(meet.getUserTravelMode())).append("\n\n");
-				}
 				break;
-				case USER_STATUS_WAITING : {
+				case USER_STATUS_WAITING :
 					waitingSet.add(meet);
 					waitingString.append(user).append("\n");
-				}
 				break;
 				default : waitingSet.add(meet);
 				break;
