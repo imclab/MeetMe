@@ -50,7 +50,7 @@ public class DownloadTask extends AsyncTask<String, Integer, String>
             br.close();
  
         }catch(Exception e){
-            Log.d("Exception while downloading url", e.toString());
+            Log.e(DownloadTask.class.getName(), e.getMessage(), e);
         }finally{
             iStream.close();
             urlConnection.disconnect();
@@ -65,7 +65,7 @@ public class DownloadTask extends AsyncTask<String, Integer, String>
         try{
             data = downloadUrl(url[0]);
         }catch(Exception e){
-            Log.d("Background Task",e.toString());
+        	Log.e(DownloadTask.class.getName(), e.getMessage(), e);
         }
         return data;
     }

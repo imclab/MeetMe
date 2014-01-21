@@ -38,7 +38,7 @@ public class ParserTask extends AsyncTask<String, Integer, List<HashMap<String,S
             places = parser.parse(jObject);
 
         }catch(Exception e){
-            Log.d("Exception",e.toString());
+            Log.e(ParserTask.class.getName(), e.getMessage(), e);
         }
         return places;
     }

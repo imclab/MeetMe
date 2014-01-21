@@ -7,6 +7,8 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.util.Log;
  
 public class GeocodeJSONParser {
  
@@ -18,7 +20,7 @@ public class GeocodeJSONParser {
             /** Retrieves all the elements in the 'places' array */
             jPlaces = jObject.getJSONArray("results");
         } catch (JSONException e) {
-            e.printStackTrace();
+        	Log.e(GeocodeJSONParser.class.getName(), e.getMessage(), e);
         }
         /** Invoking getPlaces with the array of json object
         * where each json object represent a place
@@ -39,7 +41,7 @@ public class GeocodeJSONParser {
                 placesList.add(place);
  
             } catch (JSONException e) {
-                e.printStackTrace();
+            	Log.e(GeocodeJSONParser.class.getName(), e.getMessage(), e);
             }
         }
  
@@ -68,7 +70,7 @@ public class GeocodeJSONParser {
             place.put("lng", lng);
  
         }catch (JSONException e) {
-            e.printStackTrace();
+        	Log.e(GeocodeJSONParser.class.getName(), e.getMessage(), e);
         }
         return place;
     }

@@ -3,11 +3,16 @@ package com.meetme.activity;
 import static com.meetme.store.UserStatusCodeStore.USER_STATUS_ARRIVED;
 import static com.meetme.store.UserStatusCodeStore.USER_STATUS_LEFT;
 import static com.meetme.store.UserStatusCodeStore.USER_STATUS_WAITING;
+import static com.meetme.store.UserTravelModeStore.TRAVEL_MODE_BICYCLING;
+import static com.meetme.store.UserTravelModeStore.TRAVEL_MODE_DRIVING;
+import static com.meetme.store.UserTravelModeStore.TRAVEL_MODE_WALKING;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,6 +49,7 @@ public class MeetingActivity extends Activity {
 	private Button myStatusButton;
 	private Button seeMapButton;
 	
+	private static int MY_TRAVEL_MODE = -1;
 	private static int MY_STATUS = USER_STATUS_WAITING;
 	private static final int REFRESH_RATE = 10000;
 	private static boolean REFRESHING = true;
@@ -104,17 +110,28 @@ public class MeetingActivity extends Activity {
 		v.setVisibility(visibility == View.GONE ? View.VISIBLE : View.GONE);
 	}
 	
+	private void updateMyStatus(
+			int userTravelMode,
+			int userStatus,
+			int myStatusButtonResIdText) {
+		MY_TRAVEL_MODE = userTravelMode;
+ 	   	MY_STATUS = userStatus;
+ 	   	myStatusButton.setText(myStatusButtonResIdText);
+ 	   	
+ 	   	updateMyStatusUi();
+	}
+	
 	private void updateMeetingInfo() {
 		// build meeting host text
 		meetingTitle.setText(meeting.getTitle());
 		meetingDateTime.setText(meeting.getDateTime());
 	}
 	
-	private void updateMyStatus() {
+	private void updateMyStatusUi() {
 		if (MY_STATUS == USER_STATUS_WAITING) {
 			myStatusText.setText(R.string.myStatusNotLeftYet);
 		} else if (MY_STATUS == USER_STATUS_LEFT){
-			myStatusText.setText("2 km\n10 mins\nby foot");
+			myStatusText.setText("2 km\n10 mins\n" + MY_TRAVEL_MODE);
 		} else if (MY_STATUS == USER_STATUS_ARRIVED) {
 			myStatusText.setText(R.string.myStatusArrived);
 		}
@@ -141,7 +158,7 @@ public class MeetingActivity extends Activity {
     	leftList.setText(meetPresentation.getLeftString());
     	waitingList.setText(meetPresentation.getWaitingString());
     	
-    	updateMyStatus();
+    	updateMyStatusUi();
 	}
 	
 	private void refresh() {
@@ -220,12 +237,30 @@ public class MeetingActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			if (MY_STATUS == USER_STATUS_WAITING) {
-				/*
-				 * TODO: Dialog with travel mode choice
-				 */
-				// If dialog returns response OK
-				MY_STATUS = USER_STATUS_LEFT;
-				myStatusButton.setText(R.string.myStatusButtonArrive);
+				// Build dialog
+				AlertDialog.Builder builder = new AlertDialog.Builder(MeetingActivity.this);
+				builder.setTitle("Travel mode");
+				builder.setMessage("How are you going to this meeting ?");
+				builder.setPositiveButton("Car", new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			        	   updateMyStatus(TRAVEL_MODE_DRIVING, USER_STATUS_LEFT, R.string.myStatusButtonArrive);
+			           }
+			       });
+				
+				builder.setNeutralButton("Bicycle", new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			        	   updateMyStatus(TRAVEL_MODE_BICYCLING, USER_STATUS_LEFT, R.string.myStatusButtonArrive);
+			           }
+			       });
+				
+				builder.setNegativeButton("Foot", new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			        	   updateMyStatus(TRAVEL_MODE_WALKING, USER_STATUS_LEFT, R.string.myStatusButtonArrive);
+			           }
+			       });
+				
+				AlertDialog dialog = builder.create();
+				dialog.show();
 			} else if (MY_STATUS == USER_STATUS_LEFT) {
 				/*
 				 * TODO: Dialog with confirmation of arrival
@@ -235,9 +270,8 @@ public class MeetingActivity extends Activity {
 				toggleVisibility(myStatusButton);
 			} 
 			
-			// Send user_status_code task
-			
-			updateMyStatus();
+			// TODO: Send user_status_code task 
+			// with user_travel_mode if USER_STATUS_LEFT
 		}
 	};
 }
