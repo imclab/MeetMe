@@ -88,6 +88,8 @@
     <string name="cancel">Cancel</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
     <string name="pleaseWait">Please wait&#8230;</string>
     <string name="loggingIn">Logging in&#8230;</string>
     <string name="loggingInSuccessDialogTitle">Log In</string>
@@ -104,7 +106,16 @@
     <string name="searchingUser">Searching user&#8230;</string>
     <string name="sendingInvitation">Sending invitation&#8230;</string>
     <string name="confirmLocationDialogTitle">Confirm location ?</string>
-
+    <string name="sendingResponse">Sending response&#8230;</string>
+    <string name="confirmFriendRequestDialogTitle">Friend request</string>
+    <string name="confirmFriendRequestDialogMessage">would like to be your friend.</string>
+    <string name="confirmMeetingInvitationDialogTitle">Meeting invitation</string>
+    <string name="confirmMeetingInvitationDialogMessage">would like to invite you in the meeting</string>
+    <string name="friendAcceptSuccessDialogTitle">Friend request</string>
+    <string name="friendAcceptSuccessDialogMessage">is now in your friend list.</string>
+    <string name="meetingAcceptSuccessDialogTitle">Meeting invitation</string>
+    <string name="meetingAcceptSuccessDialogMessage">You are now part of the meeting</string>
+    
     <!-- Error/Warning -->
     <string name="generalError">An error occurred</string>
     <string name="invalidEmail">Email is not valid</string>

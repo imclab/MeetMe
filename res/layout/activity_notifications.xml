@@ -19,6 +19,7 @@
        android:id="@+id/noFriendNotificationText"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
+       android:layout_marginTop="50sp"
        android:layout_gravity="center_vertical"
        android:gravity="center"
        android:text="@string/noFriendNotificationText"
@@ -28,7 +29,7 @@
    <ListView 
        android:id="@+id/friendNotificationList"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
+       android:layout_height="match_parent"
        android:visibility="gone"
        >
        
@@ -39,6 +40,7 @@
        android:id="@+id/noMeetingNotificationText"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
+       android:layout_marginTop="50sp"
        android:layout_gravity="center_vertical"
        android:gravity="center"
        android:text="@string/noMeetingNotificationText"
@@ -47,7 +49,7 @@
    <ListView 
        android:id="@+id/meetingNotificationList"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
+       android:layout_height="match_parent"
        >
    </ListView>
    <!-- Meeting notifications ends -->

@@ -2,11 +2,7 @@ package com.meetme.parser;
 
 import java.util.Map;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.util.Log;
 
 import com.meetme.model.entity.Meeting;
 
@@ -55,19 +51,7 @@ public class MeetingParser extends AbstractParser<Meeting> {
 			);
 		
 		// Parse users
-		try {
-			JSONArray userArray = (JSONArray)meetingJSON.get(USERS);
-			int userArrayLength = userArray.length();
-			
-			for (int i = 0; i < userArrayLength; i++) {
-				meeting.addFriend(friendEntityParser.getFromJSON(userArray.getJSONObject(i)));
-			}
-			
-		} catch (JSONException e) {
-			Log.w(MeetingParser.class.getName(), COULD_NOT_PARSE_FIELD_FROM_JSON + e.getMessage(), e);
-		} catch (Exception e) {
-			Log.e(MeetingParser.class.getName(), e.getMessage(), e);
-		}
+		meeting.setFriendSet(friendEntityParser.getSetFromJSON(meetingJSON, USERS));
 		
 		return meeting;
 	}

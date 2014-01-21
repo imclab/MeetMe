@@ -88,6 +88,8 @@
     <string name="cancel">Annuler</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
+    <string name="accept">Accepter</string>
+    <string name="decline">Refuser</string>
     <string name="pleaseWait">Patientez&#8230;</string>
     <string name="loggingIn">Connexion&#8230;</string>
     <string name="loggingInSuccessDialogTitle">Connexion</string>
@@ -104,7 +106,16 @@
     <string name="searchingUser">Recherche d\'ami&#8230;</string>
     <string name="sendingInvitation">Envoi de l\'invitation&#8230;</string>
     <string name="confirmLocationDialogTitle">Vous confirmez ce lieu ?</string>
-
+    <string name="sendingResponse">Envoie de la réponse&#8230;</string>
+    <string name="confirmFriendRequestDialogTitle">Demande d\'ami</string>
+    <string name="confirmFriendRequestDialogMessage">voudrait vous ajouter dans sa liste d\'amis.</string>
+    <string name="confirmMeetingInvitationDialogTitle">Invitation à un meeting </string>
+    <string name="confirmMeetingInvitationDialogMessage">voudrait vous inviter au meeting</string>
+    <string name="friendAcceptSuccessDialogTitle">Demande d\'ami</string>
+    <string name="friendAcceptSuccessDialogMessage">est maintenant dans votre liste d\'amis.</string>
+    <string name="meetingAcceptSuccessDialogTitle">Invitation à un meeting</string>
+    <string name="meetingAcceptSuccessDialogMessage">Vous faites désormais parti du meeting</string>
+    
     <!-- Error/Warning -->
     <string name="generalError">Une erreur s\'est produite</string>
     <string name="invalidEmail">Email invalide</string>

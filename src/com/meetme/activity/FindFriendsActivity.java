@@ -13,7 +13,7 @@ import static com.meetme.store.MessageStore.FRIEND_INVITATION_ALREADY_SENT;
 import static com.meetme.store.MessageStore.FRIEND_IS_YOURSELF;
 import static com.meetme.store.MessageStore.GENERAL_ERROR;
 import static com.meetme.store.MessageStore.NO_FRIEND_FOUND_FOR_EMAIL;
-import static com.meetme.store.ServerParameterStore.FRIEND_ADD_ID;
+import static com.meetme.store.ServerParameterStore.FRIEND_REQUEST_ID;
 import static com.meetme.store.ServerParameterStore.FRIEND_FIND_BY_EMAIL_EMAIL;
 import static com.meetme.store.ServerParameterStore.FRIEND_OPERATION;
 import static com.meetme.store.ServerParameterStore.FRIEND_OPERATION_REQUEST;
@@ -89,7 +89,7 @@ public class FindFriendsActivity extends Activity {
 			public void run() {
 				// Add parameters
 				parameters.put(FRIEND_OPERATION, FRIEND_OPERATION_REQUEST);
-				parameters.put(FRIEND_ADD_ID, Integer.toString(foundFriend.getId()));
+				parameters.put(FRIEND_REQUEST_ID, Integer.toString(foundFriend.getId()));
 				parameters.put(FRIEND_TOKEN, session.getUserToken());
 				
 				// Send request
@@ -133,10 +133,13 @@ public class FindFriendsActivity extends Activity {
 				
 				runOnUiThread(new Runnable() {
 					public void run() {
-						foundFriendText.setText(
-								R.string.firstnameLabel + foundFriend.getFirstname() + "\n"
-								+ R.string.lastnameLabel  + foundFriend.getLastname()
-								);
+						StringBuilder foundFriendTextBuilder = new StringBuilder();
+						foundFriendTextBuilder.append(getString(R.string.firstnameLabel));
+						foundFriendTextBuilder.append(foundFriend.getFirstname()).append("\n");
+						foundFriendTextBuilder.append(getString(R.string.lastnameLabel));
+						foundFriendTextBuilder.append(foundFriend.getLastname());
+						
+						foundFriendText.setText(foundFriendTextBuilder.toString());
 						foundFriendText.setVisibility(View.VISIBLE);
 						addFriendButton.setVisibility(View.VISIBLE);
 					}

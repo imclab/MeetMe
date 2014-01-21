@@ -1,5 +1,12 @@
 package com.meetme.activity;
 
+import static com.meetme.store.DialogBoxesStore.ACCEPT;
+import static com.meetme.store.DialogBoxesStore.DECLINE;
+import static com.meetme.store.DialogBoxesStore.FRIEND_REQUEST_CONFIRM_DIALOG_MESSAGE;
+import static com.meetme.store.DialogBoxesStore.FRIEND_REQUEST_CONFIRM_DIALOG_TITLE;
+import static com.meetme.store.DialogBoxesStore.MEETING_INVITATION_CONFIRM_DIALOG_MESSAGE;
+import static com.meetme.store.DialogBoxesStore.MEETING_INVITATION_CONFIRM_DIALOG_TITLE;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +24,13 @@ import android.widget.TextView;
 
 import com.meetme.R;
 import com.meetme.core.SessionManager;
+import com.meetme.model.entity.Friend;
 import com.meetme.model.entity.FriendInviteNotification;
 import com.meetme.model.entity.MeetingInviteNotification;
 import com.meetme.presentation.adapter.FriendInviteNotificationListArrayAdapter;
 import com.meetme.presentation.adapter.MeetingInviteNotificationListArrayAdapter;
+import com.meetme.task.FriendInviteConfirmTask;
+import com.meetme.task.MeetingInviteConfirmTask;
 
 public class NotificationsActivity extends Activity {
 	
@@ -49,7 +59,7 @@ public class NotificationsActivity extends Activity {
 		meetingNotificationListView = (ListView)findViewById(R.id.meetingNotificationList);
 		
 		pickNotificationTypeSpinner.setSelection(DEFAULT_NOTIFICATION_SPINNER_POSITION);
-		
+
 		friendNotificationListView.setOnItemClickListener(friendNotificationListViewListener);
 		meetingNotificationListView.setOnItemClickListener(meetingNotificationListViewListener);
 		pickNotificationTypeSpinner.setOnItemSelectedListener(pickNotificationTypeSpinnerListener);
@@ -110,21 +120,32 @@ public class NotificationsActivity extends Activity {
 	}
 	
 	private void displayFriendNotificationResponseDialog(int position) {
+		final FriendInviteNotification friendNotification = friendInviteNotificationList.get(position);
+		
+		// Build dialog message
+		StringBuilder messageBuilder = new StringBuilder();
+		messageBuilder.append(friendNotification.getInviterFirstname()).append(" ");
+		messageBuilder.append(friendNotification.getInviterLastname()).append(" ");
+		messageBuilder.append(getString(FRIEND_REQUEST_CONFIRM_DIALOG_MESSAGE));
+		
+		// Build dialog
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Friend request");
-		builder.setMessage("firstname lastname would like to be your friend");
-		builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+		builder.setTitle(FRIEND_REQUEST_CONFIRM_DIALOG_TITLE);
+		builder.setMessage(messageBuilder.toString());
+		builder.setPositiveButton(ACCEPT, new DialogInterface.OnClickListener() {
 	           public void onClick(DialogInterface dialog, int id) {
-	        	   // send accept
-	        	   
-	        	   //   add friend in session
-	        	   //	delete notification from session
-	        	   //	display dialog : firstname lastname is now in your friend list
+	        	   new FriendInviteConfirmTask(
+	        			   NotificationsActivity.this, 
+	        			   friendNotification, 
+	        			   true).execute();
 	           }
 	       });
-		builder.setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(DECLINE, new DialogInterface.OnClickListener() {
 	           public void onClick(DialogInterface dialog, int id) {
-	        	   // send decline
+	        	   new FriendInviteConfirmTask(
+	        			   NotificationsActivity.this, 
+	        			   friendNotification, 
+	        			   false).execute();
 	           }
 	       });
 		
@@ -133,23 +154,35 @@ public class NotificationsActivity extends Activity {
 	}
 	
 	private void displayMeetingNotificationResponseDialog(int position) {
+		final MeetingInviteNotification meetingNotification = meetingInviteNotificationList.get(position);
+		Friend meetingHost = session.getFriendById(meetingNotification.getMeetingHostUserId());
+		
+		// Build dialog message
+		StringBuilder messageBuilder = new StringBuilder();
+		messageBuilder.append(meetingHost.getFirstname()).append(" ");
+		messageBuilder.append(meetingHost.getLastname()).append(" ");
+		messageBuilder.append(getString(MEETING_INVITATION_CONFIRM_DIALOG_MESSAGE)).append(" ");
+		messageBuilder.append('"').append(meetingNotification.getMeetingTitle()).append("\".");
+		
+		// Build dialog
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Meeting invitation");
-		builder.setMessage("firstname lastname would like to invite you in the meeting meetingTitle");
-		builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+		builder.setTitle(MEETING_INVITATION_CONFIRM_DIALOG_TITLE);
+		builder.setMessage(messageBuilder.toString());
+		builder.setPositiveButton(ACCEPT, new DialogInterface.OnClickListener() {
 	           public void onClick(DialogInterface dialog, int id) {
-	        	   // send accept
-	        	   
-	        	   //	add meeting in session
-	        	   //	delete notification from session
-	        	   //	go to meeting activity
+	        	   new MeetingInviteConfirmTask(
+	        			   NotificationsActivity.this, 
+	        			   meetingNotification, 
+	        			   true).execute();
 	           }
 	       });
 		
-		builder.setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(DECLINE, new DialogInterface.OnClickListener() {
 	           public void onClick(DialogInterface dialog, int id) {
-	        	   // send decline
-	        	   // delete notification from session
+	        	   new MeetingInviteConfirmTask(
+	        			   NotificationsActivity.this, 
+	        			   meetingNotification, 
+	        			   false).execute();
 	           }
 	       });
 		
@@ -171,10 +204,16 @@ public class NotificationsActivity extends Activity {
 	}
 	
 	private void updateUi() {
+		populateNotificationsLists();
 		
+		if (pickNotificationTypeSpinner.getSelectedItemPosition() == 1) {
+			displayMeetingNotifications();
+		} else {
+			displayFriendNotifications();
+		}
 	}
 	
-	private void refresh() {
+	public void refresh() {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {

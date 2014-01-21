@@ -10,6 +10,8 @@ public abstract class DialogBoxesStore {
 	public static final int CANCEL = R.string.cancel;
 	public static final int YES = R.string.yes;
 	public static final int NO = R.string.no;
+	public static final int ACCEPT = R.string.accept;
+	public static final int DECLINE = R.string.decline;
 	public static final int PLEASE_WAIT = R.string.pleaseWait;
 	
 	public static final int LOGGING_IN = R.string.loggingIn;
@@ -30,4 +32,14 @@ public abstract class DialogBoxesStore {
 	public static final int SENDING_INVITATION = R.string.sendingInvitation;
 	
 	public static final int CONFIRM_LOCATION_TITLE = R.string.confirmLocationDialogTitle;
+	
+	public static final int SENDING_RESPONSE = R.string.sendingResponse;
+	public static final int FRIEND_REQUEST_CONFIRM_DIALOG_TITLE = R.string.confirmFriendRequestDialogTitle;
+	public static final int FRIEND_REQUEST_CONFIRM_DIALOG_MESSAGE = R.string.confirmFriendRequestDialogMessage;
+	public static final int FRIEND_ACCEPT_SUCCESS_TITLE = R.string.friendAcceptSuccessDialogTitle;
+	public static final int FRIEND_ACCEPT_SUCCESS_MESSAGE = R.string.friendAcceptSuccessDialogMessage;
+	public static final int MEETING_INVITATION_CONFIRM_DIALOG_TITLE = R.string.confirmMeetingInvitationDialogTitle;
+	public static final int MEETING_INVITATION_CONFIRM_DIALOG_MESSAGE = R.string.confirmMeetingInvitationDialogMessage;
+	public static final int MEETING_ACCEPT_SUCCESS_TITLE = R.string.meetingAcceptSuccessDialogTitle;
+	public static final int MEETING_ACCEPT_SUCCESS_MESSAGE = R.string.meetingAcceptSuccessDialogMessage;
 }
