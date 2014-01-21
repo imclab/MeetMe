@@ -3,54 +3,90 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     
-	<LinearLayout android:layout_width="match_parent"
+	<LinearLayout 
+	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:orientation="vertical" >
         
-	    <!-- Arrived friends starts -->
 	    <TextView
-	        android:id="@+id/arrivedText"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
+            android:id="@+id/meetingTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:background="@drawable/meeting_title_background"
+            />
+        <TextView
+            android:id="@+id/meetingDateTime"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/clock_icon"
+            android:padding="10sp"
+            android:gravity="center"
+            android:textSize="20sp"
+            />
+        
+	    <TextView
+	        style="@style/meetingFriendStatusLabel"
+	        android:id="@+id/arrivedLabel"
 	        android:text="@string/arrivedLabel"
-	        android:textSize="20sp"
 	        />
 	    <TextView 
+	        style="@style/meetingFriendStatusList"
 	        android:id="@+id/arrivedList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
             />
-	    <!-- Arrived friends ends -->
-	    <!-- Left friends starts -->
 	    <TextView
-            android:id="@+id/leftText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+	        style="@style/meetingFriendStatusLabel"
+            android:id="@+id/leftLabel"
             android:text="@string/leftLabel"
-            android:textSize="20sp"
             />
 	    <TextView 
+	        style="@style/meetingFriendStatusList"
             android:id="@+id/leftList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
             />
-	    <!-- Left friends ends -->
-	    <!-- Waiting friends starts -->
 	    <TextView
-            android:id="@+id/waitingText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+	        style="@style/meetingFriendStatusLabel"
+            android:id="@+id/waitingLabel"
             android:text="@string/waitingLabel"
-            android:textSize="20sp"
             />
 	    <TextView 
+	        style="@style/meetingFriendStatusList"
             android:id="@+id/waitingList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
             />
-       	<!-- Waiting friends ends -->
+	    
+	    <TextView
+            android:id="@+id/myStatusLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:padding="5sp"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:background="#dddddd"
+            android:text="@string/myStatusLabel"
+            />
+	    <TextView
+            android:id="@+id/myStatusText"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:padding="10sp"
+            android:gravity="center"
+            android:text="@string/myStatusNotLeftYet"
+            />
+	    <Button
+            android:id="@+id/myStatusButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/myStatusButtonLeave"
+            />
+	    
+	    <Button
+            android:id="@+id/seeMapButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/seeMapButton"
+            />
 	</LinearLayout>
 </ScrollView>

@@ -75,6 +75,7 @@ public class MeetingInfoActivity extends Activity {
 		meetingDao = new MeetingDao();
 		meetDao = new MeetDao();
 		
+		updateMeetingInfo();
 		loadMeeting();
 	}
 	
@@ -86,18 +87,21 @@ public class MeetingInfoActivity extends Activity {
 		v.setVisibility(visibility == View.GONE ? View.VISIBLE : View.GONE);
 	}
 	
-	private void updateUi() {
+	private void updateMeetingInfo() {
 		// build meeting host text
 		StringBuilder meetingHostBuilder = new StringBuilder();
 		meetingHostBuilder.append(getString(R.string.meetingHostLabel)).append(" ");
 		meetingHostBuilder.append(host.getFirstname()).append(" ").append(host.getLastname());
 		
-		// update meeting infos
 		meetingTitle.setText(meeting.getTitle());
 		meetingDateTime.setText(meeting.getDateTime());
 		meetingLocation.setText(meeting.getLocationText());
 		meetingDescription.setText(meeting.getDescription());
 		meetingHost.setText(meetingHostBuilder.toString());
+	}
+	
+	private void updateUi() {
+		updateMeetingInfo();
 		
 		// update users infos
 		goingLabel.setText(getString(R.string.goingLabel) + " (" + meetingPresentation.getGoingCount() + ")");

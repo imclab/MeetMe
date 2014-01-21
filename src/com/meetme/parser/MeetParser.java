@@ -18,10 +18,11 @@ public class MeetParser extends AbstractParser<Meet> {
 	private static final String USER_CONFIRMATION = "user_confirmation";
 	private static final String USER_CONFIRMATION_DATE_UPDATED = "user_confirmation_date_updated";
 	private static final String USER_LAT_LONG = "user_lat_long";
+	private static final String USER_TRAVEL_MODE = "user_travel_mode";
 	
 	private static String[] fieldNameArray = 
 		{USER_ID, USER_ETA, USER_ETA_SECONDS, USER_EDA, USER_REFRESH_DATE_UPDATED, USER_STATUS, USER_STATUS_DATE_UPDATED,
-		USER_CONFIRMATION, USER_CONFIRMATION_DATE_UPDATED, USER_LAT_LONG};
+		USER_CONFIRMATION, USER_CONFIRMATION_DATE_UPDATED, USER_LAT_LONG, USER_TRAVEL_MODE};
 	
 	/*
 	 * Methods
@@ -52,7 +53,8 @@ public class MeetParser extends AbstractParser<Meet> {
 				fieldMap.get(USER_STATUS_DATE_UPDATED),
 				Integer.parseInt(fieldMap.get(USER_CONFIRMATION)), 
 				fieldMap.get(USER_CONFIRMATION_DATE_UPDATED), 
-				fieldMap.get(USER_LAT_LONG)
+				fieldMap.get(USER_LAT_LONG),
+				Integer.parseInt(fieldMap.get(USER_TRAVEL_MODE))
 			);
 		
 		return meet;

@@ -127,7 +127,7 @@
                 android:text="@string/alreadyHaveAnAccountLink"
                 android:gravity="center"
                 android:textSize="20sp"
-                android:textColor="#FF9100"/>	    
+                android:textColor="#3B77FF"/>	    
         </LinearLayout>
         <!-- Registration Form ends -->
         <!--  Footer Starts -->

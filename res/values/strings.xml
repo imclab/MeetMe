@@ -73,11 +73,17 @@
     <string name="invitedLabel">Invited</string>
     <string name="declinedLabel">Declined</string>
     <string name="seeLiveButton">See live</string>
-    
+
     <!-- Meeting activity -->
     <string name="arrivedLabel">Arrived</string>
     <string name="leftLabel">Left</string>
     <string name="waitingLabel">Waiting</string>
+    <string name="seeMapButton">See the map</string>
+    <string name="myStatusButtonLeave">I\'m leaving</string>
+    <string name="myStatusButtonArrive">I arrived</string>
+    <string name="myStatusLabel">Your status :</string>
+    <string name="myStatusNotLeftYet">You didn\'t leave yet.</string>
+    <string name="myStatusArrived">You arrived.</string>
 
     <!-- Notifications activity -->
     <string name="pickNotificationTypeSpinnerPrompt">Choose notifications</string>

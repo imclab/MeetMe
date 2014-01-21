@@ -78,6 +78,12 @@
     <string name="arrivedLabel">Arrivé</string>
     <string name="leftLabel">Parti</string>
     <string name="waitingLabel">En attente</string>
+    <string name="seeMapButton">Voir la carte</string>
+    <string name="myStatusButtonLeave">Je pars</string>
+    <string name="myStatusButtonArrive">Je suis arrivé</string>
+    <string name="myStatusLabel">Votre status :</string>
+    <string name="myStatusNotLeftYet">Vous n\'êtes pas encore parti.</string>
+    <string name="myStatusArrived">Vous êtes arrivé.</string>
 
     <!-- Notifications activity -->
     <string name="pickNotificationTypeSpinnerPrompt">Choisissez le type de notification</string>

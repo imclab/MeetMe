@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -108,7 +109,7 @@ public class PickLocationActivity extends FragmentActivity {
 	                // encoding special characters like space in the user input place
 	                location = URLEncoder.encode(location, "utf-8");
 	            } catch (UnsupportedEncodingException e) {
-	                e.printStackTrace();
+	            	Log.e(PickLocationActivity.class.getName(), e.getMessage(), e);
 	            }
 	
 	            String address = GOOGLE_MAP_ADDRESS + "=" + location;

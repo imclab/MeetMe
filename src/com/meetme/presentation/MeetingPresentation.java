@@ -1,5 +1,6 @@
 package com.meetme.presentation;
 
+import static com.meetme.store.UserTravelModeStore.*;
 import static com.meetme.store.UserConfirmationCodeStore.USER_CONFIRMATION_ACCEPTED;
 import static com.meetme.store.UserConfirmationCodeStore.USER_CONFIRMATION_DECLINED;
 import static com.meetme.store.UserConfirmationCodeStore.USER_CONFIRMATION_INVITED;
@@ -37,7 +38,26 @@ public class MeetingPresentation {
 		this.confirmationMeetMap = new HashMap<Integer, Set<Meet>>();
 		update(meetSet);
 	}
-
+	/*
+	 * Private methods
+	 */
+	public String getTravelModeString(int travelModeCode) {
+		String travelModeString;
+		
+		switch (travelModeCode) {
+			case TRAVEL_MODE_WALKING : travelModeString = "by foot";
+			break;
+			case TRAVEL_MODE_BICYCLING : travelModeString = "by bicycle";
+			break;
+			case TRAVEL_MODE_DRIVING : travelModeString = "by car";
+			break;
+			default : travelModeString = "by foot";
+			break;
+		}
+		
+		return travelModeString;
+	}
+	
 	/*
 	 * Accessors
 	 */
@@ -129,27 +149,24 @@ public class MeetingPresentation {
 			switch (meet.getUserConfirmation()) {
 				case USER_CONFIRMATION_ACCEPTED : {
 					goingSet.add(meet);
-					goingString.append(user + "\n");
-					break;
+					goingString.append(user).append("\n");
 				}
-				
+				break;
 				case USER_CONFIRMATION_MAYBE : {
 					maybeSet.add(meet);
-					maybeString.append(user + "\n");
-					break;
+					maybeString.append(user).append("\n");
 				}
-				
+				break;
 				case USER_CONFIRMATION_INVITED : {
 					invitedSet.add(meet);
-					invitedString.append(user + "\n");
-					break;
+					invitedString.append(user).append("\n");
 				}
-				
+				break;
 				case USER_CONFIRMATION_DECLINED : {
 					declinedSet.add(meet);
-					declinedString.append(user + "\n");
-					break;
+					declinedString.append(user).append("\n");
 				}
+				break;
 				default : invitedSet.add(meet);
 				break;
 			}
@@ -157,17 +174,20 @@ public class MeetingPresentation {
 			switch (meet.getUserStatus()) {
 				case USER_STATUS_ARRIVED : {
 					arrivedSet.add(meet);
-					arrivedString.append(user + "\n");
+					arrivedString.append(user).append("\n");
 				}
 				break;
 				case USER_STATUS_LEFT : {
 					leftSet.add(meet);
-					leftString.append(user + "\n");
+					leftString.append(user).append("\n");
+					leftString.append(meet.getUserEstimatedDistance()).append("\n");
+					leftString.append(meet.getUserEstimatedTime()).append("\n");
+					leftString.append(getTravelModeString(meet.getUserTravelMode())).append("\n\n");
 				}
 				break;
 				case USER_STATUS_WAITING : {
 					waitingSet.add(meet);
-					waitingString.append(user + "\n");
+					waitingString.append(user).append("\n");
 				}
 				break;
 				default : waitingSet.add(meet);

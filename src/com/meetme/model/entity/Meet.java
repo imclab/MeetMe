@@ -18,6 +18,7 @@ public class Meet extends AbstractEntity
 	private int userConfirmation;
 	private String userConfirmationDateUpdated;
 	private String userLatitudeLongitude;
+	private int userTravelMode;
 	
 	/*
 	 * Constructors
@@ -36,7 +37,8 @@ public class Meet extends AbstractEntity
 			String userStatusDateUpdated, 
 			int userConfirmation,
 			String userConfirmationDateUpdated, 
-			String userLatitudeLongitude) {
+			String userLatitudeLongitude,
+			int userTravelMode) {
 		super();
 		this.meetingId = meetingId;
 		this.userId = userId;
@@ -49,6 +51,7 @@ public class Meet extends AbstractEntity
 		this.userConfirmation = userConfirmation;
 		this.userConfirmationDateUpdated = userConfirmationDateUpdated;
 		this.userLatitudeLongitude = userLatitudeLongitude;
+		this.userTravelMode = userTravelMode;
 	}
 
 
@@ -160,5 +163,13 @@ public class Meet extends AbstractEntity
 
 	public void setUserLatitudeLongitude(String userLatitudeLongitude) {
 		this.userLatitudeLongitude = userLatitudeLongitude;
+	}
+
+	public int getUserTravelMode() {
+		return userTravelMode;
+	}
+
+	public void setUserTravelMode(int userTravelMode) {
+		this.userTravelMode = userTravelMode;
 	}
 }
