@@ -12,4 +12,5 @@ public abstract class ServerUrlStore {
 	public static final String MEET_URL = HOST_URL + "meet.php";
 	
 	public static final String GOOGLE_MAP_URL = "https://maps.googleapis.com/maps/api/geocode/json?";
+	public static final String GOOGLE_DIRECTIONS_URL = "http://maps.googleapis.com/maps/api/directions/json?";
 }

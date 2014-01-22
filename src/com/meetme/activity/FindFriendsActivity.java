@@ -73,13 +73,17 @@ public class FindFriendsActivity extends Activity {
 	/*
 	 * Private methods
 	 */
-	private void handleAddFriendResponse(JSONObject responseJSON) {
+	private void clearFoundFriendUi() {
 		// Clear fields
 		searchFriendEdit.setText("");
 		foundFriendText.setText("");
 		// Hide found friend infos and send request button
 		foundFriendText.setVisibility(View.GONE);
 		addFriendButton.setVisibility(View.GONE);
+	}
+	
+	private void handleAddFriendResponse(JSONObject responseJSON) {
+		clearFoundFriendUi();
 		
 		Toast.makeText(getApplicationContext(), R.string.friendInvitationSent, Toast.LENGTH_LONG).show();
 	}
@@ -117,7 +121,9 @@ public class FindFriendsActivity extends Activity {
 		}).start();
 	}
 	
-	private void handleLoginError(int errorCode) {
+	private void handleFindFriendError(int errorCode) {
+		clearFoundFriendUi();
+		
 		switch (errorCode) {
 			case FIND_FRIEND_USER_NOT_FOUND : 
 				this.searchFriendEdit.setError(getString(NO_FRIEND_FOUND_FOR_EMAIL));
@@ -161,7 +167,7 @@ public class FindFriendsActivity extends Activity {
 			} else {
 				runOnUiThread(new Runnable() {
 					public void run() {
-						handleLoginError(responseCode);
+						handleFindFriendError(responseCode);
 					}
 				});
 			}

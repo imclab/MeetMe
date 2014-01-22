@@ -60,7 +60,7 @@ public abstract class AbstractParser<E extends AbstractEntity> {
 		Set<E> entitySet = new TreeSet<E>();
 		
 		try {
-			JSONArray entitiesJSON = (JSONArray)responseJSON.get(JSONKey);
+			JSONArray entitiesJSON = responseJSON.getJSONArray(JSONKey);
 			int entitiesSize = entitiesJSON.length();
 			
 			for (int i = 0; i < entitiesSize; i++) {

@@ -60,8 +60,22 @@ public abstract class ServerParameterStore {
 	public static final String MEET_OPERATION_REFRESH_OTHERS = "refresh_others";
 	public static final String MEET_CONFIRMATION_CONFIRMATION_CODE = "confirmation_code";
 	public static final String MEET_CONFIRMATION_MEETING_ID = "meeting_id";
+	public static final String MEET_REFRESH_MEETING_ID = "meeting_id";
+	public static final String MEET_REFRESH_USER_ETA = "user_eta";
+	public static final String MEET_REFRESH_USER_ETA_SECONDS = "user_eta_seconds";
+	public static final String MEET_REFRESH_USER_EDA = "user_eda";
+	public static final String MEET_REFRESH_USER_LAT_LONG = "user_lat_long";
+	public static final String MEET_REFRESH_USER_TRAVEL_MODE = "user_travel_mode";
 	public static final String MEET_REFRESH_OTHERS_MEETING_ID = "meeting_id";
 	public static final String MEET_STATUS_USER_TRAVEL_MODE = "user_travel_mode";
 	public static final String MEET_STATUS_STATUS_CODE = "status_code";
 	public static final String MEET_STATUS_MEETING_ID = "meeting_id";
+	
+	public static final String GOOGLE_DIRECTIONS_ORIGIN = "origin";
+	public static final String GOOGLE_DIRECTIONS_DESTINATION = "destination";
+	public static final String GOOGLE_DIRECTIONS_TRAVEL_MODE = "mode";
+	public static final String GOOGLE_DIRECTIONS_TRAVEL_MODE_WALKING = "walking";
+	public static final String GOOGLE_DIRECTIONS_TRAVEL_MODE_DRIVING = "driving";
+	public static final String GOOGLE_DIRECTIONS_TRAVEL_MODE_BICYCLING = "bicycling";
+	public static final String GOOGLE_DIRECTIONS_SENSOR = "sensor";
 }

@@ -8,11 +8,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
-import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -109,27 +107,7 @@ public class MeetingMapActivity extends FragmentActivity implements LocationList
 	
     @Override
     public void onLocationChanged(Location location) {
- 
-        TextView tvLocation = (TextView) findViewById(R.id.tv_location);
- 
-        // Getting latitude of the current location
-        double latitude = location.getLatitude();
- 
-        // Getting longitude of the current location
-        double longitude = location.getLongitude();
- 
-        // Creating a LatLng object for the current location
-        LatLng latLng = new LatLng(latitude, longitude);
- 
-        // Showing the current location in Google Map
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
- 
-        // Zoom in the Google Map
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
- 
-        // Setting latitude and longitude in the TextView tv_location
-        tvLocation.setText("Latitude:" +  latitude  + ", Longitude:"+ longitude );
- 
+    	// Auto-generated method stub
     }
  
     @Override

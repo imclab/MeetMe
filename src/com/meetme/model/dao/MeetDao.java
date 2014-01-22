@@ -29,7 +29,7 @@ public class MeetDao {
 		this.entityParser = new MeetParser();
 	}
 	
-	public Set<Meet> findMeetsOfMeeting(Meeting meeting, String userToken) {
+	public Set<Meet> findAllMeetsOfMeeting(Meeting meeting, String userToken) {
 		Set<Meet> meetSet = new HashSet<Meet>();
 		
 		JSONObject responseJSON = null;

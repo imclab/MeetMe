@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -24,12 +25,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.meetme.R;
 import com.meetme.core.SessionManager;
+import com.meetme.model.dao.GoogleDirectionDao;
 import com.meetme.model.dao.MeetDao;
 import com.meetme.model.dao.MeetingDao;
+import com.meetme.model.entity.GoogleDirection;
 import com.meetme.model.entity.Meeting;
 import com.meetme.presentation.MeetingPresentation;
 import com.meetme.task.SendUserStatusCodeTask;
@@ -40,8 +42,10 @@ public class MeetingActivity extends Activity implements LocationListener {
 	private SessionManager session;
 	private Meeting meeting;
 	private MeetingPresentation meetingPresentation;
+	private GoogleDirection googleDirection;
 	private MeetingDao meetingDao;
 	private MeetDao meetDao;
+	private GoogleDirectionDao googleDirectionDao;
 	
 	private TextView meetingTitle;
 	private TextView meetingDateTime;
@@ -67,14 +71,16 @@ public class MeetingActivity extends Activity implements LocationListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_meeting);
 		meeting = (Meeting)getIntent().getSerializableExtra("meeting");
-		
+			
 		locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
-		locationManager.requestLocationUpdates(
-				LocationManager.GPS_PROVIDER, 
-				2000, 
-				0, 
-				this
-			);
+		
+		// Get current location
+        Criteria criteria = new Criteria();
+        String provider = locationManager.getBestProvider(criteria, true);
+        Location location = locationManager.getLastKnownLocation(provider);
+        locationManager.requestLocationUpdates(provider, REFRESH_RATE, 0, this);
+		onLocationChanged(location);
+        
 		session = SessionManager.getInstance();
         
 		meetingTitle = (TextView)findViewById(R.id.meetingTitle);
@@ -96,8 +102,8 @@ public class MeetingActivity extends Activity implements LocationListener {
 		
 		meetingDao = new MeetingDao();
 		meetDao = new MeetDao();
+		googleDirectionDao = new GoogleDirectionDao();
 		
-		updateMyLocation(null);
 		updateMeetingInfo();
 		refresh();
 	}
@@ -114,13 +120,10 @@ public class MeetingActivity extends Activity implements LocationListener {
 	protected void onResume() {
 		super.onResume();
 		
-		// Resume refreshing and GPS updates
-		locationManager.requestLocationUpdates(
-				LocationManager.GPS_PROVIDER, 
-				2000, 
-				0, 
-				this
-			);
+		// Resume GPS updates
+		Criteria criteria = new Criteria();
+		String provider = locationManager.getBestProvider(criteria, true);
+		locationManager.requestLocationUpdates(provider, REFRESH_RATE, 0, this);
 		REFRESHING = true;
 	}
 
@@ -136,17 +139,9 @@ public class MeetingActivity extends Activity implements LocationListener {
 		if (location != null) {
 			MY_LONGITUDE = location.getLongitude();
 			MY_LATITUTE = location.getLatitude();
-		}
+		} 
 		
-		String locationString = "gps(" + location.getLatitude() + "," + location.getLongitude() + ")\n";
-		locationString += "local(" + MY_LATITUTE + "," + MY_LONGITUDE + ")";
-		Toast.makeText(getApplicationContext(), locationString, Toast.LENGTH_LONG).show();
-	}
-	
-	private void updateMeetingInfo() {
-		// build meeting host text
-		meetingTitle.setText(meeting.getTitle());
-		meetingDateTime.setText(meeting.getDateTime());
+		Log.d(MeetingActivity.class.getName(), "LatLong(" + MY_LATITUTE + "," + MY_LONGITUDE + ")");
 	}
 	
 	private void sendUserStatusTask() {
@@ -154,6 +149,12 @@ public class MeetingActivity extends Activity implements LocationListener {
 				MY_STATUS, 
 				MY_TRAVEL_MODE, 
 				meeting.getId()).execute();
+	}
+	
+	private void updateMeetingInfo() {
+		// build meeting host text
+		meetingTitle.setText(meeting.getTitle());
+		meetingDateTime.setText(meeting.getDateTime());
 	}
 	
 	private void updateMyStatus(
@@ -169,8 +170,8 @@ public class MeetingActivity extends Activity implements LocationListener {
 	
 	private void updateMyStatusUi() {
 		// Build my status message
-		String estimatedDistance = "2 km";
-		String estimatedTime = "10 mins";
+		String estimatedDistance = googleDirection.getUserEda();
+		String estimatedTime = googleDirection.getUserEta();
 		String myTravelMode = meetingPresentation.getTravelModeString(MY_TRAVEL_MODE);
 		
 		StringBuilder myStatusBuilder = new StringBuilder();
@@ -187,9 +188,7 @@ public class MeetingActivity extends Activity implements LocationListener {
 		}
 	}
 	
-	private void updateUi() {
-		updateMeetingInfo();
-		
+	private void updateGuestsUi() {
 		// Update labels
 		arrivedLabel.setText(
     			getString(R.string.arrivedLabel) 
@@ -207,7 +206,11 @@ public class MeetingActivity extends Activity implements LocationListener {
     	arrivedList.setText(meetingPresentation.getArrivedString());
     	leftList.setText(meetingPresentation.getLeftString());
     	waitingList.setText(meetingPresentation.getWaitingString());
-    	
+	}
+	
+	private void updateUi() {
+		updateMeetingInfo();
+		updateGuestsUi();
     	updateMyStatusUi();
 	}
 	
@@ -225,7 +228,12 @@ public class MeetingActivity extends Activity implements LocationListener {
 		                        	if (REFRESHING) {
 		                        		int meetingId = meeting.getId();
 		                        		
-		                        		updateMyLocation(null);
+		                        		// Get estimation time and direction
+		                        		googleDirection = googleDirectionDao.findBetweenUserLocationAndMeeting(
+		                        				MY_LATITUTE + "," + MY_LONGITUDE, 
+		                        				MY_TRAVEL_MODE, 
+		                        				meeting.getLocationGeo()
+		                        				);
 		                        		
 			                        	// TO DO : Refresh meeting data in session
 			                        	//session.updateMeeting(meetingId);
@@ -237,7 +245,7 @@ public class MeetingActivity extends Activity implements LocationListener {
 			                    		meetingPresentation = new MeetingPresentation(
 			                    				MeetingActivity.this,
 			                    				meeting,
-			                    				meetDao.findMeetsOfMeeting(meeting, session.getUser().getToken())
+			                    				meetDao.findAllMeetsOfMeeting(meeting, session.getUser().getToken())
 		                    				);
 			                        	
 			                        	// Update UI
