@@ -44,13 +44,14 @@ public abstract class ServerParameterStore {
 	public static final String FRIEND_OPERATION = OPERATION;
 	public static final String FRIEND_OPERATION_LIST = "list";
 	public static final String FRIEND_OPERATION_REQUEST = "request";
-	public static final String FRIEND_OPERATION_ACCEPT = "accept";
-	public static final String FRIEND_OPERATION_DECLINE = "decline";
+	public static final String FRIEND_OPERATION_RESPONSE = "response";
 	public static final String FRIEND_OPERATION_FIND_BY_EMAIL = "findByEmail";
 	public static final String FRIEND_OPERATION_NOTIFICATION = NOTIFICATION;
 	public static final String FRIEND_REQUEST_ID = "friend_id";
-	public static final String FRIEND_ACCEPT_ID = "friend_id";
-	public static final String FRIEND_DECLINE_ID = "friend_id";
+	public static final String FRIEND_RESPONSE_RESPONSE_CODE = "response";
+	public static final String FRIEND_RESPONSE_ACCEPT = "1";
+	public static final String FRIEND_RESPONSE_DECLINE = "0";
+	public static final String FRIEND_RESPONSE_ID = "friend_id";
 	public static final String FRIEND_FIND_BY_EMAIL_EMAIL = "email";
 	
 	public static final String MEET_TOKEN = TOKEN;

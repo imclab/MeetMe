@@ -35,14 +35,16 @@ public class MeetingMapActivity extends FragmentActivity implements LocationList
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
  
         // Showing status
-        if (status != ConnectionResult.SUCCESS) { // Google Play Services are not available
+        if (status != ConnectionResult.SUCCESS) { 
+        	// Google Play Services are not available
  
             int requestCode = 10;
             Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, this, requestCode);
             dialog.show();
  
-        } else { // Google Play Services are available
- 
+        } else { 
+        	// Google Play Services are available
+        	
             // Getting reference to the SupportMapFragment of activity_main.xml
             SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
  
@@ -114,17 +116,17 @@ public class MeetingMapActivity extends FragmentActivity implements LocationList
  
     @Override
     public void onProviderDisabled(String provider) {
-        // TODO Auto-generated method stub
+        // Auto-generated method stub
     }
  
     @Override
     public void onProviderEnabled(String provider) {
-        // TODO Auto-generated method stub
+        // Auto-generated method stub
     }
  
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-        // TODO Auto-generated method stub
+        // Auto-generated method stub
     }
  
     @Override
