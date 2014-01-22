@@ -1,6 +1,5 @@
 package com.meetme.presentation;
 
-import static com.meetme.store.UserTravelModeStore.*;
 import static com.meetme.store.UserConfirmationCodeStore.USER_CONFIRMATION_ACCEPTED;
 import static com.meetme.store.UserConfirmationCodeStore.USER_CONFIRMATION_DECLINED;
 import static com.meetme.store.UserConfirmationCodeStore.USER_CONFIRMATION_INVITED;
@@ -8,54 +7,45 @@ import static com.meetme.store.UserConfirmationCodeStore.USER_CONFIRMATION_MAYBE
 import static com.meetme.store.UserStatusCodeStore.USER_STATUS_ARRIVED;
 import static com.meetme.store.UserStatusCodeStore.USER_STATUS_LEFT;
 import static com.meetme.store.UserStatusCodeStore.USER_STATUS_WAITING;
+import static com.meetme.store.UserTravelModeStore.TRAVEL_MODE_BICYCLING;
+import static com.meetme.store.UserTravelModeStore.TRAVEL_MODE_DRIVING;
+import static com.meetme.store.UserTravelModeStore.TRAVEL_MODE_WALKING;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+
+import com.meetme.R;
 import com.meetme.model.entity.Friend;
 import com.meetme.model.entity.Meet;
 import com.meetme.model.entity.Meeting;
 
 public class MeetingPresentation {
 	
+	private Context context;
 	private Meeting meeting;
 	private Map<Integer, Set<Meet>> statusMeetMap;
 	private Map<Integer, Set<Meet>> confirmationMeetMap;
-	StringBuilder goingString;
-	StringBuilder maybeString;
-	StringBuilder invitedString;
-	StringBuilder declinedString;
-	StringBuilder arrivedString;
-	StringBuilder leftString;
-	StringBuilder waitingString;
+	private StringBuilder goingString;
+	private StringBuilder maybeString;
+	private StringBuilder invitedString;
+	private StringBuilder declinedString;
+	private StringBuilder arrivedString;
+	private StringBuilder leftString;
+	private StringBuilder waitingString;
 	
 	
-	public MeetingPresentation(Meeting meeting, Set<Meet> meetSet) {
+	@SuppressLint("UseSparseArrays")
+	public MeetingPresentation(Context context, Meeting meeting, Set<Meet> meetSet) {
+		this.context = context;
 		this.meeting = meeting;
 		this.statusMeetMap = new HashMap<Integer, Set<Meet>>();
 		this.confirmationMeetMap = new HashMap<Integer, Set<Meet>>();
 		update(meetSet);
-	}
-	/*
-	 * Private methods
-	 */
-	public String getTravelModeString(int travelModeCode) {
-		String travelModeString;
-		
-		switch (travelModeCode) {
-			case TRAVEL_MODE_WALKING : travelModeString = "by foot";
-			break;
-			case TRAVEL_MODE_BICYCLING : travelModeString = "by bicycle";
-			break;
-			case TRAVEL_MODE_DRIVING : travelModeString = "by car";
-			break;
-			default : travelModeString = "by foot";
-			break;
-		}
-		
-		return travelModeString;
 	}
 	
 	/*
@@ -124,6 +114,23 @@ public class MeetingPresentation {
 	/*
 	 * Methods 
 	 */
+	public String getTravelModeString(int travelModeCode) {
+		String travelModeString;
+		
+		switch (travelModeCode) {
+			case TRAVEL_MODE_WALKING : travelModeString = context.getString(R.string.walking);
+			break;
+			case TRAVEL_MODE_BICYCLING : travelModeString = context.getString(R.string.bicycling);
+			break;
+			case TRAVEL_MODE_DRIVING : travelModeString = context.getString(R.string.driving);
+			break;
+			default : travelModeString = context.getString(R.string.walking);
+			break;
+		}
+		
+		return travelModeString;
+	}
+	
 	public void update(Set<Meet> meetSet) {
 		Set<Meet> goingSet = new HashSet<Meet>();
 		Set<Meet> maybeSet = new HashSet<Meet>();

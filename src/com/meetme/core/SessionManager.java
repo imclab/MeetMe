@@ -11,12 +11,12 @@ import com.meetme.model.entity.Friend;
 import com.meetme.model.entity.FriendInviteNotification;
 import com.meetme.model.entity.Meeting;
 import com.meetme.model.entity.MeetingInviteNotification;
+import com.meetme.model.entity.User;
 
 public class SessionManager {
 	
 	private static SessionManager instance = null;
-	private String email = null;
-	private String userToken = null;
+	private User user;
 	private Set<Friend> friendSet = null;
 	private Set<Meeting> meetingSet = null;
 	private Set<FriendInviteNotification> friendNotificationSet = null;
@@ -49,20 +49,12 @@ public class SessionManager {
 		return instance;
 	}
 	
-	public String getEmail() {
-		return this.email;
+	public User getUser() {
+		return this.user;
 	}
 	
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	public String getUserToken() {
-		return this.userToken;
-	}
-	
-	public void setUserToken(String userToken) {
-		this.userToken = userToken;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	public Set<Friend> getFriendSet() {
@@ -103,17 +95,15 @@ public class SessionManager {
 	 * Check if the session is valid by checking token validity
 	 */
 	private boolean isSessionValid() {
-		return this.userToken != null && !this.userToken.isEmpty();
+		return this.user.getToken() != null && !this.user.getToken().isEmpty();
 	}
 	
 	/*
 	 * Find methods
 	 */
 	public Friend getFriendById(int friendId) {
-		// TO DO : check if is the user himself
-		if (friendId == 100) {
-			Friend userHimself = new Friend(100, "Baptiste", "Le Bail");
-			return userHimself;
+		if (this.user.getId() == friendId) {
+			return this.user;
 		}
 		
 		for (Friend friend : this.friendSet) {
@@ -156,28 +146,32 @@ public class SessionManager {
 	public void updateFriendSet() {
 		if (isSessionValid()) {
 			this.friendSet.clear();
-			this.friendSet.addAll(this.friendDao.findFriendsOfUser(this.userToken));
+			this.friendSet.addAll(this.friendDao.findFriendsOfUser(this.user.getToken()));
 		}
 	}
 	
 	public void updateMeetingSet() {
 		if (isSessionValid()) {
 			this.meetingSet.clear();
-			this.meetingSet.addAll(this.meetingDao.findMeetingsOfUser(this.userToken));
+			this.meetingSet.addAll(this.meetingDao.findMeetingsOfUser(this.user.getToken()));
 		}
 	}
 	
 	public void updateFriendgNotificationSet() {
 		if (isSessionValid()) {
 			this.friendNotificationSet.clear();
-			this.friendNotificationSet.addAll(this.friendNotificationDao.findFriendInviteNotifications(this.userToken));
+			this.friendNotificationSet.addAll(
+					this.friendNotificationDao.findFriendInviteNotifications(this.user.getToken())
+				);
 		}
 	}
 	
 	public void updateMeetingNotificationSet() {
 		if (isSessionValid()) {
 			this.meetingNotificationSet.clear();
-			this.meetingNotificationSet.addAll(this.meetingNotificationDao.findMeetingInviteNotifications(this.userToken));
+			this.meetingNotificationSet.addAll(
+					this.meetingNotificationDao.findMeetingInviteNotifications(this.user.getToken())
+				);
 		}
 	}
 	
@@ -185,7 +179,7 @@ public class SessionManager {
 		if (isSessionValid()) {
 			for (Meeting meeting : this.meetingSet) {
 				if (meeting.getId() == meetingId) {
-					Meeting updatedMeeting = this.meetingDao.findMeetingById(meetingId, this.userToken);
+					Meeting updatedMeeting = this.meetingDao.findMeetingById(meetingId, this.user.getToken());
 					this.meetingSet.remove(meeting);
 					this.meetingSet.add(updatedMeeting);
 				}

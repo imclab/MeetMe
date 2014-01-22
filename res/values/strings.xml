@@ -39,7 +39,12 @@
     <string name="noMeetingText">No meetings</string>
     <string name="newMeetingButton">New Meeting</string>
     <string name="findFriendsButton">Find friends</string>
-
+    
+    <!-- New meeting steps -->
+    <string name="newMeetingStep1on3">New Meeting - Step 1/3</string>
+    <string name="newMeetingStep2on3">New Meeting - Step 2/3</string>
+    <string name="newMeetingStep3on3">New Meeting - Step 3/3</string>
+    
     <!-- New meeting activity -->
     <string name="titleLabel">Title :</string>
     <string name="descriptionLabel">Description :</string>
@@ -73,8 +78,12 @@
     <string name="invitedLabel">Invited</string>
     <string name="declinedLabel">Declined</string>
     <string name="seeLiveButton">See live</string>
+    <string name="noDescription">No description.</string>
 
     <!-- Meeting activity -->
+    <string name="walking">Walking</string>
+    <string name="bicycling">Bicycling</string>
+    <string name="driving">Driving</string>
     <string name="arrivedLabel">Arrived</string>
     <string name="leftLabel">Left</string>
     <string name="waitingLabel">Waiting</string>
@@ -132,7 +141,12 @@
     <string name="friendAcceptSuccessDialogMessage">is now in your friend list.</string>
     <string name="meetingAcceptSuccessDialogTitle">Meeting invitation</string>
     <string name="meetingAcceptSuccessDialogMessage">You are now part of the meeting</string>
-
+    <string name="byCar">Car</string>
+    <string name="byBicycle">Bicycle</string>
+    <string name="byFoot">Foot</string>
+    <string name="travelModeDialogTitle">Travel mode</string>
+    <string name="travelModeDialogMessage">How are you going to this meeting ?</string>
+    
     <!-- Error/Warning -->
     <string name="generalError">An error occurred</string>
     <string name="invalidEmail">Email is not valid</string>

@@ -107,8 +107,7 @@ public class LoginActivity extends Activity {
 				MeetingInviteNotificationParser meetingNotificationParser = new MeetingInviteNotificationParser();
 				
 				// Load data into session
-				session.setEmail(loginEdit.getText().toString());
-				session.setUserToken(userParser.getFromJSON(responseJSON.getJSONObject("user")).getToken());
+				session.setUser(userParser.getFromJSON(responseJSON.getJSONObject("user")));
 				session.setFriendSet(friendParser.getSetFromJSON(responseJSON, "friends"));
 				session.setMeetingSet(meetingParser.getSetFromJSON(responseJSON, "meetings"));
 				session.setFriendNotificationSet(friendNotificationParser.getSetFromJSON(responseJSON, "friendNotifications"));

@@ -1,6 +1,9 @@
 package com.meetme.model.entity;
 
-public abstract class AbstractEntity {
+import java.io.Serializable;
+
+public abstract class AbstractEntity implements Serializable {
+	static final long serialVersionUID = 805L;
 	
 	protected AbstractEntity() {
 	}

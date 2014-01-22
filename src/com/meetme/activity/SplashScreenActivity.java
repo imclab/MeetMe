@@ -8,6 +8,7 @@ import android.os.Handler;
 
 import com.meetme.R;
 import com.meetme.core.SessionManager;
+import com.meetme.model.entity.User;
 
 public class SplashScreenActivity extends Activity {
 	
@@ -56,10 +57,14 @@ public class SplashScreenActivity extends Activity {
  
         @Override
         protected Void doInBackground(String... userToken) {
-    		session.setUserToken(userToken[0]);
-    		/*
-    		 * Init session
-    		 */
+    		// Init session
+        	User user = new User();
+    		user.setId(1);
+    		user.setEmail("email");
+    		user.setFirstname("firstname");
+    		user.setLastname("lastname");
+    		user.setToken(SplashScreenActivity.this.userToken);
+        	session.setUser(user);
         	
             return null;
         }

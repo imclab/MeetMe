@@ -4,12 +4,26 @@
 	android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     >
-    
+        <!-- Header starts -->
+        <TextView
+            android:id="@+id/newMeetingStep3on3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:padding="10sp"
+            android:gravity="center"
+            android:background="@drawable/header_gradient"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:text="@string/newMeetingStep3on3"
+            />
+        <!-- Header ends -->
         <!-- Search bar starts -->
         <RelativeLayout 
             android:id="@+id/searchBar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/newMeetingStep3on3"
             >
             
 	        <EditText

@@ -32,7 +32,7 @@ public class FindFriendsValidator extends Validator {
 			isSearchFriendValid = false;
 		}
 		
-		if (SessionManager.getInstance().getEmail().equals(searchFriend)) {
+		if (SessionManager.getInstance().getUser().getEmail().equals(searchFriend)) {
 			searchFriendEdit.setError(getString(FRIEND_IS_YOURSELF));
 			isSearchFriendValid = false;
 		}

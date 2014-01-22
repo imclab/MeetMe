@@ -76,7 +76,7 @@ public class FriendInviteConfirmTask extends AsyncTask<Void, Void, Void> {
 		progressDialog.setCancelable(true);
 		
 		// Add parameters
-		parameters.put(FRIEND_TOKEN, session.getUserToken());
+		parameters.put(FRIEND_TOKEN, session.getUser().getToken());
 		parameters.put(FRIEND_ACCEPT_ID, Integer.toString(notification.getInviterId()));
 		
 		if (accept) {

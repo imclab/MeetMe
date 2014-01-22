@@ -144,7 +144,7 @@ public class InviteFriendsActivity extends Activity {
         @Override
         protected Void doInBackground(Void...voids) {
         	// Add parameters
-			parameters.put(MEETING_TOKEN, session.getUserToken());
+			parameters.put(MEETING_TOKEN, session.getUser().getToken());
 			parameters.put(MEETING_OPERATION, MEETING_OPERATION_CREATE);
 			parameters.put(MEETING_CREATE_TITLE, newMeeting.getTitle());
 			parameters.put(MEETING_CREATE_DESCRIPTION, newMeeting.getDescription());
@@ -176,8 +176,8 @@ public class InviteFriendsActivity extends Activity {
             super.onPostExecute(result);
             
     		if (meetingCreationState == SUCCESS) {
-    			// Add meeting in session
-    			session.addMeeting(newMeeting);
+    			// Update meeting list to get the new meeting in session
+    			session.updateMeetingSet();
     			
 				// Show success dialog
 				AlertDialog meetingCreationSuccessInfoDialog = 

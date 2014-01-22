@@ -1,9 +1,7 @@
 package com.meetme.model.entity;
 
-import java.io.Serializable;
 
-public class Meet extends AbstractEntity
-	implements Serializable {
+public class Meet extends AbstractEntity {
 	
 	static final long serialVersionUID = 500L;
 	

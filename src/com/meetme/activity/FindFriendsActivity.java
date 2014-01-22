@@ -90,7 +90,7 @@ public class FindFriendsActivity extends Activity {
 				// Add parameters
 				parameters.put(FRIEND_OPERATION, FRIEND_OPERATION_REQUEST);
 				parameters.put(FRIEND_REQUEST_ID, Integer.toString(foundFriend.getId()));
-				parameters.put(FRIEND_TOKEN, session.getUserToken());
+				parameters.put(FRIEND_TOKEN, session.getUser().getToken());
 				
 				// Send request
 				responseJSON = HttpUtils.post(FRIEND_URL, parameters);
@@ -172,7 +172,7 @@ public class FindFriendsActivity extends Activity {
 				// Add parameters
 				parameters.put(FRIEND_OPERATION, FRIEND_OPERATION_FIND_BY_EMAIL);
 				parameters.put(FRIEND_FIND_BY_EMAIL_EMAIL, searchFriendEdit.getText().toString());
-				parameters.put(FRIEND_TOKEN, session.getUserToken());
+				parameters.put(FRIEND_TOKEN, session.getUser().getToken());
 				
 				// Send request
 				responseJSON = HttpUtils.post(FRIEND_URL, parameters);

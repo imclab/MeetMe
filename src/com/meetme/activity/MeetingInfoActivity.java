@@ -96,7 +96,11 @@ public class MeetingInfoActivity extends Activity {
 		meetingTitle.setText(meeting.getTitle());
 		meetingDateTime.setText(meeting.getDateTime());
 		meetingLocation.setText(meeting.getLocationText());
-		meetingDescription.setText(meeting.getDescription());
+		meetingDescription.setText(
+				meeting.getDescription().isEmpty()
+						? getString(R.string.noDescription)
+						: meeting.getDescription()
+					);
 		meetingHost.setText(meetingHostBuilder.toString());
 	}
 	
@@ -124,12 +128,13 @@ public class MeetingInfoActivity extends Activity {
                     	//session.updateMeeting(meetingId);
                     	
                 		// Load meeting data
-                    	meeting = meetingDao.findMeetingById(meetingId, session.getUserToken());
+                    	meeting = meetingDao.findMeetingById(meetingId, session.getUser().getToken());
                     	
                     	// Load friends data 
                 		meetingPresentation = new MeetingPresentation(
+                				MeetingInfoActivity.this,
                 				meeting,
-                				meetDao.findMeetsOfMeeting(meeting, session.getUserToken())
+                				meetDao.findMeetsOfMeeting(meeting, session.getUser().getToken())
             				);
                     	
                 		runOnUiThread(new Runnable() {

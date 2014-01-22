@@ -7,6 +7,18 @@
 	    android:layout_height="wrap_content"
 	    android:orientation="vertical" >
 		
+	    <TextView
+	        android:id="@+id/newMeetingStep1on3"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:padding="10sp"
+	        android:background="@drawable/header_gradient"
+	        android:textSize="18sp"
+	        android:textColor="#FFFFFF"
+	        android:text="@string/newMeetingStep1on3"
+	        />
+	    
 	    <!-- Title field starts -->	
 		<TextView 
 		    android:id="@+id/titleText"

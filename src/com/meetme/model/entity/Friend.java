@@ -7,9 +7,9 @@ public class Friend extends AbstractEntity
 	
 	static final long serialVersionUID = 200L;
 	
-	private int id;
-	private String firstname;
-	private String lastname;
+	protected int id;
+	protected String firstname;
+	protected String lastname;
 	
 	/*
 	 * Constructors

@@ -1,11 +1,10 @@
 package com.meetme.model.entity;
 
-import java.io.Serializable;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class Meeting extends AbstractEntity
-	implements Comparable<Meeting>, Serializable {
+	implements Comparable<Meeting> {
 	
 	static final long serialVersionUID = 100L;
 	
@@ -70,11 +69,11 @@ public class Meeting extends AbstractEntity
 	@Override
 	public int compareTo(Meeting another) {
 		if (this.dateTime.equals(another.dateTime)) {
-			return -1;
+			return 1;
 		}
 		
-		// Newest to oldest
-		return -1 * this.dateTime.compareTo(another.dateTime);
+		// Oldest to newest
+		return this.dateTime.compareTo(another.dateTime);
 	}
 	
 	@Override

@@ -14,6 +14,7 @@ import android.widget.TimePicker;
 
 import com.meetme.R;
 import com.meetme.core.DateUtils;
+import com.meetme.core.SessionManager;
 import com.meetme.model.entity.Meeting;
 import com.meetme.validator.NewMeetingValidator;
 
@@ -82,6 +83,7 @@ public class NewMeetingActivity extends Activity {
 	
 	private Meeting createMeeting() {
 		Meeting meeting = new Meeting();
+		meeting.setHostUserId(SessionManager.getInstance().getUser().getId());
 		meeting.setTitle(titleEdit.getText().toString());
 		meeting.setDescription(descriptionEdit.getText().toString());
 		meeting.setDateTime(dateTimeEdit.getText().toString());

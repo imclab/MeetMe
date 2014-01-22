@@ -1,10 +1,7 @@
 package com.meetme.model.entity;
 
-import java.io.Serializable;
-
-
 public class MeetingInviteNotification extends AbstractEntity
-	implements Comparable<MeetingInviteNotification>, Serializable {
+	implements Comparable<MeetingInviteNotification> {
 	
 	static final long serialVersionUID = 13L;
 	

@@ -33,7 +33,7 @@ public class MeetingActivity extends Activity {
 
 	private SessionManager session;
 	private Meeting meeting;
-	private MeetingPresentation meetPresentation;
+	private MeetingPresentation meetingPresentation;
 	private MeetingDao meetingDao;
 	private MeetDao meetDao;
 	
@@ -128,10 +128,20 @@ public class MeetingActivity extends Activity {
 	}
 	
 	private void updateMyStatusUi() {
+		// Build my status message
+		String estimatedDistance = "2 km";
+		String estimatedTime = "10 mins";
+		String myTravelMode = meetingPresentation.getTravelModeString(MY_TRAVEL_MODE);
+		
+		StringBuilder myStatusBuilder = new StringBuilder();
+		myStatusBuilder.append(estimatedDistance).append("\n");
+		myStatusBuilder.append(estimatedTime).append("\n");
+		myStatusBuilder.append(myTravelMode);
+		
 		if (MY_STATUS == USER_STATUS_WAITING) {
 			myStatusText.setText(R.string.myStatusNotLeftYet);
 		} else if (MY_STATUS == USER_STATUS_LEFT){
-			myStatusText.setText("2 km\n10 mins\n" + MY_TRAVEL_MODE);
+			myStatusText.setText(myStatusBuilder.toString());
 		} else if (MY_STATUS == USER_STATUS_ARRIVED) {
 			myStatusText.setText(R.string.myStatusArrived);
 		}
@@ -143,20 +153,20 @@ public class MeetingActivity extends Activity {
 		// Update labels
 		arrivedLabel.setText(
     			getString(R.string.arrivedLabel) 
-    			+ " (" + meetPresentation.getArrivedCount() + ")");
+    			+ " (" + meetingPresentation.getArrivedCount() + ")");
     	
     	leftLabel.setText(
     			getString(R.string.leftLabel) 
-    			+ " (" + meetPresentation.getLeftCount() + ")");
+    			+ " (" + meetingPresentation.getLeftCount() + ")");
     	
     	waitingLabel.setText(
     			getString(R.string.waitingLabel) 
-    			+ " (" + meetPresentation.getWaitingCount() + ")");
+    			+ " (" + meetingPresentation.getWaitingCount() + ")");
     	
     	// Update lists
-    	arrivedList.setText(meetPresentation.getArrivedString());
-    	leftList.setText(meetPresentation.getLeftString());
-    	waitingList.setText(meetPresentation.getWaitingString());
+    	arrivedList.setText(meetingPresentation.getArrivedString());
+    	leftList.setText(meetingPresentation.getLeftString());
+    	waitingList.setText(meetingPresentation.getWaitingString());
     	
     	updateMyStatusUi();
 	}
@@ -179,12 +189,13 @@ public class MeetingActivity extends Activity {
 			                        	//session.updateMeeting(meetingId);
 			                        	
 		                        		// Refresh meeting data
-			                        	meeting = meetingDao.findMeetingById(meetingId, session.getUserToken());
+			                        	meeting = meetingDao.findMeetingById(meetingId, session.getUser().getToken());
 			                        	
 			                        	// Refresh friends data 
-			                    		meetPresentation = new MeetingPresentation(
+			                    		meetingPresentation = new MeetingPresentation(
+			                    				MeetingActivity.this,
 			                    				meeting,
-			                    				meetDao.findMeetsOfMeeting(meeting, session.getUserToken())
+			                    				meetDao.findMeetsOfMeeting(meeting, session.getUser().getToken())
 		                    				);
 			                        	
 			                        	// Update UI
@@ -239,21 +250,21 @@ public class MeetingActivity extends Activity {
 			if (MY_STATUS == USER_STATUS_WAITING) {
 				// Build dialog
 				AlertDialog.Builder builder = new AlertDialog.Builder(MeetingActivity.this);
-				builder.setTitle("Travel mode");
-				builder.setMessage("How are you going to this meeting ?");
-				builder.setPositiveButton("Car", new DialogInterface.OnClickListener() {
+				builder.setTitle(R.string.travelModeDialogTitle);
+				builder.setMessage(R.string.travelModeDialogMessage);
+				builder.setPositiveButton(R.string.byCar, new DialogInterface.OnClickListener() {
 			           public void onClick(DialogInterface dialog, int id) {
 			        	   updateMyStatus(TRAVEL_MODE_DRIVING, USER_STATUS_LEFT, R.string.myStatusButtonArrive);
 			           }
 			       });
 				
-				builder.setNeutralButton("Bicycle", new DialogInterface.OnClickListener() {
+				builder.setNeutralButton(R.string.byBicycle, new DialogInterface.OnClickListener() {
 			           public void onClick(DialogInterface dialog, int id) {
 			        	   updateMyStatus(TRAVEL_MODE_BICYCLING, USER_STATUS_LEFT, R.string.myStatusButtonArrive);
 			           }
 			       });
 				
-				builder.setNegativeButton("Foot", new DialogInterface.OnClickListener() {
+				builder.setNegativeButton(R.string.byFoot, new DialogInterface.OnClickListener() {
 			           public void onClick(DialogInterface dialog, int id) {
 			        	   updateMyStatus(TRAVEL_MODE_WALKING, USER_STATUS_LEFT, R.string.myStatusButtonArrive);
 			           }

@@ -84,7 +84,7 @@ public class MeetingInviteConfirmTask extends AsyncTask<Void, Void, Void> {
 		progressDialog.setCancelable(true);
 		
 		// Add parameters
-		parameters.put(MEET_TOKEN, session.getUserToken());
+		parameters.put(MEET_TOKEN, session.getUser().getToken());
 		parameters.put(MEET_OPERATION, MEET_OPERATION_CONFIRMATION);
 		parameters.put(MEET_CONFIRMATION_MEETING_ID, Integer.toString(notification.getMeetingId()));
 		parameters.put(MEET_CONFIRMATION_CONFIRMATION_CODE, Integer.toString(userConfirmationCode));
