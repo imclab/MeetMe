@@ -28,6 +28,7 @@ import com.meetme.model.dao.MeetDao;
 import com.meetme.model.dao.MeetingDao;
 import com.meetme.model.entity.Meeting;
 import com.meetme.presentation.MeetingPresentation;
+import com.meetme.task.SendUserStatusCodeTask;
 
 public class MeetingActivity extends Activity {
 
@@ -110,6 +111,19 @@ public class MeetingActivity extends Activity {
 		v.setVisibility(visibility == View.GONE ? View.VISIBLE : View.GONE);
 	}
 	
+	private void updateMeetingInfo() {
+		// build meeting host text
+		meetingTitle.setText(meeting.getTitle());
+		meetingDateTime.setText(meeting.getDateTime());
+	}
+	
+	private void sendUserStatusTask() {
+		new SendUserStatusCodeTask(
+				MY_STATUS, 
+				MY_TRAVEL_MODE, 
+				meeting.getId()).execute();
+	}
+	
 	private void updateMyStatus(
 			int userTravelMode,
 			int userStatus,
@@ -119,12 +133,6 @@ public class MeetingActivity extends Activity {
  	   	myStatusButton.setText(myStatusButtonResIdText);
  	   	
  	   	updateMyStatusUi();
-	}
-	
-	private void updateMeetingInfo() {
-		// build meeting host text
-		meetingTitle.setText(meeting.getTitle());
-		meetingDateTime.setText(meeting.getDateTime());
 	}
 	
 	private void updateMyStatusUi() {
@@ -255,34 +263,48 @@ public class MeetingActivity extends Activity {
 				builder.setPositiveButton(R.string.byCar, new DialogInterface.OnClickListener() {
 			           public void onClick(DialogInterface dialog, int id) {
 			        	   updateMyStatus(TRAVEL_MODE_DRIVING, USER_STATUS_LEFT, R.string.myStatusButtonArrive);
+			        	   sendUserStatusTask();
 			           }
 			       });
-				
+				 
 				builder.setNeutralButton(R.string.byBicycle, new DialogInterface.OnClickListener() {
 			           public void onClick(DialogInterface dialog, int id) {
 			        	   updateMyStatus(TRAVEL_MODE_BICYCLING, USER_STATUS_LEFT, R.string.myStatusButtonArrive);
+			        	   sendUserStatusTask();
 			           }
 			       });
 				
 				builder.setNegativeButton(R.string.byFoot, new DialogInterface.OnClickListener() {
 			           public void onClick(DialogInterface dialog, int id) {
 			        	   updateMyStatus(TRAVEL_MODE_WALKING, USER_STATUS_LEFT, R.string.myStatusButtonArrive);
+			        	   sendUserStatusTask();
 			           }
 			       });
 				
 				AlertDialog dialog = builder.create();
 				dialog.show();
 			} else if (MY_STATUS == USER_STATUS_LEFT) {
-				/*
-				 * TODO: Dialog with confirmation of arrival
-				 */
-				// If dialog returns response OK
-				MY_STATUS = USER_STATUS_ARRIVED;
-				toggleVisibility(myStatusButton);
+				// Build dialog
+				AlertDialog.Builder builder = new AlertDialog.Builder(MeetingActivity.this);
+				builder.setTitle(R.string.confirmationArrivedDialogTitle);
+				builder.setMessage(R.string.confirmationArrivedDialogMessage);
+				builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			        	   MY_STATUS = USER_STATUS_ARRIVED;
+			        	   sendUserStatusTask();
+			        	   myStatusText.setText(R.string.myStatusArrived);
+			        	   toggleVisibility(myStatusButton);
+			           }
+			       });
+				
+				builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			           }
+			       });
+				
+				AlertDialog dialog = builder.create();
+				dialog.show();
 			} 
-			
-			// TODO: Send user_status_code task 
-			// with user_travel_mode if USER_STATUS_LEFT
 		}
 	};
 }

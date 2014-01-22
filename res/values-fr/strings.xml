@@ -70,6 +70,7 @@
     <!-- Find friend activity -->
     <string name="findButton">Chercher</string>
     <string name="addFriendButton">Envoyer une invitation</string>
+    <string name="friendInvitationSent">Demande d\'ami envoyée.</string>
     
     <!-- Meeting info activity -->
     <string name="meetingHostLabel">Créé par</string>
@@ -114,6 +115,7 @@
     <string name="accept">Accepter</string>
     <string name="decline">Refuser</string>
     <string name="maybe">Peut-être</string>
+    <string name="sending">Envoi&#8230;</string>
     <string name="pleaseWait">Patientez&#8230;</string>
     <string name="loggingIn">Connexion&#8230;</string>
     <string name="loggingInSuccessDialogTitle">Connexion</string>
@@ -144,6 +146,8 @@
     <string name="byFoot">A pied</string>
     <string name="travelModeDialogTitle">Moyen de transport</string>
     <string name="travelModeDialogMessage">Comment allez vous à ce meeting ?</string>
+    <string name="confirmationArrivedDialogTitle">Confirmation</string>
+    <string name="confirmationArrivedDialogMessage">Vous confirmez que vous êtes bien arrivés ?</string>
     
     <!-- Error/Warning -->
     <string name="generalError">Une erreur s\'est produite</string>

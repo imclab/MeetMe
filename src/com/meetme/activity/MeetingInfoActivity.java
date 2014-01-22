@@ -97,10 +97,10 @@ public class MeetingInfoActivity extends Activity {
 		meetingDateTime.setText(meeting.getDateTime());
 		meetingLocation.setText(meeting.getLocationText());
 		meetingDescription.setText(
-				meeting.getDescription().isEmpty()
-						? getString(R.string.noDescription)
-						: meeting.getDescription()
-					);
+				meeting.getDescription().isEmpty() ?
+				getString(R.string.noDescription) :
+				meeting.getDescription()
+			);
 		meetingHost.setText(meetingHostBuilder.toString());
 	}
 	

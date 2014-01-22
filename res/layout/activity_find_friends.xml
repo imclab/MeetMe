@@ -13,8 +13,14 @@
 	        />
         <TextView 
             android:id="@+id/foundFriendText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="20sp"
+            android:layout_margin="10sp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@drawable/found_friend_background"
+            android:textColor="#ffffff"
             android:visibility="gone"
             />
         <Button 
@@ -22,7 +28,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/addFriendButton"
+            android:layout_gravity="center"
             android:visibility="gone"
+            android:layout_marginBottom="10sp"
             />
         <Button 
             android:id="@+id/findButton"

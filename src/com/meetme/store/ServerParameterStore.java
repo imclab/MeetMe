@@ -49,8 +49,6 @@ public abstract class ServerParameterStore {
 	public static final String FRIEND_OPERATION_NOTIFICATION = NOTIFICATION;
 	public static final String FRIEND_REQUEST_ID = "friend_id";
 	public static final String FRIEND_RESPONSE_RESPONSE_CODE = "response";
-	public static final String FRIEND_RESPONSE_ACCEPT = "1";
-	public static final String FRIEND_RESPONSE_DECLINE = "0";
 	public static final String FRIEND_RESPONSE_ID = "friend_id";
 	public static final String FRIEND_FIND_BY_EMAIL_EMAIL = "email";
 	
@@ -63,4 +61,7 @@ public abstract class ServerParameterStore {
 	public static final String MEET_CONFIRMATION_CONFIRMATION_CODE = "confirmation_code";
 	public static final String MEET_CONFIRMATION_MEETING_ID = "meeting_id";
 	public static final String MEET_REFRESH_OTHERS_MEETING_ID = "meeting_id";
+	public static final String MEET_STATUS_USER_TRAVEL_MODE = "user_travel_mode";
+	public static final String MEET_STATUS_STATUS_CODE = "status_code";
+	public static final String MEET_STATUS_MEETING_ID = "meeting_id";
 }

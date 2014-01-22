@@ -6,7 +6,13 @@ import static com.meetme.store.DialogBoxesStore.OK;
 import static com.meetme.store.DialogBoxesStore.PLEASE_WAIT;
 import static com.meetme.store.DialogBoxesStore.SENDING_RESPONSE;
 import static com.meetme.store.ErrorCodeStore.SUCCESS;
-import static com.meetme.store.ServerParameterStore.*;
+import static com.meetme.store.FriendResponseCodeStore.FRIEND_RESPONSE_ACCEPT;
+import static com.meetme.store.FriendResponseCodeStore.FRIEND_RESPONSE_DECLINE;
+import static com.meetme.store.ServerParameterStore.FRIEND_OPERATION;
+import static com.meetme.store.ServerParameterStore.FRIEND_OPERATION_RESPONSE;
+import static com.meetme.store.ServerParameterStore.FRIEND_RESPONSE_ID;
+import static com.meetme.store.ServerParameterStore.FRIEND_RESPONSE_RESPONSE_CODE;
+import static com.meetme.store.ServerParameterStore.FRIEND_TOKEN;
 import static com.meetme.store.ServerUrlStore.FRIEND_URL;
 
 import org.json.JSONException;
@@ -75,7 +81,11 @@ public class FriendInviteConfirmTask extends AsyncTask<Void, Void, Void> {
 		parameters.put(FRIEND_OPERATION, FRIEND_OPERATION_RESPONSE);
 		parameters.put(FRIEND_TOKEN, session.getUser().getToken());
 		parameters.put(FRIEND_RESPONSE_ID, Integer.toString(notification.getInviterId()));
-		parameters.put(FRIEND_RESPONSE_RESPONSE_CODE, (accept ? FRIEND_RESPONSE_ACCEPT : FRIEND_RESPONSE_DECLINE));
+		parameters.put(FRIEND_RESPONSE_RESPONSE_CODE, 
+				accept ?
+				Integer.toString(FRIEND_RESPONSE_ACCEPT) :
+				Integer.toString(FRIEND_RESPONSE_DECLINE)
+			);
 	}
 	
 	@Override

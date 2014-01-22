@@ -33,6 +33,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.meetme.R;
 import com.meetme.core.HttpParameters;
@@ -73,7 +74,12 @@ public class FindFriendsActivity extends Activity {
 	 * Private methods
 	 */
 	private void handleAddFriendResponse(JSONObject responseJSON) {
+		// Hide found friend infos and send request button
+		foundFriendText.setText("");
+		foundFriendText.setVisibility(View.GONE);
+		addFriendButton.setVisibility(View.GONE);
 		
+		Toast.makeText(getApplicationContext(), R.string.friendInvitationSent, Toast.LENGTH_LONG).show();
 	}
 	
 	private void addFriend() {
@@ -95,8 +101,14 @@ public class FindFriendsActivity extends Activity {
 				// Send request
 				responseJSON = HttpUtils.post(FRIEND_URL, parameters);
 			
-				// Handle response
-				handleAddFriendResponse(responseJSON);
+				
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						// Handle response
+						handleAddFriendResponse(responseJSON);
+					}
+				});
 				
 				progressDialog.dismiss();
 			}
@@ -134,9 +146,9 @@ public class FindFriendsActivity extends Activity {
 				runOnUiThread(new Runnable() {
 					public void run() {
 						StringBuilder foundFriendTextBuilder = new StringBuilder();
-						foundFriendTextBuilder.append(getString(R.string.firstnameLabel));
+						foundFriendTextBuilder.append(getString(R.string.firstnameLabel)).append(" ");
 						foundFriendTextBuilder.append(foundFriend.getFirstname()).append("\n");
-						foundFriendTextBuilder.append(getString(R.string.lastnameLabel));
+						foundFriendTextBuilder.append(getString(R.string.lastnameLabel)).append(" ");
 						foundFriendTextBuilder.append(foundFriend.getLastname());
 						
 						foundFriendText.setText(foundFriendTextBuilder.toString());
