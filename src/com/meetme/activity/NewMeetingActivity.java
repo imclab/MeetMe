@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.meetme.R;
@@ -22,7 +24,7 @@ public class NewMeetingActivity extends Activity {
 
 	private EditText titleEdit;
 	private EditText descriptionEdit;
-	private EditText dateTimeEdit;
+	private TextView dateTimeEdit;
 	private long timestamp;
 	private Button pickLocationButton;
 	private Button dateTimeChooseButton;
@@ -38,7 +40,7 @@ public class NewMeetingActivity extends Activity {
 		
 		titleEdit = (EditText)findViewById(R.id.titleEdit);
 		descriptionEdit = (EditText)findViewById(R.id.descriptionEdit);
-		dateTimeEdit = (EditText)findViewById(R.id.dateTimeEdit);
+		dateTimeEdit = (TextView)findViewById(R.id.dateTimeEdit);
 		pickLocationButton = (Button)findViewById(R.id.pickLocationButton);
 		pickLocationButton.setOnClickListener(pickLocationListener);
 		dateTimeChooseButton = (Button)findViewById(R.id.dateTimeChooseButton);
@@ -67,6 +69,8 @@ public class NewMeetingActivity extends Activity {
 	        	   DatePicker datePicker = (DatePicker)dateTimeDialog.findViewById(R.id.datePicker);
 	        	   TimePicker timePicker = (TimePicker)dateTimeDialog.findViewById(R.id.timePicker);
 	        	   
+	        	   dateTimeEdit.setTextColor(Color.BLACK);
+	        	   dateTimeEdit.setVisibility(View.VISIBLE);
 	        	   dateTimeEdit.setText(DateUtils.getDateTimeFromPickers(datePicker, timePicker));
 	        	   timestamp = DateUtils.getTimestampFromPickers(datePicker, timePicker);
 	           }

@@ -74,8 +74,10 @@ public class FindFriendsActivity extends Activity {
 	 * Private methods
 	 */
 	private void handleAddFriendResponse(JSONObject responseJSON) {
-		// Hide found friend infos and send request button
+		// Clear fields
+		searchFriendEdit.setText("");
 		foundFriendText.setText("");
+		// Hide found friend infos and send request button
 		foundFriendText.setVisibility(View.GONE);
 		addFriendButton.setVisibility(View.GONE);
 		

@@ -24,7 +24,8 @@ import com.meetme.R;
 
 public class MeetingMapActivity extends FragmentActivity implements LocationListener {
 	
-	GoogleMap googleMap;
+	private LocationManager locationManager;
+	private GoogleMap googleMap;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class MeetingMapActivity extends FragmentActivity implements LocationList
             googleMap.setMyLocationEnabled(true);
  
             // Getting LocationManager object from System Service LOCATION_SERVICE
-            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
  
             // Creating a criteria object to retrieve provider
             Criteria criteria = new Criteria();
@@ -89,6 +90,23 @@ public class MeetingMapActivity extends FragmentActivity implements LocationList
             }
         }
     }
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		// Stop GPS updates
+		locationManager.removeUpdates(this);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		// Resume GPS updates
+        Criteria criteria = new Criteria();
+        String provider = locationManager.getBestProvider(criteria, true);
+		locationManager.requestLocationUpdates(provider, 2000, 0, this);
+	}
+	
     @Override
     public void onLocationChanged(Location location) {
  

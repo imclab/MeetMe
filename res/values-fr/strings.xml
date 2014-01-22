@@ -148,6 +148,7 @@
     <string name="travelModeDialogMessage">Comment allez vous à ce meeting ?</string>
     <string name="confirmationArrivedDialogTitle">Confirmation</string>
     <string name="confirmationArrivedDialogMessage">Vous confirmez que vous êtes bien arrivés ?</string>
+    <string name="gpsIsdisabledDialogMessage">Le GPS est désactivé sur votre mobile. Voulez-vous l\'activer ?</string>
     
     <!-- Error/Warning -->
     <string name="generalError">Une erreur s\'est produite</string>

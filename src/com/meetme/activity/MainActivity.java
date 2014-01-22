@@ -1,7 +1,10 @@
 package com.meetme.activity;
 
+import android.app.AlertDialog;
 import android.app.TabActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,6 +17,7 @@ import com.meetme.R;
 @SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity {
 
+	private LocationManager locationManager;
 	private TabHost tabHost;
 
 	@Override
@@ -56,6 +60,13 @@ public class MainActivity extends TabActivity {
                     View v = tw.getChildAt(i);
                     v.setBackgroundResource(R.drawable.tab_background);
         }*/
+        
+        // Check if GPS is enabled
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            showGPSDisabledAlert();
+        } 
 	}
 	
 	@Override
@@ -80,6 +91,29 @@ public class MainActivity extends TabActivity {
 	/*
 	 * Private methods
 	 */
+	private void showGPSDisabledAlert(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(R.string.gpsIsdisabledDialogMessage);
+        alertDialogBuilder.setCancelable(false);
+        
+        alertDialogBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id){
+                Intent callGPSSettingIntent = new Intent(
+                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(callGPSSettingIntent);
+            }
+        });
+        
+        alertDialogBuilder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id){
+                dialog.cancel();
+            }
+        });
+        
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+    }
+	
 	public void logOut() {
 		Intent intent = new Intent(this, LoginActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 

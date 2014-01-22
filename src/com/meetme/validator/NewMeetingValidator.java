@@ -2,10 +2,13 @@ package com.meetme.validator;
 
 import static com.meetme.store.MessageStore.EMPTY_DATETIME;
 import static com.meetme.store.MessageStore.EMPTY_TITLE;
-import static com.meetme.store.MessageStore.TITLE_TOO_LONG;
 import static com.meetme.store.MessageStore.INVALID_DATETIME;
+import static com.meetme.store.MessageStore.TITLE_TOO_LONG;
 import android.content.Context;
+import android.graphics.Color;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class NewMeetingValidator extends Validator {
@@ -14,12 +17,12 @@ public class NewMeetingValidator extends Validator {
 	private static final int DATETIME_LENGTH = 19;
 	
 	private EditText titleEdit;
-	private EditText dateTimeEdit;
+	private TextView dateTimeEdit;
 	
 	/*
 	 * Constructors
 	 */
-	public NewMeetingValidator(Context context, EditText titleEdit, EditText dateTimeEdit) {
+	public NewMeetingValidator(Context context, EditText titleEdit, TextView dateTimeEdit) {
 		super(context);
 		this.titleEdit = titleEdit;
 		this.dateTimeEdit = dateTimeEdit;
@@ -55,14 +58,19 @@ public class NewMeetingValidator extends Validator {
 		// Date must not be empty and well formated
 		isDateTimeValid = !dateTime.isEmpty() && dateTime.length() <= DATETIME_LENGTH;
 		
+		if (!isDateTimeValid) {
+			dateTimeEdit.setVisibility(View.VISIBLE);
+			dateTimeEdit.setTextColor(Color.RED);
+		}
+		
 		if (dateTime.isEmpty()) {
 			isDateTimeValid = false;
-			dateTimeEdit.setError(getString(EMPTY_DATETIME));
+			dateTimeEdit.setText(getString(EMPTY_DATETIME));
 		}
 		
 		if (dateTime.length() > DATETIME_LENGTH) {
 			isDateTimeValid = false;
-			dateTimeEdit.setError(getString(INVALID_DATETIME));
+			dateTimeEdit.setText(getString(INVALID_DATETIME));
 		}
 		return isDateTimeValid;
 	}

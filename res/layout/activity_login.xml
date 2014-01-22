@@ -93,7 +93,7 @@
                 android:text="@string/newToMeetMeLink"
                 android:gravity="center"
                 android:textSize="20sp"
-                android:textColor="#3B77FF"/>
+                android:textColor="#3DA8FF"/>
 		</LinearLayout>
 		<!-- Login Form Ends -->
 		<!--  Footer Starts -->

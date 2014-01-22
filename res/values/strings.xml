@@ -150,6 +150,7 @@
     <string name="travelModeDialogMessage">How are you going to this meeting ?</string>
     <string name="confirmationArrivedDialogTitle">Confirmation</string>
     <string name="confirmationArrivedDialogMessage">Do you confirm you arrived ?</string>
+    <string name="gpsIsdisabledDialogMessage">GPS is disabled on your device.\nWould you like to enable it ?</string>
     
     <!-- Error/Warning -->
     <string name="generalError">An error occurred</string>

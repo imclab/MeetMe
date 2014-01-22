@@ -14,6 +14,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -21,6 +24,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.meetme.R;
 import com.meetme.core.SessionManager;
@@ -30,8 +34,9 @@ import com.meetme.model.entity.Meeting;
 import com.meetme.presentation.MeetingPresentation;
 import com.meetme.task.SendUserStatusCodeTask;
 
-public class MeetingActivity extends Activity {
+public class MeetingActivity extends Activity implements LocationListener {
 
+	private LocationManager locationManager;
 	private SessionManager session;
 	private Meeting meeting;
 	private MeetingPresentation meetingPresentation;
@@ -50,7 +55,9 @@ public class MeetingActivity extends Activity {
 	private Button myStatusButton;
 	private Button seeMapButton;
 	
-	private static int MY_TRAVEL_MODE = -1;
+	private static double MY_LATITUTE = -1;
+	private static double MY_LONGITUDE = -1;
+	private static int MY_TRAVEL_MODE = TRAVEL_MODE_WALKING;
 	private static int MY_STATUS = USER_STATUS_WAITING;
 	private static final int REFRESH_RATE = 10000;
 	private static boolean REFRESHING = true;
@@ -61,8 +68,15 @@ public class MeetingActivity extends Activity {
 		setContentView(R.layout.activity_meeting);
 		meeting = (Meeting)getIntent().getSerializableExtra("meeting");
 		
+		locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
+		locationManager.requestLocationUpdates(
+				LocationManager.GPS_PROVIDER, 
+				2000, 
+				0, 
+				this
+			);
 		session = SessionManager.getInstance();
-		
+        
 		meetingTitle = (TextView)findViewById(R.id.meetingTitle);
 		meetingDateTime = (TextView)findViewById(R.id.meetingDateTime);
 		arrivedLabel = (TextView)findViewById(R.id.arrivedLabel);
@@ -83,6 +97,7 @@ public class MeetingActivity extends Activity {
 		meetingDao = new MeetingDao();
 		meetDao = new MeetDao();
 		
+		updateMyLocation(null);
 		updateMeetingInfo();
 		refresh();
 	}
@@ -90,8 +105,8 @@ public class MeetingActivity extends Activity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		
-		// Stop refreshing
+		// Stop refreshing and GPS updates
+		locationManager.removeUpdates(this);
 		REFRESHING = false;
 	}
 
@@ -99,7 +114,13 @@ public class MeetingActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		
-		// Resume refreshing
+		// Resume refreshing and GPS updates
+		locationManager.requestLocationUpdates(
+				LocationManager.GPS_PROVIDER, 
+				2000, 
+				0, 
+				this
+			);
 		REFRESHING = true;
 	}
 
@@ -109,6 +130,17 @@ public class MeetingActivity extends Activity {
 	private void toggleVisibility(View v) {
 		int visibility = v.getVisibility();
 		v.setVisibility(visibility == View.GONE ? View.VISIBLE : View.GONE);
+	}
+	
+	private void updateMyLocation(Location location) {
+		if (location != null) {
+			MY_LONGITUDE = location.getLongitude();
+			MY_LATITUTE = location.getLatitude();
+		}
+		
+		String locationString = "gps(" + location.getLatitude() + "," + location.getLongitude() + ")\n";
+		locationString += "local(" + MY_LATITUTE + "," + MY_LONGITUDE + ")";
+		Toast.makeText(getApplicationContext(), locationString, Toast.LENGTH_LONG).show();
 	}
 	
 	private void updateMeetingInfo() {
@@ -192,7 +224,9 @@ public class MeetingActivity extends Activity {
 	                        	try {
 		                        	if (REFRESHING) {
 		                        		int meetingId = meeting.getId();
-			                        	
+		                        		
+		                        		updateMyLocation(null);
+		                        		
 			                        	// TO DO : Refresh meeting data in session
 			                        	//session.updateMeeting(meetingId);
 			                        	
@@ -307,4 +341,24 @@ public class MeetingActivity extends Activity {
 			} 
 		}
 	};
+	
+	/*
+	 * Implementation of LocationListener 
+	 */
+	@Override
+	public void onLocationChanged(Location location) {
+		updateMyLocation(location);
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+	}
 }
