@@ -1,81 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="wrap_content" >
+	
+    <TextView
+        android:id="@+id/newMeetingStep1on3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:padding="10sp"
+        android:background="@drawable/header_gradient"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:text="@string/newMeetingStep1on3"
+        />
     
-	<LinearLayout android:layout_width="match_parent"
+    <!-- Title field starts -->	
+	<TextView 
+	    android:id="@+id/titleText"
+	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:orientation="vertical" >
-		
-	    <TextView
-	        android:id="@+id/newMeetingStep1on3"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:gravity="center"
-	        android:padding="10sp"
-	        android:background="@drawable/header_gradient"
-	        android:textSize="18sp"
-	        android:textColor="#FFFFFF"
-	        android:text="@string/newMeetingStep1on3"
-	        />
-	    
-	    <!-- Title field starts -->	
-		<TextView 
-		    android:id="@+id/titleText"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		  	android:text="@string/titleLabel"
-		    />
-		<EditText 
-	        android:id="@+id/titleEdit"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:hint="@string/titleHint"
-	        />
-		<!-- Title field ends -->	
-		<!-- Description field starts -->	
-		<TextView 
-		    android:id="@+id/descriptionText"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		  	android:text="@string/descriptionLabel"
-		    />
-		<EditText 
-	        android:id="@+id/descriptionEdit"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:hint="@string/descriptionHint"
-	        android:inputType="textMultiLine"
-	        />
-		<!-- Description field ends -->	
-		<!-- Datetime field starts -->	
-		<TextView 
-		    android:id="@+id/dateTimeText"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		  	android:text="@string/dateTimeLabel"
-		    />
-		<TextView 
-	        android:id="@+id/dateTimeEdit"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:textSize="16sp"
-	        android:gravity="center"
-	        android:visibility="gone"
-	        />
-		<Button 
-		    android:id="@+id/dateTimeChooseButton"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:text="@string/dateTimeChooseButton"
-		    />
-		<!-- Datetime field ends -->	
-	 	<Button 
-	        android:id="@+id/pickLocationButton"
-	        android:layout_width="match_parent"
-	    	android:layout_height="wrap_content"
-	    	android:text="@string/pickLocationButton"
-	    	android:layout_marginTop="40sp"
-	        />	    
-	</LinearLayout>
-</ScrollView>
+	    android:layout_below="@id/newMeetingStep1on3"
+	  	android:text="@string/titleLabel"
+	    />
+	<EditText 
+        android:id="@+id/titleEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleText"
+        android:hint="@string/titleHint"
+        />
+	<!-- Title field ends -->	
+	<!-- Description field starts -->	
+	<TextView 
+	    android:id="@+id/descriptionText"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/titleEdit"
+	  	android:text="@string/descriptionLabel"
+	    />
+	<EditText 
+        android:id="@+id/descriptionEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/descriptionText"
+        android:hint="@string/descriptionHint"
+        android:inputType="textMultiLine"
+        />
+	<!-- Description field ends -->	
+	<!-- Datetime field starts -->	
+	<TextView 
+	    android:id="@+id/dateTimeText"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/descriptionEdit"
+	  	android:text="@string/dateTimeLabel"
+	    />
+	<TextView 
+        android:id="@+id/dateTimeEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dateTimeText"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:visibility="gone"
+        />
+	<Button 
+	    android:id="@+id/dateTimeChooseButton"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/dateTimeEdit"
+	    android:text="@string/dateTimeChooseButton"
+	    />
+	<!-- Datetime field ends -->	
+ 	<Button 
+        android:id="@+id/pickLocationButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/pickLocationButton"
+        />      
+</RelativeLayout>

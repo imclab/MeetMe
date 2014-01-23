@@ -24,6 +24,7 @@ import com.meetme.R;
 import com.meetme.core.SessionManager;
 import com.meetme.model.entity.Friend;
 import com.meetme.model.entity.Meet;
+import com.meetme.model.entity.User;
 
 
 public class MeetingMapActivity extends FragmentActivity implements LocationListener {
@@ -31,6 +32,7 @@ public class MeetingMapActivity extends FragmentActivity implements LocationList
 	private LocationManager locationManager;
 	private GoogleMap googleMap;
 	private List<Meet> usersLeftMeetList;
+	private Meet userMeet;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class MeetingMapActivity extends FragmentActivity implements LocationList
 		
 		// Get meeting presentation 
 		usersLeftMeetList = (ArrayList<Meet>)getIntent().getSerializableExtra("usersLeftMeetList");
-		usersLeftMeetList.add((Meet)getIntent().getSerializableExtra("userMeet"));
+		userMeet = (Meet)getIntent().getSerializableExtra("userMeet");
 		
 		// Getting Google Play availability status
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
@@ -98,6 +100,7 @@ public class MeetingMapActivity extends FragmentActivity implements LocationList
             	drawMarker(latLng, f[0], f[3], f[4]);
             }*/
             
+            // Draw friends markers
             SessionManager session = SessionManager.getInstance();
             LatLng latLng = null;
             
@@ -116,6 +119,22 @@ public class MeetingMapActivity extends FragmentActivity implements LocationList
             			meet.getUserEstimatedDistance()
 					);
             }
+            
+            latLng = new LatLng(
+        			Double.parseDouble(userMeet.getUserLatitudeLongitude().split(",")[0]),
+        			Double.parseDouble(userMeet.getUserLatitudeLongitude().split(",")[1])
+    			);
+            
+            // Draw user marker
+            User user = SessionManager.getInstance().getUser();
+            
+            drawMarker(
+        			latLng, 
+        			user.getFirstname() + " " + user.getLastname(), 
+        			3, 
+        			userMeet.getUserEstimatedTime(),
+        			userMeet.getUserEstimatedDistance()
+				);
         }
     }
 	
@@ -178,10 +197,13 @@ public class MeetingMapActivity extends FragmentActivity implements LocationList
         }
         else if(icon == 2) {
         	marker = BitmapDescriptorFactory.fromResource(R.drawable.bicyclemarker);
+        } else if (icon == 3) {
+        	marker = BitmapDescriptorFactory.fromResource(R.drawable.personalmarker);
         }
+        
         markerOptions.icon(marker);
         markerOptions.title(user);
-        markerOptions.snippet(eta + "\n" + eda);
+        markerOptions.snippet(eta + " " + eda);
  
         // Adding marker on the Google Map
         googleMap.addMarker(markerOptions);

@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     
-	<LinearLayout 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="vertical" >
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
         
-	    <TextView
+        <TextView
             android:id="@+id/meetingTitle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -19,35 +19,35 @@
             android:textColor="#FFFFFF"
             android:background="@drawable/meeting_title_background"
             />
-	    <TextView
-	        style="@style/meetingFriendStatusLabel"
-	        android:id="@+id/arrivedLabel"
-	        android:text="@string/arrivedLabel"
-	        />
-	    <TextView 
-	        style="@style/meetingFriendStatusList"
-	        android:id="@+id/arrivedList"
+        <TextView
+            style="@style/meetingFriendStatusLabel"
+            android:id="@+id/arrivedLabel"
+            android:text="@string/arrivedLabel"
             />
-	    <TextView
-	        style="@style/meetingFriendStatusLabel"
+        <TextView 
+            style="@style/meetingFriendStatusList"
+            android:id="@+id/arrivedList"
+            />
+        <TextView
+            style="@style/meetingFriendStatusLabel"
             android:id="@+id/leftLabel"
             android:text="@string/leftLabel"
             />
-	    <TextView 
-	        style="@style/meetingFriendStatusList"
+        <TextView 
+            style="@style/meetingFriendStatusList"
             android:id="@+id/leftList"
             />
-	    <TextView
-	        style="@style/meetingFriendStatusLabel"
+        <TextView
+            style="@style/meetingFriendStatusLabel"
             android:id="@+id/waitingLabel"
             android:text="@string/waitingLabel"
             />
-	    <TextView 
-	        style="@style/meetingFriendStatusList"
+        <TextView 
+            style="@style/meetingFriendStatusList"
             android:id="@+id/waitingList"
             />
-	    
-	    <TextView
+        
+        <TextView
             android:id="@+id/myStatusLabel"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
             android:background="#dddddd"
             android:text="@string/myStatusLabel"
             />
-	    <TextView
+        <TextView
             android:id="@+id/myStatusText"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
@@ -66,18 +66,18 @@
             android:gravity="center"
             android:text="@string/myStatusNotLeftYet"
             />
-	    <Button
+        <Button
             android:id="@+id/myStatusButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/myStatusButtonLeave"
             />
-	    
-	    <Button
+        
+        <Button
             android:id="@+id/seeMapButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/seeMapButton"
             />
-	</LinearLayout>
+    </LinearLayout>
 </ScrollView>
