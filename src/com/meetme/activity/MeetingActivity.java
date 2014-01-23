@@ -6,10 +6,6 @@ import static com.meetme.store.UserStatusCodeStore.USER_STATUS_WAITING;
 import static com.meetme.store.UserTravelModeStore.TRAVEL_MODE_BICYCLING;
 import static com.meetme.store.UserTravelModeStore.TRAVEL_MODE_DRIVING;
 import static com.meetme.store.UserTravelModeStore.TRAVEL_MODE_WALKING;
-
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -32,6 +28,7 @@ import com.meetme.model.dao.GoogleDirectionDao;
 import com.meetme.model.dao.MeetDao;
 import com.meetme.model.dao.MeetingDao;
 import com.meetme.model.entity.GoogleDirection;
+import com.meetme.model.entity.Meet;
 import com.meetme.model.entity.Meeting;
 import com.meetme.presentation.MeetingPresentation;
 import com.meetme.task.SendUserStatusCodeTask;
@@ -41,14 +38,13 @@ public class MeetingActivity extends Activity implements LocationListener {
 	private LocationManager locationManager;
 	private SessionManager session;
 	private Meeting meeting;
+	private Meet userMeet;
 	private MeetingPresentation meetingPresentation;
-	private GoogleDirection googleDirection;
 	private MeetingDao meetingDao;
 	private MeetDao meetDao;
 	private GoogleDirectionDao googleDirectionDao;
 	
 	private TextView meetingTitle;
-	private TextView meetingDateTime;
 	private TextView arrivedLabel;
 	private TextView arrivedList;
 	private TextView leftLabel;
@@ -59,10 +55,6 @@ public class MeetingActivity extends Activity implements LocationListener {
 	private Button myStatusButton;
 	private Button seeMapButton;
 	
-	private static double MY_LATITUTE = -1;
-	private static double MY_LONGITUDE = -1;
-	private static int MY_TRAVEL_MODE = TRAVEL_MODE_WALKING;
-	private static int MY_STATUS = USER_STATUS_WAITING;
 	private static final int REFRESH_RATE = 10000;
 	private static boolean REFRESHING = true;
 	
@@ -71,7 +63,12 @@ public class MeetingActivity extends Activity implements LocationListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_meeting);
 		meeting = (Meeting)getIntent().getSerializableExtra("meeting");
-			
+		userMeet = new Meet();
+		userMeet.setUserEstimatedDistance("2 km");
+		userMeet.setUserEstimatedTime("10 mins");
+		userMeet.setUserEstimatedTimeSeconds(600);
+		userMeet.setUserTravelMode(TRAVEL_MODE_WALKING);
+		
 		locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
 		
 		// Get current location
@@ -84,7 +81,6 @@ public class MeetingActivity extends Activity implements LocationListener {
 		session = SessionManager.getInstance();
         
 		meetingTitle = (TextView)findViewById(R.id.meetingTitle);
-		meetingDateTime = (TextView)findViewById(R.id.meetingDateTime);
 		arrivedLabel = (TextView)findViewById(R.id.arrivedLabel);
 		arrivedLabel.setOnClickListener(arrivedListener);
 		leftLabel = (TextView)findViewById(R.id.leftLabel);
@@ -137,54 +133,54 @@ public class MeetingActivity extends Activity implements LocationListener {
 	
 	private void updateMyLocation(Location location) {
 		if (location != null) {
-			MY_LONGITUDE = location.getLongitude();
-			MY_LATITUTE = location.getLatitude();
+			userMeet.setUserLatitudeLongitude(location.getLatitude() + "," + location.getLongitude());
 		} 
 		
-		Log.d(MeetingActivity.class.getName(), "LatLong(" + MY_LATITUTE + "," + MY_LONGITUDE + ")");
+		Log.d(MeetingActivity.class.getName(), "LatLong(" + userMeet.getUserLatitudeLongitude() + ")");
 	}
 	
 	private void sendUserStatusTask() {
 		new SendUserStatusCodeTask(
-				MY_STATUS, 
-				MY_TRAVEL_MODE, 
+				userMeet.getUserStatus(), 
+				userMeet.getUserTravelMode(), 
 				meeting.getId()).execute();
 	}
 	
 	private void updateMeetingInfo() {
-		// build meeting host text
 		meetingTitle.setText(meeting.getTitle());
-		meetingDateTime.setText(meeting.getDateTime());
 	}
 	
 	private void updateMyStatus(
 			int userTravelMode,
 			int userStatus,
 			int myStatusButtonResIdText) {
-		MY_TRAVEL_MODE = userTravelMode;
- 	   	MY_STATUS = userStatus;
+		userMeet.setUserTravelMode(userTravelMode);
+ 	   	userMeet.setUserStatus(userStatus);
  	   	myStatusButton.setText(myStatusButtonResIdText);
  	   	
  	   	updateMyStatusUi();
 	}
 	
 	private void updateMyStatusUi() {
-		// Build my status message
-		String estimatedDistance = googleDirection.getUserEda();
-		String estimatedTime = googleDirection.getUserEta();
-		String myTravelMode = meetingPresentation.getTravelModeString(MY_TRAVEL_MODE);
+		String estimatedDistance = userMeet.getUserEstimatedDistance(); 
+		String estimatedTime = userMeet.getUserEstimatedTime();
+		String myTravelMode = meetingPresentation.getTravelModeString(userMeet.getUserTravelMode());
 		
+		// Build my status messags
 		StringBuilder myStatusBuilder = new StringBuilder();
 		myStatusBuilder.append(estimatedDistance).append("\n");
 		myStatusBuilder.append(estimatedTime).append("\n");
 		myStatusBuilder.append(myTravelMode);
 		
-		if (MY_STATUS == USER_STATUS_WAITING) {
+		if (userMeet.getUserStatus() == USER_STATUS_WAITING) {
 			myStatusText.setText(R.string.myStatusNotLeftYet);
-		} else if (MY_STATUS == USER_STATUS_LEFT){
+			myStatusButton.setText(R.string.myStatusButtonLeave);
+		} else if (userMeet.getUserStatus() == USER_STATUS_LEFT){
 			myStatusText.setText(myStatusBuilder.toString());
-		} else if (MY_STATUS == USER_STATUS_ARRIVED) {
+			myStatusButton.setText(R.string.myStatusButtonArrive);
+		} else if (userMeet.getUserStatus() == USER_STATUS_ARRIVED) {
 			myStatusText.setText(R.string.myStatusArrived);
+			myStatusButton.setVisibility(View.GONE);
 		}
 	}
 	
@@ -215,51 +211,62 @@ public class MeetingActivity extends Activity implements LocationListener {
 	}
 	
 	private void refresh() {
-		TimerTask doAsynchronousTask;
-	    final Handler handler = new Handler();
-	    final Timer timer = new Timer(true);
-		
-		doAsynchronousTask = new TimerTask() {
-	    	@Override
-	    	public void run() {
-	    		handler.post(new Runnable() {
-	                        public void run() {
-	                        	try {
-		                        	if (REFRESHING) {
-		                        		int meetingId = meeting.getId();
-		                        		
-		                        		// Get estimation time and direction
-		                        		googleDirection = googleDirectionDao.findBetweenUserLocationAndMeeting(
-		                        				MY_LATITUTE + "," + MY_LONGITUDE, 
-		                        				MY_TRAVEL_MODE, 
-		                        				meeting.getLocationGeo()
-		                        				);
-		                        		
-			                        	// TO DO : Refresh meeting data in session
-			                        	//session.updateMeeting(meetingId);
-			                        	
-		                        		// Refresh meeting data
-			                        	meeting = meetingDao.findMeetingById(meetingId, session.getUser().getToken());
-			                        	
-			                        	// Refresh friends data 
-			                    		meetingPresentation = new MeetingPresentation(
-			                    				MeetingActivity.this,
-			                    				meeting,
-			                    				meetDao.findAllMeetsOfMeeting(meeting, session.getUser().getToken())
-		                    				);
-			                        	
-			                        	// Update UI
-			                        	updateUi();
-		                        	}
-	                            } catch (Exception e) {
-	                            	Log.e(MeetingActivity.class.getName(), e.getMessage(), e);
-	                            	timer.cancel();
-	                            }
-	                        }
-	                    });
-	                }
-	            };
-	       timer.schedule(doAsynchronousTask, 0, REFRESH_RATE);
+		final Handler handler = new Handler();
+	    
+	    Runnable refreshMeeting = new Runnable() {
+			@Override
+            public void run() {
+            	try {
+                	if (REFRESHING) {
+                		int meetingId = meeting.getId();
+                		
+                		// Get estimation time and direction
+                		GoogleDirection googleDirection = googleDirectionDao.findBetweenUserLocationAndMeeting(
+                				userMeet.getUserLatitudeLongitude(), 
+                				userMeet.getUserTravelMode(), 
+                				meeting.getLocationGeo()
+                				);
+                		
+                		// update user Meet
+                		userMeet.setUserEstimatedDistance(googleDirection.getUserEda());
+                		userMeet.setUserEstimatedTime(googleDirection.getUserEta());
+                		userMeet.setUserEstimatedTimeSeconds(googleDirection.getUserEtaSeconds());
+                		
+                    	// TO DO : Refresh meeting data in session
+                    	//session.updateMeeting(meetingId);
+                		
+                		// TO DO : if status arrived then only refresh_others 
+                		
+                		// Refresh meeting data
+                    	meeting = meetingDao.findMeetingById(meetingId, session.getUser().getToken());
+                    	
+                    	// Send user Meet and refresh friends data 
+                		meetingPresentation = new MeetingPresentation(
+                				MeetingActivity.this,
+                				meeting,
+                				meetDao.findAllMeetsOfMeeting(meeting, userMeet, session.getUser().getToken())
+            				);
+                    	
+                		// Get the meet of the user
+                		userMeet = meetingPresentation.getUserMeet();
+                		
+                    	// Update UI
+                    	runOnUiThread(new Runnable() {
+	                    		@Override
+                    			public void run() {
+	                    			updateUi();
+	                    		}
+                    		});
+                    	
+                    	handler.postDelayed(this, REFRESH_RATE);
+                	}
+                } catch (Exception e) {
+                	Log.e(MeetingActivity.class.getName(), e.getMessage(), e);
+                }
+            }
+	    };
+	    
+	    handler.post(refreshMeeting);
 	}
 	
 	/*
@@ -290,6 +297,8 @@ public class MeetingActivity extends Activity implements LocationListener {
 		@Override
 		public void onClick(View v) {
 			Intent intent = new Intent(MeetingActivity.this, MeetingMapActivity.class);
+			intent.putExtra("userMeet", userMeet);
+			intent.putExtra("usersLeftMeetList", meetingPresentation.getUsersLeftMeetList());
 			startActivity(intent);
 		}
 	};
@@ -297,7 +306,7 @@ public class MeetingActivity extends Activity implements LocationListener {
 	private OnClickListener myStatusButtonListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			if (MY_STATUS == USER_STATUS_WAITING) {
+			if (userMeet.getUserStatus() == USER_STATUS_WAITING) {
 				// Build dialog
 				AlertDialog.Builder builder = new AlertDialog.Builder(MeetingActivity.this);
 				builder.setTitle(R.string.travelModeDialogTitle);
@@ -325,14 +334,14 @@ public class MeetingActivity extends Activity implements LocationListener {
 				
 				AlertDialog dialog = builder.create();
 				dialog.show();
-			} else if (MY_STATUS == USER_STATUS_LEFT) {
+			} else if (userMeet.getUserStatus() == USER_STATUS_LEFT) {
 				// Build dialog
 				AlertDialog.Builder builder = new AlertDialog.Builder(MeetingActivity.this);
 				builder.setTitle(R.string.confirmationArrivedDialogTitle);
 				builder.setMessage(R.string.confirmationArrivedDialogMessage);
 				builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 			           public void onClick(DialogInterface dialog, int id) {
-			        	   MY_STATUS = USER_STATUS_ARRIVED;
+			        	   userMeet.setUserStatus(USER_STATUS_ARRIVED);
 			        	   sendUserStatusTask();
 			        	   myStatusText.setText(R.string.myStatusArrived);
 			        	   toggleVisibility(myStatusButton);

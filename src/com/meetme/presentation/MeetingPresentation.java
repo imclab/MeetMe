@@ -11,6 +11,8 @@ import static com.meetme.store.UserTravelModeStore.TRAVEL_MODE_BICYCLING;
 import static com.meetme.store.UserTravelModeStore.TRAVEL_MODE_DRIVING;
 import static com.meetme.store.UserTravelModeStore.TRAVEL_MODE_WALKING;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -20,14 +22,18 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.meetme.R;
+import com.meetme.core.SessionManager;
 import com.meetme.model.entity.Friend;
 import com.meetme.model.entity.Meet;
 import com.meetme.model.entity.Meeting;
 
-public class MeetingPresentation {
+public class MeetingPresentation implements Serializable {
+	
+	static final long serialVersionUID = 897L;
 	
 	private Context context;
 	private Meeting meeting;
+	private Meet userMeet;
 	private Map<Integer, Set<Meet>> statusMeetMap;
 	private Map<Integer, Set<Meet>> confirmationMeetMap;
 	private StringBuilder goingString;
@@ -40,7 +46,10 @@ public class MeetingPresentation {
 	
 	
 	@SuppressLint("UseSparseArrays")
-	public MeetingPresentation(Context context, Meeting meeting, Set<Meet> meetSet) {
+	public MeetingPresentation(
+			Context context, 
+			Meeting meeting, 
+			Set<Meet> meetSet) {
 		this.context = context;
 		this.meeting = meeting;
 		this.statusMeetMap = new HashMap<Integer, Set<Meet>>();
@@ -53,6 +62,20 @@ public class MeetingPresentation {
 	 */
 	public Meeting getMeeting() {
 		return this.meeting;
+	}
+	
+	public Meet getUserMeet() {
+		return this.userMeet;
+	}
+	
+	public ArrayList<Meet> getUsersLeftMeetList() {
+		ArrayList<Meet> meetList = new ArrayList<Meet>();
+		
+		for (Meet meet : statusMeetMap.get(USER_STATUS_LEFT)) {
+			meetList.add(meet);
+		}
+		
+		return meetList;
 	}
 	
 	public int getGoingCount() {
@@ -151,6 +174,12 @@ public class MeetingPresentation {
 		
 		// update map
 		for (Meet meet : meetSet) {
+			// Isolation du Meet du User
+			if (meet.getUserId() == SessionManager.getInstance().getUser().getId()) {
+				this.userMeet = meet;
+				continue;
+			}
+			
 			Friend user = meeting.getFriendById(meet.getUserId());
 			
 			switch (meet.getUserConfirmation()) {

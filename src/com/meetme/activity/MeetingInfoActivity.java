@@ -134,7 +134,7 @@ public class MeetingInfoActivity extends Activity {
                 		meetingPresentation = new MeetingPresentation(
                 				MeetingInfoActivity.this,
                 				meeting,
-                				meetDao.findAllMeetsOfMeeting(meeting, session.getUser().getToken())
+                				meetDao.findOtherMeetsOfMeeting(meeting, session.getUser().getToken())
             				);
                     	
                 		runOnUiThread(new Runnable() {

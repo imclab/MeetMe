@@ -19,16 +19,6 @@
             android:textColor="#FFFFFF"
             android:background="@drawable/meeting_title_background"
             />
-        <TextView
-            android:id="@+id/meetingDateTime"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/clock_icon"
-            android:padding="10sp"
-            android:gravity="center"
-            android:textSize="20sp"
-            />
-        
 	    <TextView
 	        style="@style/meetingFriendStatusLabel"
 	        android:id="@+id/arrivedLabel"

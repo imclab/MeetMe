@@ -1,5 +1,8 @@
 package com.meetme.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Dialog;
 import android.location.Criteria;
 import android.location.Location;
@@ -18,17 +21,25 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.meetme.R;
+import com.meetme.core.SessionManager;
+import com.meetme.model.entity.Friend;
+import com.meetme.model.entity.Meet;
 
 
 public class MeetingMapActivity extends FragmentActivity implements LocationListener {
 	
 	private LocationManager locationManager;
 	private GoogleMap googleMap;
+	private List<Meet> usersLeftMeetList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_meeting_map);
+		
+		// Get meeting presentation 
+		usersLeftMeetList = (ArrayList<Meet>)getIntent().getSerializableExtra("usersLeftMeetList");
+		usersLeftMeetList.add((Meet)getIntent().getSerializableExtra("userMeet"));
 		
 		// Getting Google Play availability status
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
@@ -71,7 +82,7 @@ public class MeetingMapActivity extends FragmentActivity implements LocationList
             locationManager.requestLocationUpdates(provider, 20000, 0, this);
             
             // Add friends as markers
-            String[][] friends = 
+            /*String[][] friends = 
             	{
             		{ "Matthieu K", "43.5912500", "3.8900167", "0", "3 mins"},
             		{ "Baptiste L", "43.6139500", "3.8685333", "2", "10 mins"},
@@ -85,6 +96,25 @@ public class MeetingMapActivity extends FragmentActivity implements LocationList
             {
             	latLng = new LatLng(Double.parseDouble(f[1]), Double.parseDouble(f[2]));
             	drawMarker(latLng, f[0], f[3], f[4]);
+            }*/
+            
+            SessionManager session = SessionManager.getInstance();
+            LatLng latLng = null;
+            
+            for (Meet meet : usersLeftMeetList) {
+            	Friend friend = session.getFriendById(meet.getUserId());
+            	
+            	latLng = new LatLng(
+            			Double.parseDouble(meet.getUserLatitudeLongitude().split(",")[0]),
+            			Double.parseDouble(meet.getUserLatitudeLongitude().split(",")[1])
+        			);
+            	drawMarker(
+            			latLng, 
+            			friend.getFirstname() + " " + friend.getLastname(), 
+            			meet.getUserTravelMode(), 
+            			meet.getUserEstimatedTime(),
+            			meet.getUserEstimatedDistance()
+					);
             }
         }
     }
@@ -133,25 +163,25 @@ public class MeetingMapActivity extends FragmentActivity implements LocationList
     }
     
     
-    private void drawMarker(LatLng point, String user, String icon, String eta){
+    private void drawMarker(LatLng point, String user, int icon, String eta, String eda){
         // Creating an instance of MarkerOptions
         MarkerOptions markerOptions = new MarkerOptions();
  
         // Setting options on marker
         markerOptions.position(point);
         BitmapDescriptor marker = null;
-        if(icon == "0") {
+        if(icon == 0) {
         	marker = BitmapDescriptorFactory.fromResource(R.drawable.walkmarker);
         }
-        else if(icon == "1") {
+        else if(icon == 1) {
         	marker = BitmapDescriptorFactory.fromResource(R.drawable.carmarker);
         }
-        else if(icon == "2") {
+        else if(icon == 2) {
         	marker = BitmapDescriptorFactory.fromResource(R.drawable.bicyclemarker);
         }
         markerOptions.icon(marker);
         markerOptions.title(user);
-        markerOptions.snippet(eta);
+        markerOptions.snippet(eta + "\n" + eda);
  
         // Adding marker on the Google Map
         googleMap.addMarker(markerOptions);
