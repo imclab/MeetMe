@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.meetme.R;
+import com.meetme.core.DateUtils;
 import com.meetme.model.entity.MeetingInviteNotification;
 
 public class MeetingInviteNotificationListArrayAdapter 
@@ -50,7 +51,7 @@ public class MeetingInviteNotificationListArrayAdapter
 		ViewHolder holder = (ViewHolder) rowView.getTag();
 		holder.meetingTitle.setText(meetingNotification.getMeetingTitle());
 		holder.meetingLocation.setText(meetingNotification.getMeetingLocationText());
-	    holder.meetingDateTime.setText(meetingNotification.getMeetingDateTime());
+	    holder.meetingDateTime.setText(DateUtils.formatDateTime(meetingNotification.getMeetingDateTime()));
 	    
 	    return rowView;
 	}

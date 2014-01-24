@@ -242,6 +242,9 @@ public class NotificationsActivity extends Activity {
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view, int pos,
 				long id) {
+			
+			populateNotificationsLists();
+			
 			if (pos == 1) {
 				displayMeetingNotifications();
 			} else {

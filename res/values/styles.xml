@@ -32,4 +32,21 @@
         <item name="android:visibility">gone</item>
         <item name="android:gravity">center</item>
     </style>
+    
+    <style name="meetingDateTime">
+        <item name="android:textColor">#0005A3</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="notificationLayout">
+        <item name="android:padding">5sp</item>
+        <item name="android:layout_margin">5sp</item>
+        <item name="android:background">@drawable/notification_background</item>
+    </style>
+    
+    <style name="notificationList">
+       <item name="android:listSelector">@drawable/notification_selector</item>
+       <item name="android:divider">@android:color/transparent</item>
+       <item name="android:dividerHeight">5.0sp</item>
+    </style>
 </resources>

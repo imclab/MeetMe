@@ -32,6 +32,7 @@
     <string name="passwordLabel">Mot de passe :</string>
     <string name="loginHint">Login</string>
     <string name="passwordHint">Mot de passe</string>
+    <string name="rememberCheckBox">Rester connecté</string>
     <string name="loginButton">Connexion</string>
     <string name="newToMeetMeLink">Pas encore inscrit ? <u>Inscrivez-vous</u>!</string>
 

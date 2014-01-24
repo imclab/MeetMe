@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.meetme.R;
+import com.meetme.core.DateUtils;
 import com.meetme.model.entity.Meeting;
 
 public class MeetingListArrayAdapter extends ArrayAdapter<Meeting> {
@@ -49,7 +50,7 @@ public class MeetingListArrayAdapter extends ArrayAdapter<Meeting> {
 		ViewHolder holder = (ViewHolder) rowView.getTag();
 		holder.meetingTitle.setText(meeting.getTitle());
 		holder.meetingLocation.setText(meeting.getLocationText());
-	    holder.meetingDateTime.setText(meeting.getDateTime());
+	    holder.meetingDateTime.setText(DateUtils.formatDateTime(meeting.getDateTime()));
 	    
 	    return rowView;
 	}

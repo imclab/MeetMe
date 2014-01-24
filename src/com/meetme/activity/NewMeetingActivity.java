@@ -26,6 +26,7 @@ public class NewMeetingActivity extends Activity {
 	private EditText descriptionEdit;
 	private TextView dateTimeEdit;
 	private long timestamp;
+	private String dateTime;
 	private Button pickLocationButton;
 	private Button dateTimeChooseButton;
 	AlertDialog dateTimeDialog;
@@ -38,6 +39,7 @@ public class NewMeetingActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_meeting);
 		
+		dateTime = "";
 		titleEdit = (EditText)findViewById(R.id.titleEdit);
 		descriptionEdit = (EditText)findViewById(R.id.descriptionEdit);
 		dateTimeEdit = (TextView)findViewById(R.id.dateTimeEdit);
@@ -69,9 +71,11 @@ public class NewMeetingActivity extends Activity {
 	        	   DatePicker datePicker = (DatePicker)dateTimeDialog.findViewById(R.id.datePicker);
 	        	   TimePicker timePicker = (TimePicker)dateTimeDialog.findViewById(R.id.timePicker);
 	        	   
-	        	   dateTimeEdit.setTextColor(Color.BLACK);
+	        	   dateTime = DateUtils.getDateTimeFromPickers(datePicker, timePicker);
+	        	   
+	        	   dateTimeEdit.setTextColor(Color.parseColor("#0005A3"));
 	        	   dateTimeEdit.setVisibility(View.VISIBLE);
-	        	   dateTimeEdit.setText(DateUtils.getDateTimeFromPickers(datePicker, timePicker));
+	        	   dateTimeEdit.setText(DateUtils.formatDateTime(dateTime));
 	        	   timestamp = DateUtils.getTimestampFromPickers(datePicker, timePicker);
 	           }
 	       });
@@ -90,7 +94,7 @@ public class NewMeetingActivity extends Activity {
 		meeting.setHostUserId(SessionManager.getInstance().getUser().getId());
 		meeting.setTitle(titleEdit.getText().toString());
 		meeting.setDescription(descriptionEdit.getText().toString());
-		meeting.setDateTime(dateTimeEdit.getText().toString());
+		meeting.setDateTime(dateTime);
 		meeting.setTimestamp(timestamp);
 		
 		return meeting;
@@ -102,7 +106,7 @@ public class NewMeetingActivity extends Activity {
 	private OnClickListener pickLocationListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			if (newMeetingValidator.validate()) {
+			if (newMeetingValidator.validate(dateTime)) {
 				// Start pick location activity
 				Intent intent = new Intent(NewMeetingActivity.this, PickLocationActivity.class);
 				intent.putExtra(NEW_MEETING_INTENT_KEY, createMeeting());

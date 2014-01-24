@@ -1,13 +1,16 @@
 package com.meetme.core;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import android.annotation.SuppressLint;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
+@SuppressLint("SimpleDateFormat")
 public abstract class DateUtils {
 	
 	private DateUtils() {
@@ -31,6 +34,21 @@ public abstract class DateUtils {
 	/*
 	 * Methods
 	 */
+	public static String formatDateTime(String datetime) {
+		Calendar calendar = new GregorianCalendar();
+		calendar.set(
+				Integer.parseInt(datetime.substring(0, 4)), 
+				Integer.parseInt(datetime.substring(5, 7)) - 1, 
+				Integer.parseInt(datetime.substring(8, 10)), 
+				Integer.parseInt(datetime.substring(11, 13)), 
+				Integer.parseInt(datetime.substring(14, 16)), 
+				Integer.parseInt(datetime.substring(17, 19))
+			);
+		
+        DateFormat dateFormat = new SimpleDateFormat("MMM dd yyyy 'at' HH:mm");
+        return dateFormat.format(calendar.getTime());
+	}
+	
 	public static String getDateTimeFromPickers(DatePicker datePicker, TimePicker timePicker) {
 		Date date = getDateObject(datePicker, timePicker);
 		

@@ -32,6 +32,7 @@
     <string name="passwordLabel">Password :</string>
     <string name="loginHint">Login</string>
     <string name="passwordHint">Password</string>
+    <string name="rememberCheckBox">Stay connected</string>
     <string name="loginButton">Log In</string>
     <string name="newToMeetMeLink">New to MeetMe ? <u>Sign Up</u>!</string>
 

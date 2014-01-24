@@ -22,11 +22,15 @@
         android:layout_height="wrap_content"
         android:paddingLeft="6dip">
     </TextView>
+
     <TextView
+         style="@style/meetingDateTime"
         android:id="@+id/meetingDateTime"
-        android:textSize="12sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="6dip">
+        android:paddingTop="3sp"
+        android:paddingLeft="6dip"
+         >
+
     </TextView>
 </LinearLayout>

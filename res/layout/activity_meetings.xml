@@ -39,5 +39,6 @@
             android:gravity="center" 
             android:visibility="invisible"
             android:text="@string/noMeetingText"
-            android:layout_above="@id/newMeetingBar" />
+            android:layout_above="@id/newMeetingBar" 
+            android:layout_alignParentTop="true"/>
 </RelativeLayout>

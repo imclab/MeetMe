@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.meetme.R;
+import com.meetme.core.DateUtils;
 import com.meetme.core.SessionManager;
 import com.meetme.model.dao.MeetDao;
 import com.meetme.model.dao.MeetingDao;
@@ -94,7 +95,7 @@ public class MeetingInfoActivity extends Activity {
 		meetingHostBuilder.append(host.getFirstname()).append(" ").append(host.getLastname());
 		
 		meetingTitle.setText(meeting.getTitle());
-		meetingDateTime.setText(meeting.getDateTime());
+		meetingDateTime.setText(DateUtils.formatDateTime(meeting.getDateTime()));
 		meetingLocation.setText(meeting.getLocationText());
 		meetingDescription.setText(
 				meeting.getDescription().isEmpty() ?

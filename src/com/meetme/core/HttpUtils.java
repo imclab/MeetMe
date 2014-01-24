@@ -34,7 +34,7 @@ public abstract class HttpUtils {
 	
 	    try {
 	        // Add parameters
-	        httppost.setEntity(new UrlEncodedFormEntity(parameters));
+	        httppost.setEntity(new UrlEncodedFormEntity(parameters, "utf8"));
 	        
 	        // Log request
 	        Log.d(HttpUtils.class.getName(), "POST:" + EntityUtils.toString(httppost.getEntity()));

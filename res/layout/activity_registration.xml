@@ -33,7 +33,7 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:orientation="vertical" 
-		    android:paddingTop="15dip"
+		    android:paddingTop="5dip"
 		    android:layout_below="@id/header" >
 		    
 		    <TextView
@@ -122,8 +122,8 @@
 			<TextView android:id="@+id/alreadyHaveAnAccountLink"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dip"
-                android:layout_marginBottom="40dip"
+                android:layout_marginTop="25dip"
+                android:layout_marginBottom="25dip"
                 android:text="@string/alreadyHaveAnAccountLink"
                 android:gravity="center"
                 android:textSize="20sp"

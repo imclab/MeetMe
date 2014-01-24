@@ -59,11 +59,13 @@
 	  	android:text="@string/dateTimeLabel"
 	    />
 	<TextView 
+        style="@style/meetingDateTime"
         android:id="@+id/dateTimeEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/dateTimeText"
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:layout_marginBottom="15sp"
         android:gravity="center"
         android:visibility="gone"
         />

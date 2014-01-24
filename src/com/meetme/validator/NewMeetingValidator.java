@@ -2,7 +2,6 @@ package com.meetme.validator;
 
 import static com.meetme.store.MessageStore.EMPTY_DATETIME;
 import static com.meetme.store.MessageStore.EMPTY_TITLE;
-import static com.meetme.store.MessageStore.INVALID_DATETIME;
 import static com.meetme.store.MessageStore.TITLE_TOO_LONG;
 import android.content.Context;
 import android.graphics.Color;
@@ -14,10 +13,10 @@ import android.widget.TextView;
 public class NewMeetingValidator extends Validator {
 	
 	private static final int TITLE_MAX_LENGTH = 255;
-	private static final int DATETIME_LENGTH = 19;
 	
 	private EditText titleEdit;
 	private TextView dateTimeEdit;
+	private String dateTime;
 	
 	/*
 	 * Constructors
@@ -53,10 +52,9 @@ public class NewMeetingValidator extends Validator {
 	
 	private boolean validateDateTime() {
 		boolean isDateTimeValid = true;
-		String dateTime = dateTimeEdit.getText().toString();
 		
 		// Date must not be empty and well formated
-		isDateTimeValid = !dateTime.isEmpty() && dateTime.length() <= DATETIME_LENGTH;
+		isDateTimeValid = !dateTime.isEmpty();
 		
 		if (!isDateTimeValid) {
 			dateTimeEdit.setVisibility(View.VISIBLE);
@@ -68,10 +66,6 @@ public class NewMeetingValidator extends Validator {
 			dateTimeEdit.setText(getString(EMPTY_DATETIME));
 		}
 		
-		if (dateTime.length() > DATETIME_LENGTH) {
-			isDateTimeValid = false;
-			dateTimeEdit.setText(getString(INVALID_DATETIME));
-		}
 		return isDateTimeValid;
 	}
 	
@@ -82,5 +76,10 @@ public class NewMeetingValidator extends Validator {
 	public boolean validate() {
 		return validateTitle()
 				&& validateDateTime();
+	}
+	
+	public boolean validate(String dateTime) {
+		this.dateTime = dateTime; 
+		return validate();
 	}
 }

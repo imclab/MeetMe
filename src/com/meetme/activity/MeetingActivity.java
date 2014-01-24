@@ -64,9 +64,9 @@ public class MeetingActivity extends Activity implements LocationListener {
 		setContentView(R.layout.activity_meeting);
 		meeting = (Meeting)getIntent().getSerializableExtra("meeting");
 		userMeet = new Meet();
-		userMeet.setUserEstimatedDistance("2 km");
-		userMeet.setUserEstimatedTime("10 mins");
-		userMeet.setUserEstimatedTimeSeconds(600);
+//		userMeet.setUserEstimatedDistance("2 km");
+//		userMeet.setUserEstimatedTime("10 mins");
+//		userMeet.setUserEstimatedTimeSeconds(600);
 		userMeet.setUserTravelMode(TRAVEL_MODE_WALKING);
 		
 		locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
@@ -298,6 +298,7 @@ public class MeetingActivity extends Activity implements LocationListener {
 		public void onClick(View v) {
 			Intent intent = new Intent(MeetingActivity.this, MeetingMapActivity.class);
 			intent.putExtra("userMeet", userMeet);
+			intent.putExtra("meeting", meeting);
 			intent.putExtra("usersLeftMeetList", meetingPresentation.getUsersLeftMeetList());
 			startActivity(intent);
 		}
