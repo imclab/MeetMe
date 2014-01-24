@@ -37,6 +37,7 @@ import com.meetme.presentation.MeetingPresentation;
 
 public class MeetingMapActivity extends FragmentActivity implements LocationListener {
 	
+	private Handler handler;
 	private SessionManager session;
 	private MeetingDao meetingDao;
 	private MeetDao meetDao;
@@ -60,6 +61,8 @@ public class MeetingMapActivity extends FragmentActivity implements LocationList
 		meetingDao = new MeetingDao();
 		meetDao = new MeetDao();
 		googleDirectionDao = new GoogleDirectionDao();
+		
+		handler = new Handler();
 		
 		// Get intent extras
 		usersLeftMeetList = (ArrayList<Meet>)getIntent().getSerializableExtra("usersLeftMeetList");
@@ -206,10 +209,8 @@ public class MeetingMapActivity extends FragmentActivity implements LocationList
     }
     
     private void refresh() {
-	final Handler handler = new Handler();
-	    
 	    Runnable refreshMeeting = new Runnable() {
-			@Override
+	    	@Override
             public void run() {
             	try {
                 	if (REFRESHING) {

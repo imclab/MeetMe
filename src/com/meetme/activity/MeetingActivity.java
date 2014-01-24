@@ -35,6 +35,7 @@ import com.meetme.task.SendUserStatusCodeTask;
 
 public class MeetingActivity extends Activity implements LocationListener {
 
+	private Handler handler;
 	private LocationManager locationManager;
 	private SessionManager session;
 	private Meeting meeting;
@@ -55,20 +56,20 @@ public class MeetingActivity extends Activity implements LocationListener {
 	private Button myStatusButton;
 	private Button seeMapButton;
 	
-	private static final int REFRESH_RATE = 10000;
+	private static final int REFRESH_RATE = 7500;
 	private static boolean REFRESHING = true;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_meeting);
+		
+		
 		meeting = (Meeting)getIntent().getSerializableExtra("meeting");
 		userMeet = new Meet();
-//		userMeet.setUserEstimatedDistance("2 km");
-//		userMeet.setUserEstimatedTime("10 mins");
-//		userMeet.setUserEstimatedTimeSeconds(600);
 		userMeet.setUserTravelMode(TRAVEL_MODE_WALKING);
 		
+		handler = new Handler();
 		locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
 		
 		// Get current location
@@ -102,6 +103,7 @@ public class MeetingActivity extends Activity implements LocationListener {
 		
 		updateMeetingInfo();
 		refresh();
+		
 	}
 	
 	@Override
@@ -155,7 +157,7 @@ public class MeetingActivity extends Activity implements LocationListener {
 			int userStatus,
 			int myStatusButtonResIdText) {
 		userMeet.setUserTravelMode(userTravelMode);
- 	   	userMeet.setUserStatus(userStatus);
+		userMeet.setUserStatus(userStatus);
  	   	myStatusButton.setText(myStatusButtonResIdText);
  	   	
  	   	updateMyStatusUi();
@@ -213,9 +215,8 @@ public class MeetingActivity extends Activity implements LocationListener {
 	}
 	
 	private void refresh() {
-		final Handler handler = new Handler();
 	    
-	    Runnable refreshMeeting = new Runnable() {
+		Runnable refreshMeeting = new Runnable() {
 			@Override
             public void run() {
             	try {
@@ -259,7 +260,7 @@ public class MeetingActivity extends Activity implements LocationListener {
 	                    			updateUi();
 	                    		}
                     		});
-                    	
+                    	 
                     	handler.postDelayed(this, REFRESH_RATE);
                 	}
                 } catch (Exception e) {
