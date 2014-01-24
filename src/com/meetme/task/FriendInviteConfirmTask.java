@@ -99,9 +99,6 @@ public class FriendInviteConfirmTask extends AsyncTask<Void, Void, Void> {
 		if (friendAcceptState == SUCCESS) {
 			// Refresh friend list
 			session.updateFriendSet();
-			
-		    // Refresh notification list
-			session.updateFriendgNotificationSet();
 		}
 		
 		progressDialog.dismiss();

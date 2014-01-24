@@ -40,7 +40,6 @@
     
     <style name="notificationLayout">
         <item name="android:padding">5sp</item>
-        <item name="android:layout_margin">5sp</item>
         <item name="android:background">@drawable/notification_background</item>
     </style>
     

@@ -109,6 +109,8 @@
     <string name="meetingInviteNotificationDescription">Icône d\'invitation à un meeting</string>
     <string name="friendInviteNotificationDescription">Icône de demande d\'ajout d\'ami</string>
     <string name="friendInviteNoticationText">would like to be your friend.</string>
+    <string name="notificationRefreshButtonDescription">Bouton de rafraichissement des notifications</string>
+    <string name="refreshingNotifications">Rafraîchissement des notifications&#8230;</string>
     
     <!-- Dialog boxes -->
     <string name="ok">OK</string>

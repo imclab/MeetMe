@@ -1,18 +1,29 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:layout_height="wrap_content" >
     
     <!-- Notification bar starts -->
-   <Spinner
-	   android:id="@+id/pickNotificationTypeSpinner"
-	   android:layout_width="match_parent"
-	   android:layout_height="wrap_content"
-	   android:entries="@array/pickNotificationTypeSpinnerArray"
-	   android:prompt="@string/pickNotificationTypeSpinnerPrompt" 
-    />
+    <Spinner
+        android:id="@+id/pickNotificationTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:entries="@array/pickNotificationTypeSpinnerArray"
+        android:prompt="@string/pickNotificationTypeSpinnerPrompt" 
+     />
+    
    <!-- Notification bar ends -->
+   
+   <ImageButton
+        android:id="@+id/notificationRefreshButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/refresh_icon"
+        android:layout_alignParentBottom="true"
+        android:contentDescription="@string/notificationRefreshButtonDescription"
+        />
+   
    <!-- Friends notifications starts -->
    <TextView
        android:id="@+id/noFriendNotificationText"
@@ -20,6 +31,7 @@
        android:layout_height="wrap_content"
        android:layout_marginTop="50sp"
        android:layout_gravity="center_vertical"
+       android:layout_below="@id/pickNotificationTypeSpinner"
        android:gravity="center"
        android:text="@string/noFriendNotificationText"
        android:textSize="20sp"
@@ -30,10 +42,11 @@
        android:id="@+id/friendNotificationList"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
+       android:layout_below="@id/pickNotificationTypeSpinner"
+       android:layout_above="@id/notificationRefreshButton"
        android:visibility="gone"
-       >
        
-   </ListView>
+       />
    <!-- Friends notifications ends -->
    <!-- Meeting notifications starts -->
    <TextView
@@ -42,6 +55,7 @@
        android:layout_height="wrap_content"
        android:layout_marginTop="50sp"
        android:layout_gravity="center_vertical"
+       android:layout_below="@id/pickNotificationTypeSpinner"
        android:gravity="center"
        android:text="@string/noMeetingNotificationText"
        android:textSize="20sp"
@@ -50,8 +64,10 @@
        style="@style/notificationList"
        android:id="@+id/meetingNotificationList"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
+       android:layout_height="0dip"
+       android:layout_below="@id/pickNotificationTypeSpinner"
+       android:layout_above="@id/notificationRefreshButton"
        >
    </ListView>
    <!-- Meeting notifications ends -->
-</LinearLayout>
+</RelativeLayout>

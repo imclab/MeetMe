@@ -111,7 +111,9 @@
     <string name="meetingInviteNotificationDescription">Meeting invite notification icon</string>
     <string name="friendInviteNotificationDescription">Friend invite notification icon</string>
     <string name="friendInviteNoticationText">would like to be your friend.</string>
-
+    <string name="notificationRefreshButtonDescription">Refresh notifications button</string>
+    <string name="refreshingNotifications">Refreshing notifications&#8230;</string>
+    
     <!-- Dialog boxes -->
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>

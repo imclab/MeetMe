@@ -139,7 +139,7 @@ public class SessionManager {
 	public void update() {
 		updateFriendSet();
 		updateMeetingSet();
-		updateFriendgNotificationSet();
+		updateFriendNotificationSet();
 		updateMeetingNotificationSet();
 	}
 	
@@ -157,7 +157,7 @@ public class SessionManager {
 		}
 	}
 	
-	public void updateFriendgNotificationSet() {
+	public void updateFriendNotificationSet() {
 		if (isSessionValid()) {
 			this.friendNotificationSet.clear();
 			this.friendNotificationSet.addAll(

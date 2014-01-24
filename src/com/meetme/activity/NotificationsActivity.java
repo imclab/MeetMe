@@ -19,9 +19,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,8 +37,10 @@ import com.meetme.presentation.adapter.FriendInviteNotificationListArrayAdapter;
 import com.meetme.presentation.adapter.MeetingInviteNotificationListArrayAdapter;
 import com.meetme.task.FriendInviteConfirmTask;
 import com.meetme.task.MeetingInviteConfirmTask;
+import com.meetme.task.NotificationsRefreshTask;
+import com.meetme.task.listener.NotificationsRefreshTaskListener;
 
-public class NotificationsActivity extends Activity {
+public class NotificationsActivity extends Activity implements NotificationsRefreshTaskListener {
 	
 	private static final int DEFAULT_NOTIFICATION_SPINNER_POSITION = 1;
 	
@@ -50,6 +54,7 @@ public class NotificationsActivity extends Activity {
 	private ListView friendNotificationListView;
 	private TextView meetingNotificationText;
 	private ListView meetingNotificationListView;
+	private ImageButton notificationRefreshButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +66,8 @@ public class NotificationsActivity extends Activity {
 		friendNotificationListView = (ListView)findViewById(R.id.friendNotificationList);
 		meetingNotificationText = (TextView)findViewById(R.id.noMeetingNotificationText);
 		meetingNotificationListView = (ListView)findViewById(R.id.meetingNotificationList);
+		notificationRefreshButton = (ImageButton)findViewById(R.id.notificationRefreshButton);
+		notificationRefreshButton.setOnClickListener(notificationRefreshButtonListener);
 		
 		pickNotificationTypeSpinner.setSelection(DEFAULT_NOTIFICATION_SPINNER_POSITION);
 
@@ -76,21 +83,6 @@ public class NotificationsActivity extends Activity {
 		// Update lists
 		populateNotificationsLists();
 		
-		// Set adapaters
-		friendInviteNotificationAdapter = 
-				new FriendInviteNotificationListArrayAdapter(
-						this,
-						friendInviteNotificationList
-					);
-	    friendNotificationListView.setAdapter(friendInviteNotificationAdapter);
-		
-		meetingInviteNotificationAdapter = 
-				new MeetingInviteNotificationListArrayAdapter(
-						this,
-						meetingInviteNotificationList
-					);
-	    meetingNotificationListView.setAdapter(meetingInviteNotificationAdapter);
-	    
 		refresh();
 	}
 
@@ -214,6 +206,21 @@ public class NotificationsActivity extends Activity {
 		for (MeetingInviteNotification meetingNotification : session.getMeetingNotificationSet()) {
 			meetingInviteNotificationList.add(meetingNotification);
 		}
+		
+		// Set adapaters
+		friendInviteNotificationAdapter = 
+				new FriendInviteNotificationListArrayAdapter(
+						this,
+						friendInviteNotificationList
+					);
+	    friendNotificationListView.setAdapter(friendInviteNotificationAdapter);
+		
+		meetingInviteNotificationAdapter = 
+				new MeetingInviteNotificationListArrayAdapter(
+						this,
+						meetingInviteNotificationList
+					);
+	    meetingNotificationListView.setAdapter(meetingInviteNotificationAdapter);
 	}
 	
 	private void updateUi() {
@@ -238,6 +245,11 @@ public class NotificationsActivity extends Activity {
 	/*
 	 * Listeners
 	 */
+	@Override
+	public void onNotificationsRefreshTaskComplete() {
+		refresh();
+	}
+	
 	private OnItemSelectedListener pickNotificationTypeSpinnerListener = new OnItemSelectedListener() {
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view, int pos,
@@ -273,4 +285,16 @@ public class NotificationsActivity extends Activity {
 				displayMeetingNotificationResponseDialog(position);
 			}
 		};
+	
+	private OnClickListener notificationRefreshButtonListener = new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				NotificationsRefreshTask notificationsRefreshTask = 
+						new NotificationsRefreshTask(NotificationsActivity.this);
+				
+				notificationsRefreshTask.setOnCompleteListener(NotificationsActivity.this);
+				notificationsRefreshTask.execute();
+			}
+		};
+
 }

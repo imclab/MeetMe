@@ -102,9 +102,6 @@ public class MeetingInviteConfirmTask extends AsyncTask<Void, Void, Void> {
 		if (meetingAcceptState == SUCCESS) {
 			// Refresh meeting list
 			session.updateMeetingSet();
-			
-		    // Refresh notification list
-			session.updateMeetingNotificationSet();
 		}
 		
 		progressDialog.dismiss();
