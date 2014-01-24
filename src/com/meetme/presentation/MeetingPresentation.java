@@ -13,6 +13,8 @@ import static com.meetme.store.UserTravelModeStore.TRAVEL_MODE_WALKING;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -20,8 +22,10 @@ import java.util.Set;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 
 import com.meetme.R;
+import com.meetme.core.DateUtils;
 import com.meetme.core.SessionManager;
 import com.meetme.model.entity.Friend;
 import com.meetme.model.entity.Meet;
@@ -135,6 +139,30 @@ public class MeetingPresentation implements Serializable {
 	}
 
 	/*
+	 * Private methods
+	 */
+	public String getUserInTimeOrLate(long userEstimatedTimeSeconds) {
+		String userInTimeOrLate = "";
+		
+		Calendar nowCalendar = GregorianCalendar.getInstance();
+		Calendar meetingCalendar = DateUtils.getCalendarFromDateTime(meeting.getDateTime());
+		
+		long interval = (meetingCalendar.getTimeInMillis() - nowCalendar.getTimeInMillis()) / 1000;
+		
+		Log.d(MeetingPresentation.class.getName(), "interval=" + interval + ",eta=" + userEstimatedTimeSeconds);
+		
+		// In order to not be too severe
+		// we add 1 minute to the theorical travel interval we computed
+		if (userEstimatedTimeSeconds > (interval + 60)) {
+			userInTimeOrLate =  context.getString(R.string.userIsLate);
+		} else {
+			userInTimeOrLate =  context.getString(R.string.userIsInTime);
+		}
+		
+		return userInTimeOrLate;
+	}
+	
+	/*
 	 * Methods 
 	 */
 	public String getTravelModeString(int travelModeCode) {
@@ -213,7 +241,8 @@ public class MeetingPresentation implements Serializable {
 					leftString.append(user).append("\n");
 					leftString.append(meet.getUserEstimatedDistance()).append("\n");
 					leftString.append(meet.getUserEstimatedTime()).append("\n");
-					leftString.append(getTravelModeString(meet.getUserTravelMode())).append("\n\n");
+					leftString.append(getTravelModeString(meet.getUserTravelMode())).append("\n");
+					leftString.append(getUserInTimeOrLate(meet.getUserEstimatedTimeSeconds())).append("\n\n");
 				break;
 				case USER_STATUS_WAITING :
 					waitingSet.add(meet);

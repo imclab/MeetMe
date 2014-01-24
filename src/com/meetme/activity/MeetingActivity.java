@@ -165,12 +165,14 @@ public class MeetingActivity extends Activity implements LocationListener {
 		String estimatedDistance = userMeet.getUserEstimatedDistance(); 
 		String estimatedTime = userMeet.getUserEstimatedTime();
 		String myTravelMode = meetingPresentation.getTravelModeString(userMeet.getUserTravelMode());
+		String inTimeOrLate = meetingPresentation.getUserInTimeOrLate(userMeet.getUserEstimatedTimeSeconds());
 		
 		// Build my status messags
 		StringBuilder myStatusBuilder = new StringBuilder();
 		myStatusBuilder.append(estimatedDistance).append("\n");
 		myStatusBuilder.append(estimatedTime).append("\n");
-		myStatusBuilder.append(myTravelMode);
+		myStatusBuilder.append(myTravelMode).append("\n");
+		myStatusBuilder.append(inTimeOrLate);
 		
 		if (userMeet.getUserStatus() == USER_STATUS_WAITING) {
 			myStatusText.setText(R.string.myStatusNotLeftYet);

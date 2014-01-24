@@ -95,6 +95,8 @@
     <string name="myStatusLabel">Your status :</string>
     <string name="myStatusNotLeftYet">You didn\'t leave yet.</string>
     <string name="myStatusArrived">You arrived.</string>
+    <string name="userIsLate">Late</string>
+    <string name="userIsInTime">In time</string>
 
     <!-- Notifications activity -->
     <string name="pickNotificationTypeSpinnerPrompt">Choose notifications</string>

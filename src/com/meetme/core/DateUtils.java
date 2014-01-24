@@ -31,19 +31,26 @@ public abstract class DateUtils {
 		return calendar.getTime(); 
 	}
 	
+	
 	/*
 	 * Methods
 	 */
-	public static String formatDateTime(String datetime) {
+	public static Calendar getCalendarFromDateTime(String dateTime) {
 		Calendar calendar = new GregorianCalendar();
 		calendar.set(
-				Integer.parseInt(datetime.substring(0, 4)), 
-				Integer.parseInt(datetime.substring(5, 7)) - 1, 
-				Integer.parseInt(datetime.substring(8, 10)), 
-				Integer.parseInt(datetime.substring(11, 13)), 
-				Integer.parseInt(datetime.substring(14, 16)), 
-				Integer.parseInt(datetime.substring(17, 19))
+				Integer.parseInt(dateTime.substring(0, 4)), 
+				Integer.parseInt(dateTime.substring(5, 7)) - 1, 
+				Integer.parseInt(dateTime.substring(8, 10)), 
+				Integer.parseInt(dateTime.substring(11, 13)), 
+				Integer.parseInt(dateTime.substring(14, 16)), 
+				Integer.parseInt(dateTime.substring(17, 19))
 			);
+		
+		return calendar;
+	}
+	
+	public static String formatDateTime(String dateTime) {
+		Calendar calendar = getCalendarFromDateTime(dateTime);
 		
         DateFormat dateFormat = new SimpleDateFormat("MMM dd yyyy 'at' HH:mm");
         return dateFormat.format(calendar.getTime());

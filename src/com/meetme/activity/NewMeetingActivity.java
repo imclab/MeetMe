@@ -55,6 +55,14 @@ public class NewMeetingActivity extends Activity {
 				titleEdit,
 				dateTimeEdit
 			); 
+		
+		// TODO : remove this quick & dirty update
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				SessionManager.getInstance().updateFriendSet();
+			}
+		}).start();
 	}
 	
 	/*
