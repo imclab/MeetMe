@@ -51,8 +51,7 @@ public abstract class DateUtils {
 	
 	public static String formatDateTime(String dateTime) {
 		Calendar calendar = getCalendarFromDateTime(dateTime);
-		
-        DateFormat dateFormat = new SimpleDateFormat("MMM dd yyyy 'at' HH:mm");
+        DateFormat dateFormat = new SimpleDateFormat("MMM dd yyyy '-' HH:mm");
         return dateFormat.format(calendar.getTime());
 	}
 	
