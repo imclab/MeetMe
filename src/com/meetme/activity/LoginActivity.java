@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -35,6 +36,8 @@ import com.meetme.R;
 import com.meetme.core.HttpParameters;
 import com.meetme.core.HttpUtils;
 import com.meetme.core.SessionManager;
+import com.meetme.model.database.DatabaseHandler;
+import com.meetme.model.database.Session;
 import com.meetme.parser.FriendInviteNotificationParser;
 import com.meetme.parser.FriendParser;
 import com.meetme.parser.MeetingInviteNotificationParser;
@@ -49,6 +52,7 @@ public class LoginActivity extends Activity {
 	private TextView errorTextView;
 	private EditText loginEdit;
 	private EditText passwordEdit;
+	private CheckBox rememberCheckBox;
 	private Button loginButton;
 	private TextView newToMeetMeTextView;
 	private LoginValidator loginValidator;
@@ -62,6 +66,7 @@ public class LoginActivity extends Activity {
 		errorTextView = (TextView)findViewById(R.id.errorText);
 		loginEdit = (EditText)findViewById(R.id.loginEdit);
 		passwordEdit = (EditText)findViewById(R.id.passwordEdit);
+		rememberCheckBox = (CheckBox)findViewById(R.id.rememberCheckBox);
 		loginButton = (Button)findViewById(R.id.loginButton);
 		loginButton.setOnClickListener(loginListener);
 		newToMeetMeTextView = (TextView)findViewById(R.id.newToMeetMeLink);
@@ -113,6 +118,23 @@ public class LoginActivity extends Activity {
 				session.setFriendNotificationSet(friendNotificationParser.getSetFromJSON(responseJSON, "friendNotifications"));
 				session.setMeetingNotificationSet(meetingNotificationParser.getSetFromJSON(responseJSON, "meetingsNotifications"));
 			
+				// If stay connected is checked
+				if (rememberCheckBox.isChecked()) {
+					DatabaseHandler db = new DatabaseHandler(LoginActivity.this);
+					
+					// Store session in DB 
+					Session persistentSession = new Session(
+							session.getUser().getEmail(), 
+							passwordEdit.getText().toString()
+						);
+					
+					if (db.getSession() == null) {
+						db.addSession(persistentSession);
+					} else {
+						db.updateSession(persistentSession);
+					}
+				}
+				
 				// Start main activity
 				Intent i = new Intent(LoginActivity.this, MainActivity.class);
 				startActivity(i);

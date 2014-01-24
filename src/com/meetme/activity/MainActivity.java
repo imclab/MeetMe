@@ -13,6 +13,8 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
 import com.meetme.R;
+import com.meetme.model.database.DatabaseHandler;
+import com.meetme.model.database.Session;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity {
@@ -115,6 +117,14 @@ public class MainActivity extends TabActivity {
     }
 	
 	public void logOut() {
+		DatabaseHandler databaseHandler = new DatabaseHandler(MainActivity.this);
+		Session session = databaseHandler.getSession();
+		
+		// A persistent session exists
+		if (session != null) {
+			databaseHandler.deleteSession(session);
+		}
+		
 		Intent intent = new Intent(this, LoginActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
